@@ -1,0 +1,31 @@
+<p>
+  <strong>Name:</strong>
+  <%= @recipe.name %>
+</p>
+
+<p>
+  <strong>URL:</strong>
+  <%= @recipe.url %>
+</p>
+
+<p>
+  <strong>Type:</strong><br>
+  Entree:<%= @recipe.entree %><br>
+  Soup:<%= @recipe.soup %><br>
+  Salad:<%= @recipe.salad %><br>
+  Dessert:<%= @recipe.dessert %><br>
+  Appetizer:<%= @recipe.appetizer %>
+</p>
+
+<p>
+  <strong>Tags:</strong>
+  <%= @recipe.tags %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @recipe.notes %>
+</p>
+
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<%= link_to 'Back', recipes_path %>
