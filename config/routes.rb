@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
   get 'welcome/index'
 
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
    root 'welcome#index'
+
+
+          #search with elasticsearch
+          get 'search', to: 'search#search'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -15,6 +20,8 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
      resources :recipes
+
+
 
   # Example resource route with options:
   #   resources :products do

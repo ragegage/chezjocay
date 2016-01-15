@@ -45,3 +45,6 @@ group :development do
   gem 'spring'
 end
 
+#search functionality
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
