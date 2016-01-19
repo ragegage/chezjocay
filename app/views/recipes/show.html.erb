@@ -1,11 +1,6 @@
 <p>
   <strong>Name:</strong>
-  <%= @recipe.name %>
-</p>
-
-<p>
-  <strong>URL:</strong>
-  <%= @recipe.url %>
+  <a href="<%= @recipe.url %>"><%= @recipe.name %></a>
 </p>
 
 <p>
@@ -20,7 +15,7 @@
     Salad
   <% end %>
   <% if @recipe.dessert %>
-    Dessert 
+    Dessert
   <% end %>
   <% if @recipe.appetizer %>
     Appetizer
