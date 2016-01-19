@@ -1,5 +1,7 @@
 <h1>Recipes Search</h1>
 
+<%= link_to 'See all', recipes_path %>
+
 <%= form_for search_path, method: :get do |f| %>
   <p>
     <%= f.label "Search for" %>
@@ -13,7 +15,6 @@
     <li>
       <h3>
         <%= link_to recipe.name, controller: "recipes", action: "show", id: recipe.id %>
-        <!==", controller: "recipes", action: "show", id: recipe._id " removed>
       </h3>
       <p><i><%= recipe.tags %></i></p>
       <p><%= recipe.notes %></p>

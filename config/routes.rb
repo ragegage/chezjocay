@@ -9,7 +9,7 @@ Rails.application.routes.draw do
    root 'welcome#index'
 
 
-          #search with elasticsearch
+          #search with(OUT) elasticsearch
           get 'search', to: 'search#search'
 
   # Example of regular route:

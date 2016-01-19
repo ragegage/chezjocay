@@ -1,7 +1,9 @@
-<h1>Listing recipes</h1>
+<h1>All recipes</h1>
 
+<p>
 <%= link_to 'New recipe', new_recipe_path %>
 <%= link_to 'Search recipes', search_path %>
+</p>
 
 <table>
   <tr>
@@ -16,8 +18,23 @@
     <tr>
       <td><%= recipe.name %></td>
       <td><%= recipe.url %></td>
-      <td><%= recipe.entree %><%= recipe.soup %><%= recipe.salad %>
-        <%= recipe.dessert %><%= recipe.appetizer %></td>
+      <td>
+        <% if recipe.entree %>
+          Entree
+        <% end %>
+        <% if recipe.soup %>
+          Soup
+        <% end %>
+        <% if recipe.salad %>
+          Salad
+        <% end %>
+        <% if recipe.dessert %>
+          Dessert
+        <% end %>
+        <% if recipe.appetizer %>
+          Appetizer
+        <% end %>
+      </td>
       <td><%= recipe.tags %></td>
       <td><%= recipe.notes %></td>
 

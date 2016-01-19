@@ -9,12 +9,22 @@
 </p>
 
 <p>
-  <strong>Type:</strong><br>
-  Entree:<%= @recipe.entree %><br>
-  Soup:<%= @recipe.soup %><br>
-  Salad:<%= @recipe.salad %><br>
-  Dessert:<%= @recipe.dessert %><br>
-  Appetizer:<%= @recipe.appetizer %>
+  <strong>Type:</strong>
+  <% if @recipe.entree %>
+    Entree
+  <% end %>
+  <% if @recipe.soup %>
+    Soup
+  <% end %>
+  <% if @recipe.salad %>
+    Salad
+  <% end %>
+  <% if @recipe.dessert %>
+    Dessert 
+  <% end %>
+  <% if @recipe.appetizer %>
+    Appetizer
+  <% end %>
 </p>
 
 <p>
