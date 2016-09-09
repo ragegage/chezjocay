@@ -3,11 +3,11 @@ export const requestRecipes = () => ({
 })
 
 export const receiveRecipes = (recipes) => ({
-  type: 'RECEIVE_RECIPES'
+  type: 'RECEIVE_RECIPES',
   recipes
 })
 
 export const receiveRecipe = (recipe) => ({
-  type: 'RECEIVE_RECIPE'
+  type: 'RECEIVE_RECIPE',
   recipe
 })

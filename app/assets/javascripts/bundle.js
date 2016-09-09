@@ -65,6 +65,8 @@
 	document.addEventListener('DOMContentLoaded', function () {
 	  var store = (0, _store2.default)();
 	
+	  window.store = store;
+	
 	  var root = document.getElementById('luv-you-joc');
 	  (0, _reactDom.render)(_react2.default.createElement(_root2.default, { store: store }), root);
 	});
@@ -28797,9 +28799,9 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case 'RECEIVE_ALL_RECIPES':
+	    case 'RECEIVE_RECIPES':
 	      return action.recipes;
-	    case 'RECEIVE_NEW_RECIPE':
+	    case 'RECEIVE_RECIPE':
 	      var newRecipe = _defineProperty({}, action.recipe.id, action.recipe);
 	      return _extends({}, state, newRecipe);
 	    default:
@@ -28828,9 +28830,9 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case 'RECEIVE_ALL_LISTS':
+	    case 'RECEIVE_SHOPPING_LISTS':
 	      return action.lists;
-	    case 'RECEIVE_NEW_LIST':
+	    case 'RECEIVE_SHOPPING_LIST':
 	      var newList = _defineProperty({}, action.list.id, action.list);
 	      return _extends({}, state, newList);
 	    default:
@@ -28862,9 +28864,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var RootMiddleware = (0, _redux.applyMiddleware)(_recipe2.default, _shopping_list2.default);
-	
-	exports.default = RootMiddleware;
+	exports.default = (0, _redux.applyMiddleware)(_recipe2.default, _shopping_list2.default);
 
 /***/ },
 /* 265 */
@@ -28911,13 +28911,62 @@
 /* 266 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var fetchRecipes = exports.fetchRecipes = function fetchRecipes(success) {
+	  $.ajax({
+	    url: 'recipes',
+	    method: 'GET',
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var createRecipe = exports.createRecipe = function createRecipe(data, success) {
+	  $.ajax({
+	    url: 'recipes',
+	    method: 'POST',
+	    data: data,
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
 
 /***/ },
 /* 267 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var requestRecipes = exports.requestRecipes = function requestRecipes() {
+	  return {
+	    type: 'REQUEST_RECIPES'
+	  };
+	};
+	
+	var receiveRecipes = exports.receiveRecipes = function receiveRecipes(recipes) {
+	  return {
+	    type: 'RECEIVE_RECIPES',
+	    recipes: recipes
+	  };
+	};
+	
+	var receiveRecipe = exports.receiveRecipe = function receiveRecipe(recipe) {
+	  return {
+	    type: 'RECEIVE_RECIPE',
+	    recipe: recipe
+	  };
+	};
 
 /***/ },
 /* 268 */
@@ -28964,13 +29013,62 @@
 /* 269 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var fetchShoppingLists = exports.fetchShoppingLists = function fetchShoppingLists(success) {
+	  $.ajax({
+	    url: 'shopping_lists',
+	    method: 'GET',
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var createShoppingList = exports.createShoppingList = function createShoppingList(data, success) {
+	  $.ajax({
+	    url: 'shopping_lists',
+	    method: 'POST',
+	    data: data,
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
 
 /***/ },
 /* 270 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var requestRecipes = exports.requestRecipes = function requestRecipes() {
+	  return {
+	    type: 'REQUEST_SHOPPING_LISTS'
+	  };
+	};
+	
+	var receiveShoppingLists = exports.receiveShoppingLists = function receiveShoppingLists(lists) {
+	  return {
+	    type: 'RECEIVE_SHOPPING_LISTS',
+	    lists: lists
+	  };
+	};
+	
+	var receiveShoppingList = exports.receiveShoppingList = function receiveShoppingList(list) {
+	  return {
+	    type: 'RECEIVE_SHOPPING_LIST',
+	    list: list
+	  };
+	};
 
 /***/ }
 /******/ ]);

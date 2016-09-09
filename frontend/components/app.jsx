@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from 'react'
+import { Link } from 'react-router'
 // import GreetingContainer from './greeting/greeting_container';
 
 const App = ({children}) => (
@@ -9,6 +9,6 @@ const App = ({children}) => (
     </header>
     {children}
   </div>
-);
+)
 
-export default App;
+export default App

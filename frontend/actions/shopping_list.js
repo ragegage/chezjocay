@@ -1,13 +1,13 @@
 export const requestRecipes = () => ({
-  type: 'REQUEST_RECIPES'
+  type: 'REQUEST_SHOPPING_LISTS'
 })
 
-export const receiveShoppingLists = (lsits) => ({
-  type: 'RECEIVE_RECIPES'
-  lsits
+export const receiveShoppingLists = (lists) => ({
+  type: 'RECEIVE_SHOPPING_LISTS',
+  lists
 })
 
 export const receiveShoppingList = (list) => ({
-  type: 'RECEIVE_RECIPE'
+  type: 'RECEIVE_SHOPPING_LIST',
   list
 })

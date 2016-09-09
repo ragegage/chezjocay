@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 //Router
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 //Components
-import App from './app';
+import App from './app'
 // import SearchContainer from '../search/search_container';
 // import BenchFormContainer from '../bench_form/bench_form_container';
 // import BenchShowContainer from '../bench_show/bench_show_container';
@@ -16,8 +16,8 @@ class AppRouter extends React.Component{
         <Route path="/" component={ App }>
         </Route>
       </Router>
-    );
+    )
   }
 }
 
-export default AppRouter;
+export default AppRouter
