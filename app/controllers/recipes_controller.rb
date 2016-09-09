@@ -2,19 +2,20 @@ class RecipesController < ApplicationController
 
   def index
       @recipes = Recipe.all.includes(:ingredients)
-      render json: @recipes
+      # render json: @recipes
   end
 
   def show
-    @recipe = Recipe.find(params[:id]).includes(:ingredients
-    render json: @recipe
+    @recipe = Recipe.find(params[:id])
+    # render json: @recipe
   end
 
   def create
     @recipe = Recipe.new(recipe_params)
 
     if @recipe.save
-      render json: @recipe
+      # render json: @recipe
+      render :show
     else
       render json: @recipe.errors.full_messages, status: 422
     end
@@ -24,7 +25,8 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
 
     if @recipe.update(recipe_params)
-      render json: @recipe
+      # render json: @recipe
+      render :show
     else
       render json: @recipe.errors.full_messages, status: 422
     end
