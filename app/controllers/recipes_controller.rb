@@ -1,28 +1,22 @@
 class RecipesController < ApplicationController
 
   def index
-      @recipes = Recipe.all
+      @recipes = Recipe.all.includes(:ingredients)
+      render json: @recipes
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
-  end
-
-  def new
-    @recipe = Recipe.new
-  end
-
-  def edit
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.find(params[:id]).includes(:ingredients
+    render json: @recipe
   end
 
   def create
     @recipe = Recipe.new(recipe_params)
 
     if @recipe.save
-      redirect_to @recipe
+      render json: @recipe
     else
-      render 'new'
+      render json: @recipe.errors.full_messages, status: 422
     end
   end
 
@@ -30,9 +24,9 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
 
     if @recipe.update(recipe_params)
-      redirect_to @recipe
+      render json: @recipe
     else
-      render 'edit'
+      render json: @recipe.errors.full_messages, status: 422
     end
   end
 
@@ -40,7 +34,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @recipe.destroy
 
-    redirect_to recipes_path
+    render json: @recipe
   end
 
   private
