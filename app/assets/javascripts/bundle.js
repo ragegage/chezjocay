@@ -56,7 +56,7 @@
 	
 	var _root2 = _interopRequireDefault(_root);
 	
-	var _store = __webpack_require__(260);
+	var _store = __webpack_require__(263);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -23100,6 +23100,10 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
+	var _index_container = __webpack_require__(260);
+	
+	var _index_container2 = _interopRequireDefault(_index_container);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23107,16 +23111,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	//Router
-	
-	//Components
-	
-	
-	// import SearchContainer from '../search/search_container';
-	// import BenchFormContainer from '../bench_form/bench_form_container';
-	// import BenchShowContainer from '../bench_show/bench_show_container';
-	// import ReviewFormContainer from '../bench_show/review_form_container';
-	// import SessionFormContainer from '../session_form/session_form_container';
 	
 	var AppRouter = function (_React$Component) {
 	  _inherits(AppRouter, _React$Component);
@@ -23133,7 +23127,11 @@
 	      return _react2.default.createElement(
 	        _reactRouter.Router,
 	        { history: _reactRouter.browserHistory },
-	        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _app2.default })
+	        _react2.default.createElement(
+	          _reactRouter.Route,
+	          { path: '/', component: _app2.default },
+	          _react2.default.createElement(_reactRouter.IndexRoute, { component: _index_container2.default })
+	        )
 	      );
 	    }
 	  }]);
@@ -28734,13 +28732,117 @@
 	  value: true
 	});
 	
+	var _reactRedux = __webpack_require__(173);
+	
+	var _index = __webpack_require__(261);
+	
+	var _index2 = _interopRequireDefault(_index);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    recipes: state.recipes
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    requestRecipes: function (_requestRecipes) {
+	      function requestRecipes() {
+	        return _requestRecipes.apply(this, arguments);
+	      }
+	
+	      requestRecipes.toString = function () {
+	        return _requestRecipes.toString();
+	      };
+	
+	      return requestRecipes;
+	    }(function () {
+	      return dispatch(requestRecipes());
+	    })
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(_index2.default);
+
+/***/ },
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (_ref) {
+	  var recipes = _ref.recipes;
+	  return _react2.default.createElement(
+	    'ul',
+	    null,
+	    Object.keys(recipes).map(function (id) {
+	      return _react2.default.createElement(
+	        'li',
+	        null,
+	        recipes[id].name
+	      );
+	    })
+	  );
+	};
+
+/***/ },
+/* 262 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var requestRecipes = exports.requestRecipes = function requestRecipes() {
+	  return {
+	    type: 'REQUEST_RECIPES'
+	  };
+	};
+	
+	var receiveRecipes = exports.receiveRecipes = function receiveRecipes(recipes) {
+	  return {
+	    type: 'RECEIVE_RECIPES',
+	    recipes: recipes
+	  };
+	};
+	
+	var receiveRecipe = exports.receiveRecipe = function receiveRecipe(recipe) {
+	  return {
+	    type: 'RECEIVE_RECIPE',
+	    recipe: recipe
+	  };
+	};
+
+/***/ },
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
 	var _redux = __webpack_require__(180);
 	
-	var _reducers = __webpack_require__(261);
+	var _reducers = __webpack_require__(264);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _middleware = __webpack_require__(264);
+	var _middleware = __webpack_require__(267);
 	
 	var _middleware2 = _interopRequireDefault(_middleware);
 	
@@ -28754,7 +28856,7 @@
 	exports.default = configureStore;
 
 /***/ },
-/* 261 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28765,11 +28867,11 @@
 	
 	var _redux = __webpack_require__(180);
 	
-	var _recipes = __webpack_require__(262);
+	var _recipes = __webpack_require__(265);
 	
 	var _recipes2 = _interopRequireDefault(_recipes);
 	
-	var _shopping_lists = __webpack_require__(263);
+	var _shopping_lists = __webpack_require__(266);
 	
 	var _shopping_lists2 = _interopRequireDefault(_shopping_lists);
 	
@@ -28781,7 +28883,7 @@
 	});
 
 /***/ },
-/* 262 */
+/* 265 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28812,7 +28914,7 @@
 	exports.default = recipes;
 
 /***/ },
-/* 263 */
+/* 266 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28843,7 +28945,7 @@
 	exports.default = shopping_lists;
 
 /***/ },
-/* 264 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28854,11 +28956,11 @@
 	
 	var _redux = __webpack_require__(180);
 	
-	var _recipe = __webpack_require__(265);
+	var _recipe = __webpack_require__(268);
 	
 	var _recipe2 = _interopRequireDefault(_recipe);
 	
-	var _shopping_list = __webpack_require__(268);
+	var _shopping_list = __webpack_require__(270);
 	
 	var _shopping_list2 = _interopRequireDefault(_shopping_list);
 	
@@ -28867,7 +28969,7 @@
 	exports.default = (0, _redux.applyMiddleware)(_recipe2.default, _shopping_list2.default);
 
 /***/ },
-/* 265 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28876,9 +28978,9 @@
 	  value: true
 	});
 	
-	var _recipe_api_util = __webpack_require__(266);
+	var _recipe_api_util = __webpack_require__(269);
 	
-	var _recipe = __webpack_require__(267);
+	var _recipe = __webpack_require__(262);
 	
 	exports.default = function (_ref) {
 	  var getState = _ref.getState;
@@ -28892,6 +28994,7 @@
 	        return dispatch((0, _recipe.receiveRecipe)(data));
 	      };
 	      var result = next(action);
+	
 	      switch (action.type) {
 	        case 'REQUEST_RECIPES':
 	          (0, _recipe_api_util.fetchRecipes)(recipesSuccess);
@@ -28908,7 +29011,7 @@
 	};
 
 /***/ },
-/* 266 */
+/* 269 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28940,36 +29043,7 @@
 	};
 
 /***/ },
-/* 267 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var requestRecipes = exports.requestRecipes = function requestRecipes() {
-	  return {
-	    type: 'REQUEST_RECIPES'
-	  };
-	};
-	
-	var receiveRecipes = exports.receiveRecipes = function receiveRecipes(recipes) {
-	  return {
-	    type: 'RECEIVE_RECIPES',
-	    recipes: recipes
-	  };
-	};
-	
-	var receiveRecipe = exports.receiveRecipe = function receiveRecipe(recipe) {
-	  return {
-	    type: 'RECEIVE_RECIPE',
-	    recipe: recipe
-	  };
-	};
-
-/***/ },
-/* 268 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28978,9 +29052,9 @@
 	  value: true
 	});
 	
-	var _list_api_util = __webpack_require__(269);
+	var _list_api_util = __webpack_require__(271);
 	
-	var _shopping_list = __webpack_require__(270);
+	var _shopping_list = __webpack_require__(272);
 	
 	exports.default = function (_ref) {
 	  var getState = _ref.getState;
@@ -29010,7 +29084,7 @@
 	};
 
 /***/ },
-/* 269 */
+/* 271 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29042,7 +29116,7 @@
 	};
 
 /***/ },
-/* 270 */
+/* 272 */
 /***/ function(module, exports) {
 
 	'use strict';

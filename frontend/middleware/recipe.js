@@ -9,6 +9,7 @@ export default ({getState, dispatch}) => next => action => {
   const recipesSuccess = data => dispatch(receiveRecipes(data));
   const recipeSuccess = data => dispatch(receiveRecipe(data));
   const result = next(action);
+
   switch(action.type){
     case 'REQUEST_RECIPES':
       fetchRecipes(recipesSuccess);
