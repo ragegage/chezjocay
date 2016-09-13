@@ -1,4 +1,4 @@
-export const requestRecipes = () => ({
+export const requestShoppingLists = () => ({
   type: 'REQUEST_SHOPPING_LISTS'
 })
 

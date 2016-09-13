@@ -56,7 +56,7 @@
 	
 	var _root2 = _interopRequireDefault(_root);
 	
-	var _store = __webpack_require__(263);
+	var _store = __webpack_require__(266);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -23100,9 +23100,13 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _index_container = __webpack_require__(260);
+	var _recipe_index_container = __webpack_require__(262);
 	
-	var _index_container2 = _interopRequireDefault(_index_container);
+	var _recipe_index_container2 = _interopRequireDefault(_recipe_index_container);
+	
+	var _recipe_show_container = __webpack_require__(264);
+	
+	var _recipe_show_container2 = _interopRequireDefault(_recipe_show_container);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -23130,7 +23134,8 @@
 	        _react2.default.createElement(
 	          _reactRouter.Route,
 	          { path: '/', component: _app2.default },
-	          _react2.default.createElement(_reactRouter.IndexRoute, { component: _index_container2.default })
+	          _react2.default.createElement(_reactRouter.IndexRoute, { component: _recipe_index_container2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { path: '/:recipeId', component: _recipe_show_container2.default })
 	        )
 	      );
 	    }
@@ -28694,9 +28699,11 @@
 	
 	var _reactRouter = __webpack_require__(198);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _list_container = __webpack_require__(260);
 	
-	// import GreetingContainer from './greeting/greeting_container';
+	var _list_container2 = _interopRequireDefault(_list_container);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var App = function App(_ref) {
 	  var children = _ref.children;
@@ -28716,6 +28723,7 @@
 	        )
 	      )
 	    ),
+	    _react2.default.createElement(_list_container2.default, null),
 	    children
 	  );
 	};
@@ -28734,9 +28742,205 @@
 	
 	var _reactRedux = __webpack_require__(173);
 	
-	var _index = __webpack_require__(261);
+	var _list = __webpack_require__(261);
 	
-	var _index2 = _interopRequireDefault(_index);
+	var _list2 = _interopRequireDefault(_list);
+	
+	var _shopping_list = __webpack_require__(276);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    shopping_lists: state.shopping_lists
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    requestShoppingLists: function requestShoppingLists() {
+	      return dispatch((0, _shopping_list.requestShoppingLists)());
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_list2.default);
+
+/***/ },
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var List = function (_React$Component) {
+	  _inherits(List, _React$Component);
+	
+	  function List() {
+	    _classCallCheck(this, List);
+	
+	    return _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).apply(this, arguments));
+	  }
+	
+	  _createClass(List, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.props.requestShoppingLists();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      return _react2.default.createElement(
+	        'ul',
+	        null,
+	        Object.keys(this.props.shopping_lists).map(function (id) {
+	          return _react2.default.createElement(
+	            'li',
+	            null,
+	            _this2.props.shopping_lists[id].name
+	          );
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return List;
+	}(_react2.default.Component);
+	
+	exports.default = List;
+
+/***/ },
+/* 262 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(173);
+	
+	var _recipe_index = __webpack_require__(263);
+	
+	var _recipe_index2 = _interopRequireDefault(_recipe_index);
+	
+	var _recipe = __webpack_require__(273);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    recipes: state.recipes
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    requestRecipes: function requestRecipes() {
+	      return dispatch((0, _recipe.requestRecipes)());
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_recipe_index2.default);
+
+/***/ },
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RecipeIndex = function (_React$Component) {
+	  _inherits(RecipeIndex, _React$Component);
+	
+	  function RecipeIndex() {
+	    _classCallCheck(this, RecipeIndex);
+	
+	    return _possibleConstructorReturn(this, (RecipeIndex.__proto__ || Object.getPrototypeOf(RecipeIndex)).apply(this, arguments));
+	  }
+	
+	  _createClass(RecipeIndex, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.props.requestRecipes();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      return _react2.default.createElement(
+	        'ul',
+	        null,
+	        Object.keys(this.props.recipes).map(function (id) {
+	          return _react2.default.createElement(
+	            'li',
+	            null,
+	            _this2.props.recipes[id].name
+	          );
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return RecipeIndex;
+	}(_react2.default.Component);
+	
+	exports.default = RecipeIndex;
+
+/***/ },
+/* 264 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(173);
+	
+	var _recipe_show = __webpack_require__(265);
+	
+	var _recipe_show2 = _interopRequireDefault(_recipe_show);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28764,10 +28968,10 @@
 	  };
 	};
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(_index2.default);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_recipe_show2.default);
 
 /***/ },
-/* 261 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28776,58 +28980,58 @@
 	  value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = function (_ref) {
-	  var recipes = _ref.recipes;
-	  return _react2.default.createElement(
-	    'ul',
-	    null,
-	    Object.keys(recipes).map(function (id) {
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RecipeShow = function (_React$Component) {
+	  _inherits(RecipeShow, _React$Component);
+	
+	  function RecipeShow() {
+	    _classCallCheck(this, RecipeShow);
+	
+	    return _possibleConstructorReturn(this, (RecipeShow.__proto__ || Object.getPrototypeOf(RecipeShow)).apply(this, arguments));
+	  }
+	
+	  _createClass(RecipeShow, [{
+	    key: 'render',
+	
+	    // componentWillMount () {
+	    //   this.props.requestRecipes()
+	    // }
+	
+	    value: function render() {
 	      return _react2.default.createElement(
-	        'li',
+	        'ul',
 	        null,
-	        recipes[id].name
+	        Object.keys(recipes).map(function (id) {
+	          return _react2.default.createElement(
+	            'li',
+	            null,
+	            recipes[id].name
+	          );
+	        })
 	      );
-	    })
-	  );
-	};
+	    }
+	  }]);
+	
+	  return RecipeShow;
+	}(_react2.default.Component);
+	
+	exports.default = RecipeShow;
 
 /***/ },
-/* 262 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var requestRecipes = exports.requestRecipes = function requestRecipes() {
-	  return {
-	    type: 'REQUEST_RECIPES'
-	  };
-	};
-	
-	var receiveRecipes = exports.receiveRecipes = function receiveRecipes(recipes) {
-	  return {
-	    type: 'RECEIVE_RECIPES',
-	    recipes: recipes
-	  };
-	};
-	
-	var receiveRecipe = exports.receiveRecipe = function receiveRecipe(recipe) {
-	  return {
-	    type: 'RECEIVE_RECIPE',
-	    recipe: recipe
-	  };
-	};
-
-/***/ },
-/* 263 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28838,11 +29042,11 @@
 	
 	var _redux = __webpack_require__(180);
 	
-	var _reducers = __webpack_require__(264);
+	var _reducers = __webpack_require__(267);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _middleware = __webpack_require__(267);
+	var _middleware = __webpack_require__(270);
 	
 	var _middleware2 = _interopRequireDefault(_middleware);
 	
@@ -28856,7 +29060,7 @@
 	exports.default = configureStore;
 
 /***/ },
-/* 264 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28867,11 +29071,11 @@
 	
 	var _redux = __webpack_require__(180);
 	
-	var _recipes = __webpack_require__(265);
+	var _recipes = __webpack_require__(268);
 	
 	var _recipes2 = _interopRequireDefault(_recipes);
 	
-	var _shopping_lists = __webpack_require__(266);
+	var _shopping_lists = __webpack_require__(269);
 	
 	var _shopping_lists2 = _interopRequireDefault(_shopping_lists);
 	
@@ -28883,7 +29087,7 @@
 	});
 
 /***/ },
-/* 265 */
+/* 268 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28914,7 +29118,7 @@
 	exports.default = recipes;
 
 /***/ },
-/* 266 */
+/* 269 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28945,7 +29149,7 @@
 	exports.default = shopping_lists;
 
 /***/ },
-/* 267 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28956,11 +29160,11 @@
 	
 	var _redux = __webpack_require__(180);
 	
-	var _recipe = __webpack_require__(268);
+	var _recipe = __webpack_require__(271);
 	
 	var _recipe2 = _interopRequireDefault(_recipe);
 	
-	var _shopping_list = __webpack_require__(270);
+	var _shopping_list = __webpack_require__(274);
 	
 	var _shopping_list2 = _interopRequireDefault(_shopping_list);
 	
@@ -28969,7 +29173,7 @@
 	exports.default = (0, _redux.applyMiddleware)(_recipe2.default, _shopping_list2.default);
 
 /***/ },
-/* 268 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28978,9 +29182,9 @@
 	  value: true
 	});
 	
-	var _recipe_api_util = __webpack_require__(269);
+	var _recipe_api_util = __webpack_require__(272);
 	
-	var _recipe = __webpack_require__(262);
+	var _recipe = __webpack_require__(273);
 	
 	exports.default = function (_ref) {
 	  var getState = _ref.getState;
@@ -29011,7 +29215,7 @@
 	};
 
 /***/ },
-/* 269 */
+/* 272 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29043,7 +29247,36 @@
 	};
 
 /***/ },
-/* 270 */
+/* 273 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var requestRecipes = exports.requestRecipes = function requestRecipes() {
+	  return {
+	    type: 'REQUEST_RECIPES'
+	  };
+	};
+	
+	var receiveRecipes = exports.receiveRecipes = function receiveRecipes(recipes) {
+	  return {
+	    type: 'RECEIVE_RECIPES',
+	    recipes: recipes
+	  };
+	};
+	
+	var receiveRecipe = exports.receiveRecipe = function receiveRecipe(recipe) {
+	  return {
+	    type: 'RECEIVE_RECIPE',
+	    recipe: recipe
+	  };
+	};
+
+/***/ },
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29052,9 +29285,9 @@
 	  value: true
 	});
 	
-	var _list_api_util = __webpack_require__(271);
+	var _list_api_util = __webpack_require__(275);
 	
-	var _shopping_list = __webpack_require__(272);
+	var _shopping_list = __webpack_require__(276);
 	
 	exports.default = function (_ref) {
 	  var getState = _ref.getState;
@@ -29084,7 +29317,7 @@
 	};
 
 /***/ },
-/* 271 */
+/* 275 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29116,7 +29349,7 @@
 	};
 
 /***/ },
-/* 272 */
+/* 276 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29124,7 +29357,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var requestRecipes = exports.requestRecipes = function requestRecipes() {
+	var requestShoppingLists = exports.requestShoppingLists = function requestShoppingLists() {
 	  return {
 	    type: 'REQUEST_SHOPPING_LISTS'
 	  };

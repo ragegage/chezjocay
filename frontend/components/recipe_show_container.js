@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Index from './index'
+import RecipeShow from './recipe_show'
 
 const mapStateToProps = state => ({
   recipes: state.recipes
@@ -10,5 +10,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(
-  mapStateToProps
-)(Index)
+  mapStateToProps,
+  mapDispatchToProps
+)(RecipeShow)
