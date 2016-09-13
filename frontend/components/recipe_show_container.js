@@ -1,15 +1,10 @@
 import { connect } from 'react-redux'
 import RecipeShow from './recipe_show'
 
-const mapStateToProps = state => ({
-  recipes: state.recipes
-})
-
-const mapDispatchToProps = dispatch => ({
-  requestRecipes: () => dispatch(requestRecipes())
+const mapStateToProps = (state, ownProps) => ({
+  recipe: state.recipes[ownProps.params.recipeId]
 })
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(RecipeShow)

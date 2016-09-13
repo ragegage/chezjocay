@@ -3,7 +3,7 @@ json.extract! recipe, :id, :name, :url, :entree, :soup, :salad, :dessert, :appet
 json.ingredients do
   recipe.ingredients.each do |ingredient|
     json.set! ingredient.id do
-      json.extract! :name
+      json.extract! ingredient, :name
     end
   end
 end

@@ -1,4 +1,5 @@
 import React from 'react'
+import IngredientIndex from './ingredient_index'
 
 class RecipeShow extends React.Component {
   // componentWillMount () {
@@ -6,14 +7,16 @@ class RecipeShow extends React.Component {
   // }
 
   render () {
+    const ingredients = this.props.recipe.ingredients
     return (
-      <ul>
+      <div>
       {
-        Object.keys(recipes).map(id => {
-          return (<li>{recipes[id].name}</li>)
-        })
+        this.props.recipe.name
       }
-      </ul>
+      {
+        <IngredientIndex ingredients={ingredients} />
+      }
+      </div>
     )
   }
 }

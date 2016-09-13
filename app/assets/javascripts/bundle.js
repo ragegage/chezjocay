@@ -56,7 +56,7 @@
 	
 	var _root2 = _interopRequireDefault(_root);
 	
-	var _store = __webpack_require__(266);
+	var _store = __webpack_require__(268);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -23100,13 +23100,15 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _recipe_index_container = __webpack_require__(262);
+	var _recipe_index_container = __webpack_require__(263);
 	
 	var _recipe_index_container2 = _interopRequireDefault(_recipe_index_container);
 	
-	var _recipe_show_container = __webpack_require__(264);
+	var _recipe_show_container = __webpack_require__(266);
 	
 	var _recipe_show_container2 = _interopRequireDefault(_recipe_show_container);
+	
+	var _reactRouterRedux = __webpack_require__(282);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -23128,6 +23130,7 @@
 	  _createClass(AppRouter, [{
 	    key: 'render',
 	    value: function render() {
+	      debugger;
 	      return _react2.default.createElement(
 	        _reactRouter.Router,
 	        { history: _reactRouter.browserHistory },
@@ -23135,7 +23138,7 @@
 	          _reactRouter.Route,
 	          { path: '/', component: _app2.default },
 	          _react2.default.createElement(_reactRouter.IndexRoute, { component: _recipe_index_container2.default }),
-	          _react2.default.createElement(_reactRouter.Route, { path: '/:recipeId', component: _recipe_show_container2.default })
+	          _react2.default.createElement(_reactRouter.Route, { path: 'r/:recipeId', component: _recipe_show_container2.default })
 	        )
 	      );
 	    }
@@ -28746,7 +28749,7 @@
 	
 	var _list2 = _interopRequireDefault(_list);
 	
-	var _shopping_list = __webpack_require__(276);
+	var _shopping_list = __webpack_require__(262);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28782,6 +28785,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _list_item = __webpack_require__(277);
+	
+	var _list_item2 = _interopRequireDefault(_list_item);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28813,11 +28820,7 @@
 	        'ul',
 	        null,
 	        Object.keys(this.props.shopping_lists).map(function (id) {
-	          return _react2.default.createElement(
-	            'li',
-	            null,
-	            _this2.props.shopping_lists[id].name
-	          );
+	          return _react2.default.createElement(_list_item2.default, { item: _this2.props.shopping_lists[id] });
 	        })
 	      );
 	    }
@@ -28830,6 +28833,35 @@
 
 /***/ },
 /* 262 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var requestShoppingLists = exports.requestShoppingLists = function requestShoppingLists() {
+	  return {
+	    type: 'REQUEST_SHOPPING_LISTS'
+	  };
+	};
+	
+	var receiveShoppingLists = exports.receiveShoppingLists = function receiveShoppingLists(lists) {
+	  return {
+	    type: 'RECEIVE_SHOPPING_LISTS',
+	    lists: lists
+	  };
+	};
+	
+	var receiveShoppingList = exports.receiveShoppingList = function receiveShoppingList(list) {
+	  return {
+	    type: 'RECEIVE_SHOPPING_LIST',
+	    list: list
+	  };
+	};
+
+/***/ },
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28840,11 +28872,11 @@
 	
 	var _reactRedux = __webpack_require__(173);
 	
-	var _recipe_index = __webpack_require__(263);
+	var _recipe_index = __webpack_require__(264);
 	
 	var _recipe_index2 = _interopRequireDefault(_recipe_index);
 	
-	var _recipe = __webpack_require__(273);
+	var _recipe = __webpack_require__(265);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28865,7 +28897,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_recipe_index2.default);
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28879,6 +28911,14 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _recipe_search = __webpack_require__(279);
+	
+	var _recipe_search2 = _interopRequireDefault(_recipe_search);
+	
+	var _recipe_index_item = __webpack_require__(278);
+	
+	var _recipe_index_item2 = _interopRequireDefault(_recipe_index_item);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28908,15 +28948,16 @@
 	      var _this2 = this;
 	
 	      return _react2.default.createElement(
-	        'ul',
-	        null,
-	        Object.keys(this.props.recipes).map(function (id) {
-	          return _react2.default.createElement(
-	            'li',
-	            null,
-	            _this2.props.recipes[id].name
-	          );
-	        })
+	        'div',
+	        { className: 'recipe-index' },
+	        _react2.default.createElement(_recipe_search2.default, null),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'recipe-list' },
+	          Object.keys(this.props.recipes).map(function (id) {
+	            return _react2.default.createElement(_recipe_index_item2.default, { item: _this2.props.recipes[id] });
+	          })
+	        )
 	      );
 	    }
 	  }]);
@@ -28927,7 +28968,36 @@
 	exports.default = RecipeIndex;
 
 /***/ },
-/* 264 */
+/* 265 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var requestRecipes = exports.requestRecipes = function requestRecipes() {
+	  return {
+	    type: 'REQUEST_RECIPES'
+	  };
+	};
+	
+	var receiveRecipes = exports.receiveRecipes = function receiveRecipes(recipes) {
+	  return {
+	    type: 'RECEIVE_RECIPES',
+	    recipes: recipes
+	  };
+	};
+	
+	var receiveRecipe = exports.receiveRecipe = function receiveRecipe(recipe) {
+	  return {
+	    type: 'RECEIVE_RECIPE',
+	    recipe: recipe
+	  };
+	};
+
+/***/ },
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28938,40 +29008,22 @@
 	
 	var _reactRedux = __webpack_require__(173);
 	
-	var _recipe_show = __webpack_require__(265);
+	var _recipe_show = __webpack_require__(267);
 	
 	var _recipe_show2 = _interopRequireDefault(_recipe_show);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var mapStateToProps = function mapStateToProps(state) {
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
 	  return {
-	    recipes: state.recipes
+	    recipe: state.recipes[ownProps.params.recipeId]
 	  };
 	};
 	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    requestRecipes: function (_requestRecipes) {
-	      function requestRecipes() {
-	        return _requestRecipes.apply(this, arguments);
-	      }
-	
-	      requestRecipes.toString = function () {
-	        return _requestRecipes.toString();
-	      };
-	
-	      return requestRecipes;
-	    }(function () {
-	      return dispatch(requestRecipes());
-	    })
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_recipe_show2.default);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(_recipe_show2.default);
 
 /***/ },
-/* 265 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28985,6 +29037,10 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _ingredient_index = __webpack_require__(280);
+	
+	var _ingredient_index2 = _interopRequireDefault(_ingredient_index);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29011,16 +29067,12 @@
 	    // }
 	
 	    value: function render() {
+	      var ingredients = this.props.recipe.ingredients;
 	      return _react2.default.createElement(
-	        'ul',
+	        'div',
 	        null,
-	        Object.keys(recipes).map(function (id) {
-	          return _react2.default.createElement(
-	            'li',
-	            null,
-	            recipes[id].name
-	          );
-	        })
+	        this.props.recipe.name,
+	        _react2.default.createElement(_ingredient_index2.default, { ingredients: ingredients })
 	      );
 	    }
 	  }]);
@@ -29031,7 +29083,7 @@
 	exports.default = RecipeShow;
 
 /***/ },
-/* 266 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29042,11 +29094,11 @@
 	
 	var _redux = __webpack_require__(180);
 	
-	var _reducers = __webpack_require__(267);
+	var _reducers = __webpack_require__(269);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _middleware = __webpack_require__(270);
+	var _middleware = __webpack_require__(272);
 	
 	var _middleware2 = _interopRequireDefault(_middleware);
 	
@@ -29060,7 +29112,7 @@
 	exports.default = configureStore;
 
 /***/ },
-/* 267 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29071,23 +29123,26 @@
 	
 	var _redux = __webpack_require__(180);
 	
-	var _recipes = __webpack_require__(268);
+	var _recipes = __webpack_require__(270);
 	
 	var _recipes2 = _interopRequireDefault(_recipes);
 	
-	var _shopping_lists = __webpack_require__(269);
+	var _shopping_lists = __webpack_require__(271);
 	
 	var _shopping_lists2 = _interopRequireDefault(_shopping_lists);
+	
+	var _reactRouterRedux = __webpack_require__(282);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = (0, _redux.combineReducers)({
 	  recipes: _recipes2.default,
-	  shopping_lists: _shopping_lists2.default
+	  shopping_lists: _shopping_lists2.default,
+	  routing: _reactRouterRedux.routerReducer
 	});
 
 /***/ },
-/* 268 */
+/* 270 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29118,7 +29173,7 @@
 	exports.default = recipes;
 
 /***/ },
-/* 269 */
+/* 271 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29149,7 +29204,7 @@
 	exports.default = shopping_lists;
 
 /***/ },
-/* 270 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29160,11 +29215,11 @@
 	
 	var _redux = __webpack_require__(180);
 	
-	var _recipe = __webpack_require__(271);
+	var _recipe = __webpack_require__(273);
 	
 	var _recipe2 = _interopRequireDefault(_recipe);
 	
-	var _shopping_list = __webpack_require__(274);
+	var _shopping_list = __webpack_require__(275);
 	
 	var _shopping_list2 = _interopRequireDefault(_shopping_list);
 	
@@ -29173,7 +29228,7 @@
 	exports.default = (0, _redux.applyMiddleware)(_recipe2.default, _shopping_list2.default);
 
 /***/ },
-/* 271 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29182,9 +29237,9 @@
 	  value: true
 	});
 	
-	var _recipe_api_util = __webpack_require__(272);
+	var _recipe_api_util = __webpack_require__(274);
 	
-	var _recipe = __webpack_require__(273);
+	var _recipe = __webpack_require__(265);
 	
 	exports.default = function (_ref) {
 	  var getState = _ref.getState;
@@ -29215,7 +29270,7 @@
 	};
 
 /***/ },
-/* 272 */
+/* 274 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29247,36 +29302,7 @@
 	};
 
 /***/ },
-/* 273 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var requestRecipes = exports.requestRecipes = function requestRecipes() {
-	  return {
-	    type: 'REQUEST_RECIPES'
-	  };
-	};
-	
-	var receiveRecipes = exports.receiveRecipes = function receiveRecipes(recipes) {
-	  return {
-	    type: 'RECEIVE_RECIPES',
-	    recipes: recipes
-	  };
-	};
-	
-	var receiveRecipe = exports.receiveRecipe = function receiveRecipe(recipe) {
-	  return {
-	    type: 'RECEIVE_RECIPE',
-	    recipe: recipe
-	  };
-	};
-
-/***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29285,9 +29311,9 @@
 	  value: true
 	});
 	
-	var _list_api_util = __webpack_require__(275);
+	var _list_api_util = __webpack_require__(276);
 	
-	var _shopping_list = __webpack_require__(276);
+	var _shopping_list = __webpack_require__(262);
 	
 	exports.default = function (_ref) {
 	  var getState = _ref.getState;
@@ -29317,7 +29343,7 @@
 	};
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29349,7 +29375,372 @@
 	};
 
 /***/ },
-/* 276 */
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ListItem = function (_React$Component) {
+	  _inherits(ListItem, _React$Component);
+	
+	  function ListItem() {
+	    _classCallCheck(this, ListItem);
+	
+	    return _possibleConstructorReturn(this, (ListItem.__proto__ || Object.getPrototypeOf(ListItem)).apply(this, arguments));
+	  }
+	
+	  _createClass(ListItem, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'greyOut',
+	    value: function greyOut(e) {
+	      console.log('grayed out');
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'li',
+	        { onClick: this.greyOut },
+	        this.props.item.name
+	      );
+	    }
+	  }]);
+	
+	  return ListItem;
+	}(_react2.default.Component);
+	
+	exports.default = ListItem;
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(198);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RecipeIndexItem = function (_React$Component) {
+	  _inherits(RecipeIndexItem, _React$Component);
+	
+	  function RecipeIndexItem() {
+	    _classCallCheck(this, RecipeIndexItem);
+	
+	    return _possibleConstructorReturn(this, (RecipeIndexItem.__proto__ || Object.getPrototypeOf(RecipeIndexItem)).apply(this, arguments));
+	  }
+	
+	  _createClass(RecipeIndexItem, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'changePage',
+	    value: function changePage(e) {
+	      console.log('going to page ' + this.props.item.id);
+	      _reactRouter.browserHistory.push('/r/' + this.props.item.id);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'li',
+	        { onClick: this.changePage.bind(this) },
+	        this.props.item.name
+	      );
+	    }
+	  }]);
+	
+	  return RecipeIndexItem;
+	}(_react2.default.Component);
+	
+	exports.default = RecipeIndexItem;
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RecipeSearch = function (_React$Component) {
+	  _inherits(RecipeSearch, _React$Component);
+	
+	  function RecipeSearch() {
+	    _classCallCheck(this, RecipeSearch);
+	
+	    return _possibleConstructorReturn(this, (RecipeSearch.__proto__ || Object.getPrototypeOf(RecipeSearch)).apply(this, arguments));
+	  }
+	
+	  _createClass(RecipeSearch, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'onChange',
+	    value: function onChange(e) {
+	      console.log('new value is ' + e.currentTarget.value);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('input', { onChange: this.onChange });
+	    }
+	  }]);
+	
+	  return RecipeSearch;
+	}(_react2.default.Component);
+	
+	exports.default = RecipeSearch;
+
+/***/ },
+/* 280 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _ingredient_index_item = __webpack_require__(281);
+	
+	var _ingredient_index_item2 = _interopRequireDefault(_ingredient_index_item);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var IngredientIndex = function (_React$Component) {
+	  _inherits(IngredientIndex, _React$Component);
+	
+	  function IngredientIndex() {
+	    _classCallCheck(this, IngredientIndex);
+	
+	    return _possibleConstructorReturn(this, (IngredientIndex.__proto__ || Object.getPrototypeOf(IngredientIndex)).apply(this, arguments));
+	  }
+	
+	  _createClass(IngredientIndex, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var ingredients = this.props.ingredients || {};
+	      return _react2.default.createElement(
+	        'ul',
+	        null,
+	        Object.keys(ingredients).map(function (id) {
+	          return _react2.default.createElement(_ingredient_index_item2.default, { item: ingredients[id] });
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return IngredientIndex;
+	}(_react2.default.Component);
+	
+	exports.default = IngredientIndex;
+
+/***/ },
+/* 281 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var IngredientIndexItem = function (_React$Component) {
+	  _inherits(IngredientIndexItem, _React$Component);
+	
+	  function IngredientIndexItem() {
+	    _classCallCheck(this, IngredientIndexItem);
+	
+	    return _possibleConstructorReturn(this, (IngredientIndexItem.__proto__ || Object.getPrototypeOf(IngredientIndexItem)).apply(this, arguments));
+	  }
+	
+	  _createClass(IngredientIndexItem, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'li',
+	        null,
+	        this.props.item.name
+	      );
+	    }
+	  }]);
+	
+	  return IngredientIndexItem;
+	}(_react2.default.Component);
+	
+	exports.default = IngredientIndexItem;
+
+/***/ },
+/* 282 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.routerMiddleware = exports.routerActions = exports.goForward = exports.goBack = exports.go = exports.replace = exports.push = exports.CALL_HISTORY_METHOD = exports.routerReducer = exports.LOCATION_CHANGE = exports.syncHistoryWithStore = undefined;
+	
+	var _reducer = __webpack_require__(283);
+	
+	Object.defineProperty(exports, 'LOCATION_CHANGE', {
+	  enumerable: true,
+	  get: function get() {
+	    return _reducer.LOCATION_CHANGE;
+	  }
+	});
+	Object.defineProperty(exports, 'routerReducer', {
+	  enumerable: true,
+	  get: function get() {
+	    return _reducer.routerReducer;
+	  }
+	});
+	
+	var _actions = __webpack_require__(284);
+	
+	Object.defineProperty(exports, 'CALL_HISTORY_METHOD', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.CALL_HISTORY_METHOD;
+	  }
+	});
+	Object.defineProperty(exports, 'push', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.push;
+	  }
+	});
+	Object.defineProperty(exports, 'replace', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.replace;
+	  }
+	});
+	Object.defineProperty(exports, 'go', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.go;
+	  }
+	});
+	Object.defineProperty(exports, 'goBack', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.goBack;
+	  }
+	});
+	Object.defineProperty(exports, 'goForward', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.goForward;
+	  }
+	});
+	Object.defineProperty(exports, 'routerActions', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.routerActions;
+	  }
+	});
+	
+	var _sync = __webpack_require__(285);
+	
+	var _sync2 = _interopRequireDefault(_sync);
+	
+	var _middleware = __webpack_require__(286);
+	
+	var _middleware2 = _interopRequireDefault(_middleware);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	exports.syncHistoryWithStore = _sync2['default'];
+	exports.routerMiddleware = _middleware2['default'];
+
+/***/ },
+/* 283 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29357,25 +29748,274 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var requestShoppingLists = exports.requestShoppingLists = function requestShoppingLists() {
-	  return {
-	    type: 'REQUEST_SHOPPING_LISTS'
-	  };
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports.routerReducer = routerReducer;
+	/**
+	 * This action type will be dispatched when your history
+	 * receives a location change.
+	 */
+	var LOCATION_CHANGE = exports.LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
+	
+	var initialState = {
+	  locationBeforeTransitions: null
 	};
 	
-	var receiveShoppingLists = exports.receiveShoppingLists = function receiveShoppingLists(lists) {
-	  return {
-	    type: 'RECEIVE_SHOPPING_LISTS',
-	    lists: lists
+	/**
+	 * This reducer will update the state with the most recent location history
+	 * has transitioned to. This may not be in sync with the router, particularly
+	 * if you have asynchronously-loaded routes, so reading from and relying on
+	 * this state is discouraged.
+	 */
+	function routerReducer() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	
+	  var _ref = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	  var type = _ref.type;
+	  var payload = _ref.payload;
+	
+	  if (type === LOCATION_CHANGE) {
+	    return _extends({}, state, { locationBeforeTransitions: payload });
+	  }
+	
+	  return state;
+	}
+
+/***/ },
+/* 284 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/**
+	 * This action type will be dispatched by the history actions below.
+	 * If you're writing a middleware to watch for navigation events, be sure to
+	 * look for actions of this type.
+	 */
+	var CALL_HISTORY_METHOD = exports.CALL_HISTORY_METHOD = '@@router/CALL_HISTORY_METHOD';
+	
+	function updateLocation(method) {
+	  return function () {
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return {
+	      type: CALL_HISTORY_METHOD,
+	      payload: { method: method, args: args }
+	    };
 	  };
+	}
+	
+	/**
+	 * These actions correspond to the history API.
+	 * The associated routerMiddleware will capture these events before they get to
+	 * your reducer and reissue them as the matching function on your history.
+	 */
+	var push = exports.push = updateLocation('push');
+	var replace = exports.replace = updateLocation('replace');
+	var go = exports.go = updateLocation('go');
+	var goBack = exports.goBack = updateLocation('goBack');
+	var goForward = exports.goForward = updateLocation('goForward');
+	
+	var routerActions = exports.routerActions = { push: push, replace: replace, go: go, goBack: goBack, goForward: goForward };
+
+/***/ },
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports['default'] = syncHistoryWithStore;
+	
+	var _reducer = __webpack_require__(283);
+	
+	var defaultSelectLocationState = function defaultSelectLocationState(state) {
+	  return state.routing;
 	};
 	
-	var receiveShoppingList = exports.receiveShoppingList = function receiveShoppingList(list) {
-	  return {
-	    type: 'RECEIVE_SHOPPING_LIST',
-	    list: list
+	/**
+	 * This function synchronizes your history state with the Redux store.
+	 * Location changes flow from history to the store. An enhanced history is
+	 * returned with a listen method that responds to store updates for location.
+	 *
+	 * When this history is provided to the router, this means the location data
+	 * will flow like this:
+	 * history.push -> store.dispatch -> enhancedHistory.listen -> router
+	 * This ensures that when the store state changes due to a replay or other
+	 * event, the router will be updated appropriately and can transition to the
+	 * correct router state.
+	 */
+	function syncHistoryWithStore(history, store) {
+	  var _ref = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	
+	  var _ref$selectLocationSt = _ref.selectLocationState;
+	  var selectLocationState = _ref$selectLocationSt === undefined ? defaultSelectLocationState : _ref$selectLocationSt;
+	  var _ref$adjustUrlOnRepla = _ref.adjustUrlOnReplay;
+	  var adjustUrlOnReplay = _ref$adjustUrlOnRepla === undefined ? true : _ref$adjustUrlOnRepla;
+	
+	  // Ensure that the reducer is mounted on the store and functioning properly.
+	  if (typeof selectLocationState(store.getState()) === 'undefined') {
+	    throw new Error('Expected the routing state to be available either as `state.routing` ' + 'or as the custom expression you can specify as `selectLocationState` ' + 'in the `syncHistoryWithStore()` options. ' + 'Ensure you have added the `routerReducer` to your store\'s ' + 'reducers via `combineReducers` or whatever method you use to isolate ' + 'your reducers.');
+	  }
+	
+	  var initialLocation = void 0;
+	  var isTimeTraveling = void 0;
+	  var unsubscribeFromStore = void 0;
+	  var unsubscribeFromHistory = void 0;
+	
+	  // What does the store say about current location?
+	  var getLocationInStore = function getLocationInStore(useInitialIfEmpty) {
+	    var locationState = selectLocationState(store.getState());
+	    return locationState.locationBeforeTransitions || (useInitialIfEmpty ? initialLocation : undefined);
 	  };
-	};
+	
+	  // Init currentLocation with potential location in store
+	  var currentLocation = getLocationInStore();
+	
+	  // If the store is replayed, update the URL in the browser to match.
+	  if (adjustUrlOnReplay) {
+	    var handleStoreChange = function handleStoreChange() {
+	      var locationInStore = getLocationInStore(true);
+	      if (currentLocation === locationInStore) {
+	        return;
+	      }
+	
+	      // Update address bar to reflect store state
+	      isTimeTraveling = true;
+	      currentLocation = locationInStore;
+	      history.transitionTo(_extends({}, locationInStore, {
+	        action: 'PUSH'
+	      }));
+	      isTimeTraveling = false;
+	    };
+	
+	    unsubscribeFromStore = store.subscribe(handleStoreChange);
+	    handleStoreChange();
+	  }
+	
+	  // Whenever location changes, dispatch an action to get it in the store
+	  var handleLocationChange = function handleLocationChange(location) {
+	    // ... unless we just caused that location change
+	    if (isTimeTraveling) {
+	      return;
+	    }
+	
+	    // Remember where we are
+	    currentLocation = location;
+	
+	    // Are we being called for the first time?
+	    if (!initialLocation) {
+	      // Remember as a fallback in case state is reset
+	      initialLocation = location;
+	
+	      // Respect persisted location, if any
+	      if (getLocationInStore()) {
+	        return;
+	      }
+	    }
+	
+	    // Tell the store to update by dispatching an action
+	    store.dispatch({
+	      type: _reducer.LOCATION_CHANGE,
+	      payload: location
+	    });
+	  };
+	  unsubscribeFromHistory = history.listen(handleLocationChange);
+	
+	  // The enhanced history uses store as source of truth
+	  return _extends({}, history, {
+	    // The listeners are subscribed to the store instead of history
+	
+	    listen: function listen(listener) {
+	      // Copy of last location.
+	      var lastPublishedLocation = getLocationInStore(true);
+	
+	      // Keep track of whether we unsubscribed, as Redux store
+	      // only applies changes in subscriptions on next dispatch
+	      var unsubscribed = false;
+	      var unsubscribeFromStore = store.subscribe(function () {
+	        var currentLocation = getLocationInStore(true);
+	        if (currentLocation === lastPublishedLocation) {
+	          return;
+	        }
+	        lastPublishedLocation = currentLocation;
+	        if (!unsubscribed) {
+	          listener(lastPublishedLocation);
+	        }
+	      });
+	
+	      // History listeners expect a synchronous call. Make the first call to the
+	      // listener after subscribing to the store, in case the listener causes a
+	      // location change (e.g. when it redirects)
+	      listener(lastPublishedLocation);
+	
+	      // Let user unsubscribe later
+	      return function () {
+	        unsubscribed = true;
+	        unsubscribeFromStore();
+	      };
+	    },
+	
+	
+	    // It also provides a way to destroy internal listeners
+	    unsubscribe: function unsubscribe() {
+	      if (adjustUrlOnReplay) {
+	        unsubscribeFromStore();
+	      }
+	      unsubscribeFromHistory();
+	    }
+	  });
+	}
+
+/***/ },
+/* 286 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports['default'] = routerMiddleware;
+	
+	var _actions = __webpack_require__(284);
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	/**
+	 * This middleware captures CALL_HISTORY_METHOD actions to redirect to the
+	 * provided history object. This will prevent these actions from reaching your
+	 * reducer or any middleware that comes after this one.
+	 */
+	function routerMiddleware(history) {
+	  return function () {
+	    return function (next) {
+	      return function (action) {
+	        if (action.type !== _actions.CALL_HISTORY_METHOD) {
+	          return next(action);
+	        }
+	
+	        var _action$payload = action.payload;
+	        var method = _action$payload.method;
+	        var args = _action$payload.args;
+	
+	        history[method].apply(history, _toConsumableArray(args));
+	      };
+	    };
+	  };
+	}
 
 /***/ }
 /******/ ]);
