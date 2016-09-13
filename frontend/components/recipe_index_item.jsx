@@ -12,7 +12,7 @@ class RecipeIndexItem extends React.Component {
 
   render () {
     return (
-      <li onClick={this.changePage.bind(this)}>
+      <li key={this.props.item.id} onClick={this.changePage.bind(this)}>
       {
         this.props.item.name
       }

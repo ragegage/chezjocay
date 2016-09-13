@@ -10,7 +10,7 @@ class ListItem extends React.Component {
 
   render () {
     return (
-      <li onClick={this.greyOut}>
+      <li key={this.props.item.id} onClick={this.greyOut}>
       {
         this.props.item.name
       }

@@ -5,12 +5,13 @@ class RecipeSearch extends React.Component {
   }
 
   onChange(e) {
-    console.log(`new value is ${e.currentTarget.value}`)
+    console.log(`searching with ${e.currentTarget.value}`)
+    this.props.searchRecipes(e.currentTarget.value)
   }
 
   render () {
     return (
-      <input onChange={this.onChange} />
+      <input onChange={this.onChange.bind(this)} />
     )
   }
 }

@@ -16,3 +16,13 @@ export const createRecipe = (data, success) => {
     error: data => console.log(data)
   })
 }
+
+export const searchRecipes = (query, success) => {
+  $.ajax({
+    url: 'search',
+    method: 'GET',
+    data: {q: query},
+    success,
+    error: data => console.log(data)
+  })
+}

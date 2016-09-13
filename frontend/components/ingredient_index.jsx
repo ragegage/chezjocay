@@ -11,7 +11,7 @@ class IngredientIndex extends React.Component {
       <ul>
       {
         Object.keys(ingredients).map(id => {
-          return (<IngredientIndexItem item={ingredients[id]}/>)
+          return (<IngredientIndexItem key={id} item={ingredients[id]}/>)
         })
       }
       </ul>

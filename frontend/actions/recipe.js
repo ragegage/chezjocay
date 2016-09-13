@@ -11,3 +11,8 @@ export const receiveRecipe = (recipe) => ({
   type: 'RECEIVE_RECIPE',
   recipe
 })
+
+export const searchRecipes = (query) => ({
+  type: 'SEARCH_RECIPES',
+  query
+})

@@ -1,12 +1,12 @@
 import React from 'react'
 
-class IngredientIndexItem extends React.Component {
+class ListList extends React.Component {
   componentWillMount() {
   }
 
   render () {
     return (
-      <li key={this.props.item.id}>
+      <li key={this.props.item.id} onClick={this.props.onClick}>
       {
         this.props.item.name
       }
@@ -15,4 +15,4 @@ class IngredientIndexItem extends React.Component {
   }
 }
 
-export default IngredientIndexItem
+export default ListList

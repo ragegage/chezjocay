@@ -28704,11 +28704,14 @@
 	
 	var _shopping_list = __webpack_require__(262);
 	
+	var _selections = __webpack_require__(289);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    shopping_lists: state.shopping_lists
+	    shopping_lists: state.shopping_lists,
+	    shopping_list: state.shopping_lists[state.selections.list]
 	  };
 	};
 	
@@ -28716,6 +28719,9 @@
 	  return {
 	    requestShoppingLists: function requestShoppingLists() {
 	      return dispatch((0, _shopping_list.requestShoppingLists)());
+	    },
+	    selectList: function selectList(id) {
+	      return dispatch((0, _selections.selectList)(id));
 	    }
 	  };
 	};
@@ -28741,6 +28747,10 @@
 	var _list_item = __webpack_require__(277);
 	
 	var _list_item2 = _interopRequireDefault(_list_item);
+	
+	var _list_list = __webpack_require__(290);
+	
+	var _list_list2 = _interopRequireDefault(_list_list);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28769,12 +28779,20 @@
 	    value: function render() {
 	      var _this2 = this;
 	
+	      var list = void 0;
+	      if (this.props.shopping_list) list = Object.keys(this.props.shopping_list.shopping_list_items).map(function (id) {
+	        return _react2.default.createElement(_list_item2.default, { key: id, item: _this2.props.shopping_list.shopping_list_items[id] });
+	      });else list = Object.keys(this.props.shopping_lists).map(function (id) {
+	        return _react2.default.createElement(_list_list2.default, { key: id,
+	          item: _this2.props.shopping_lists[id],
+	          onClick: _this2.props.selectList.bind(null, id)
+	        });
+	      });
+	
 	      return _react2.default.createElement(
 	        'ul',
 	        null,
-	        Object.keys(this.props.shopping_lists).map(function (id) {
-	          return _react2.default.createElement(_list_item2.default, { item: _this2.props.shopping_lists[id] });
-	        })
+	        list
 	      );
 	    }
 	  }]);
@@ -28810,6 +28828,13 @@
 	  return {
 	    type: 'RECEIVE_SHOPPING_LIST',
 	    list: list
+	  };
+	};
+	
+	var updateShoppingListItem = exports.updateShoppingListItem = function updateShoppingListItem(item) {
+	  return {
+	    type: 'UPDATE_SHOPPING_LIST_ITEM',
+	    item: item
 	  };
 	};
 
@@ -28870,9 +28895,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _recipe_search = __webpack_require__(279);
+	var _recipe_search_container = __webpack_require__(287);
 	
-	var _recipe_search2 = _interopRequireDefault(_recipe_search);
+	var _recipe_search_container2 = _interopRequireDefault(_recipe_search_container);
 	
 	var _recipe_index_item = __webpack_require__(278);
 	
@@ -28908,12 +28933,12 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'recipe-index' },
-	        _react2.default.createElement(_recipe_search2.default, null),
+	        _react2.default.createElement(_recipe_search_container2.default, null),
 	        _react2.default.createElement(
 	          'ul',
 	          { className: 'recipe-list' },
 	          Object.keys(this.props.recipes).map(function (id) {
-	            return _react2.default.createElement(_recipe_index_item2.default, { item: _this2.props.recipes[id], push: _this2.props.push });
+	            return _react2.default.createElement(_recipe_index_item2.default, { key: id, item: _this2.props.recipes[id], push: _this2.props.push });
 	          })
 	        )
 	      );
@@ -28951,6 +28976,13 @@
 	  return {
 	    type: 'RECEIVE_RECIPE',
 	    recipe: recipe
+	  };
+	};
+	
+	var searchRecipes = exports.searchRecipes = function searchRecipes(query) {
+	  return {
+	    type: 'SEARCH_RECIPES',
+	    query: query
 	  };
 	};
 
@@ -29089,11 +29121,16 @@
 	
 	var _shopping_lists2 = _interopRequireDefault(_shopping_lists);
 	
+	var _selections = __webpack_require__(288);
+	
+	var _selections2 = _interopRequireDefault(_selections);
+	
 	var _reactRouterRedux = __webpack_require__(282);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = (0, _redux.combineReducers)({
+	  selections: _selections2.default,
 	  recipes: _recipes2.default,
 	  shopping_lists: _shopping_lists2.default,
 	  routing: _reactRouterRedux.routerReducer
@@ -29223,6 +29260,9 @@
 	        case 'CREATE_RECIPE':
 	          (0, _recipe_api_util.createRecipe)(action.bench, recipeSuccess);
 	          break;
+	        case 'SEARCH_RECIPES':
+	          (0, _recipe_api_util.searchRecipes)(action.query, recipesSuccess);
+	          break;
 	        default:
 	          break;
 	      }
@@ -29256,6 +29296,18 @@
 	    url: 'recipes',
 	    method: 'POST',
 	    data: data,
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var searchRecipes = exports.searchRecipes = function searchRecipes(query, success) {
+	  $.ajax({
+	    url: 'search',
+	    method: 'GET',
+	    data: { q: query },
 	    success: success,
 	    error: function error(data) {
 	      return console.log(data);
@@ -29296,6 +29348,9 @@
 	        case 'CREATE_SHOPPING_LIST':
 	          (0, _list_api_util.createShoppingList)(action.bench, shoppingListSuccess);
 	          break;
+	        case 'UPDATE_SHOPPING_LIST_ITEM':
+	          (0, _list_api_util.updateShoppingListItem)(action.item, shoppingListSuccess);
+	          break;
 	        default:
 	          break;
 	      }
@@ -29329,6 +29384,18 @@
 	    url: 'shopping_lists',
 	    method: 'POST',
 	    data: data,
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var updateShoppingListItem = exports.updateShoppingListItem = function updateShoppingListItem(item, success) {
+	  $.ajax({
+	    url: 'shopping_lists',
+	    method: 'POST',
+	    data: {},
 	    success: success,
 	    error: function error(data) {
 	      return console.log(data);
@@ -29382,7 +29449,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'li',
-	        { onClick: this.greyOut },
+	        { key: this.props.item.id, onClick: this.greyOut },
 	        this.props.item.name
 	      );
 	    }
@@ -29442,7 +29509,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'li',
-	        { onClick: this.changePage.bind(this) },
+	        { key: this.props.item.id, onClick: this.changePage.bind(this) },
 	        this.props.item.name
 	      );
 	    }
@@ -29492,12 +29559,13 @@
 	  }, {
 	    key: 'onChange',
 	    value: function onChange(e) {
-	      console.log('new value is ' + e.currentTarget.value);
+	      console.log('searching with ' + e.currentTarget.value);
+	      this.props.searchRecipes(e.currentTarget.value);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('input', { onChange: this.onChange });
+	      return _react2.default.createElement('input', { onChange: this.onChange.bind(this) });
 	    }
 	  }]);
 	
@@ -29554,7 +29622,7 @@
 	        'ul',
 	        null,
 	        Object.keys(ingredients).map(function (id) {
-	          return _react2.default.createElement(_ingredient_index_item2.default, { item: ingredients[id] });
+	          return _react2.default.createElement(_ingredient_index_item2.default, { key: id, item: ingredients[id] });
 	        })
 	      );
 	    }
@@ -29606,7 +29674,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'li',
-	        null,
+	        { key: this.props.item.id },
 	        this.props.item.name
 	      );
 	    }
@@ -29978,6 +30046,136 @@
 	    };
 	  };
 	}
+
+/***/ },
+/* 287 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(173);
+	
+	var _recipe_search = __webpack_require__(279);
+	
+	var _recipe_search2 = _interopRequireDefault(_recipe_search);
+	
+	var _recipe = __webpack_require__(265);
+	
+	var _reactRouterRedux = __webpack_require__(282);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {};
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    searchRecipes: function searchRecipes(query) {
+	      return dispatch((0, _recipe.searchRecipes)(query));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_recipe_search2.default);
+
+/***/ },
+/* 288 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var selections = function selections() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'SELECT_LIST':
+	      return _extends({}, state, { list: action.id });
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = selections;
+
+/***/ },
+/* 289 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var selectList = exports.selectList = function selectList(id) {
+	  return {
+	    type: 'SELECT_LIST',
+	    id: id
+	  };
+	};
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ListList = function (_React$Component) {
+	  _inherits(ListList, _React$Component);
+	
+	  function ListList() {
+	    _classCallCheck(this, ListList);
+	
+	    return _possibleConstructorReturn(this, (ListList.__proto__ || Object.getPrototypeOf(ListList)).apply(this, arguments));
+	  }
+	
+	  _createClass(ListList, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'li',
+	        { key: this.props.item.id, onClick: this.props.onClick },
+	        this.props.item.name
+	      );
+	    }
+	  }]);
+	
+	  return ListList;
+	}(_react2.default.Component);
+	
+	exports.default = ListList;
 
 /***/ }
 /******/ ]);

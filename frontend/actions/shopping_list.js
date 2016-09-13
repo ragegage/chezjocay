@@ -11,3 +11,8 @@ export const receiveShoppingList = (list) => ({
   type: 'RECEIVE_SHOPPING_LIST',
   list
 })
+
+export const updateShoppingListItem = (item) => ({
+  type: 'UPDATE_SHOPPING_LIST_ITEM',
+  item
+})
