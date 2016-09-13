@@ -14,7 +14,7 @@ class RecipeIndex extends React.Component {
         <ul className='recipe-list'>
         {
           Object.keys(this.props.recipes).map(id => {
-            return (<RecipeIndexItem item={this.props.recipes[id]} />)
+            return (<RecipeIndexItem item={this.props.recipes[id]} push={this.props.push} />)
           })
         }
         </ul>

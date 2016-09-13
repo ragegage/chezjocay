@@ -7,7 +7,7 @@ class RecipeIndexItem extends React.Component {
 
   changePage(e) {
     console.log(`going to page ${this.props.item.id}`)
-    browserHistory.push(`/r/${this.props.item.id}`)
+    this.props.push(`/r/${this.props.item.id}`)
   }
 
   render () {

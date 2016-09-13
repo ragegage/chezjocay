@@ -21458,18 +21458,41 @@
 	
 	var _reactRedux = __webpack_require__(173);
 	
-	var _router = __webpack_require__(197);
+	var _reactRouter = __webpack_require__(198);
 	
-	var _router2 = _interopRequireDefault(_router);
+	var _reactRouterRedux = __webpack_require__(282);
+	
+	var _app = __webpack_require__(259);
+	
+	var _app2 = _interopRequireDefault(_app);
+	
+	var _recipe_index_container = __webpack_require__(263);
+	
+	var _recipe_index_container2 = _interopRequireDefault(_recipe_index_container);
+	
+	var _recipe_show_container = __webpack_require__(266);
+	
+	var _recipe_show_container2 = _interopRequireDefault(_recipe_show_container);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Root = function Root(_ref) {
 	  var store = _ref.store;
+	
+	  var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHistory, store); // setup for react-router-redux
 	  return _react2.default.createElement(
 	    _reactRedux.Provider,
 	    { store: store },
-	    _react2.default.createElement(_router2.default, null)
+	    _react2.default.createElement(
+	      _reactRouter.Router,
+	      { history: history },
+	      _react2.default.createElement(
+	        _reactRouter.Route,
+	        { path: '/', component: _app2.default },
+	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _recipe_index_container2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'r/:recipeId', component: _recipe_show_container2.default })
+	      )
+	    )
 	  );
 	};
 	
@@ -23079,77 +23102,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 197 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(198);
-	
-	var _app = __webpack_require__(259);
-	
-	var _app2 = _interopRequireDefault(_app);
-	
-	var _recipe_index_container = __webpack_require__(263);
-	
-	var _recipe_index_container2 = _interopRequireDefault(_recipe_index_container);
-	
-	var _recipe_show_container = __webpack_require__(266);
-	
-	var _recipe_show_container2 = _interopRequireDefault(_recipe_show_container);
-	
-	var _reactRouterRedux = __webpack_require__(282);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var AppRouter = function (_React$Component) {
-	  _inherits(AppRouter, _React$Component);
-	
-	  function AppRouter() {
-	    _classCallCheck(this, AppRouter);
-	
-	    return _possibleConstructorReturn(this, (AppRouter.__proto__ || Object.getPrototypeOf(AppRouter)).apply(this, arguments));
-	  }
-	
-	  _createClass(AppRouter, [{
-	    key: 'render',
-	    value: function render() {
-	      debugger;
-	      return _react2.default.createElement(
-	        _reactRouter.Router,
-	        { history: _reactRouter.browserHistory },
-	        _react2.default.createElement(
-	          _reactRouter.Route,
-	          { path: '/', component: _app2.default },
-	          _react2.default.createElement(_reactRouter.IndexRoute, { component: _recipe_index_container2.default }),
-	          _react2.default.createElement(_reactRouter.Route, { path: 'r/:recipeId', component: _recipe_show_container2.default })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return AppRouter;
-	}(_react2.default.Component);
-	
-	exports.default = AppRouter;
-
-/***/ },
+/* 197 */,
 /* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -28878,6 +28831,8 @@
 	
 	var _recipe = __webpack_require__(265);
 	
+	var _reactRouterRedux = __webpack_require__(282);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state) {
@@ -28890,6 +28845,9 @@
 	  return {
 	    requestRecipes: function requestRecipes() {
 	      return dispatch((0, _recipe.requestRecipes)());
+	    },
+	    push: function push(location) {
+	      return dispatch((0, _reactRouterRedux.push)(location));
 	    }
 	  };
 	};
@@ -28955,7 +28913,7 @@
 	          'ul',
 	          { className: 'recipe-list' },
 	          Object.keys(this.props.recipes).map(function (id) {
-	            return _react2.default.createElement(_recipe_index_item2.default, { item: _this2.props.recipes[id] });
+	            return _react2.default.createElement(_recipe_index_item2.default, { item: _this2.props.recipes[id], push: _this2.props.push });
 	          })
 	        )
 	      );
@@ -29215,6 +29173,10 @@
 	
 	var _redux = __webpack_require__(180);
 	
+	var _reactRouterRedux = __webpack_require__(282);
+	
+	var _reactRouter = __webpack_require__(198);
+	
 	var _recipe = __webpack_require__(273);
 	
 	var _recipe2 = _interopRequireDefault(_recipe);
@@ -29225,7 +29187,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = (0, _redux.applyMiddleware)(_recipe2.default, _shopping_list2.default);
+	exports.default = (0, _redux.applyMiddleware)(_recipe2.default, _shopping_list2.default, (0, _reactRouterRedux.routerMiddleware)(_reactRouter.browserHistory));
 
 /***/ },
 /* 273 */
@@ -29473,7 +29435,7 @@
 	    key: 'changePage',
 	    value: function changePage(e) {
 	      console.log('going to page ' + this.props.item.id);
-	      _reactRouter.browserHistory.push('/r/' + this.props.item.id);
+	      this.props.push('/r/' + this.props.item.id);
 	    }
 	  }, {
 	    key: 'render',
