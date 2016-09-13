@@ -21460,8 +21460,6 @@
 	
 	var _reactRouter = __webpack_require__(198);
 	
-	var _reactRouterRedux = __webpack_require__(282);
-	
 	var _app = __webpack_require__(259);
 	
 	var _app2 = _interopRequireDefault(_app);
@@ -21479,13 +21477,12 @@
 	var Root = function Root(_ref) {
 	  var store = _ref.store;
 	
-	  var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHistory, store); // setup for react-router-redux
 	  return _react2.default.createElement(
 	    _reactRedux.Provider,
 	    { store: store },
 	    _react2.default.createElement(
 	      _reactRouter.Router,
-	      { history: history },
+	      { history: _reactRouter.browserHistory },
 	      _react2.default.createElement(
 	        _reactRouter.Route,
 	        { path: '/', component: _app2.default },
@@ -29125,15 +29122,12 @@
 	
 	var _selections2 = _interopRequireDefault(_selections);
 	
-	var _reactRouterRedux = __webpack_require__(282);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = (0, _redux.combineReducers)({
 	  selections: _selections2.default,
 	  recipes: _recipes2.default,
-	  shopping_lists: _shopping_lists2.default,
-	  routing: _reactRouterRedux.routerReducer
+	  shopping_lists: _shopping_lists2.default
 	});
 
 /***/ },
