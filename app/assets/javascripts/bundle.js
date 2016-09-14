@@ -29701,10 +29701,59 @@
 	
 	    value: function render() {
 	      var ingredients = this.props.recipe.ingredients;
+	      var recipe = this.props.recipe;
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        this.props.recipe.name,
+	        { className: 'recipe-show' },
+	        _react2.default.createElement(
+	          'header',
+	          null,
+	          recipe.name
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { href: recipe.url },
+	          recipe.url
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          recipe.notes
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          recipe.entree ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'entree'
+	          ) : '',
+	          recipe.soup ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'soup'
+	          ) : '',
+	          recipe.salad ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'salad'
+	          ) : '',
+	          recipe.dessert ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'dessert'
+	          ) : '',
+	          recipe.appetizer ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'appetizer'
+	          ) : ''
+	        ),
+	        _react2.default.createElement(
+	          'footer',
+	          null,
+	          recipe.tags
+	        ),
 	        _react2.default.createElement(_ingredient_index2.default, { ingredients: ingredients })
 	      );
 	    }
@@ -30147,7 +30196,7 @@
 	
 	var fetchShoppingLists = exports.fetchShoppingLists = function fetchShoppingLists(success) {
 	  $.ajax({
-	    url: 'shopping_lists',
+	    url: '/shopping_lists',
 	    method: 'GET',
 	    success: success,
 	    error: function error(data) {
@@ -30158,7 +30207,7 @@
 	
 	var createShoppingList = exports.createShoppingList = function createShoppingList(data, success) {
 	  $.ajax({
-	    url: 'shopping_lists',
+	    url: '/shopping_lists',
 	    method: 'POST',
 	    data: data,
 	    success: success,
@@ -30170,7 +30219,7 @@
 	
 	var updateShoppingListItem = exports.updateShoppingListItem = function updateShoppingListItem(item, success) {
 	  $.ajax({
-	    url: 'shopping_list_items/' + item.id,
+	    url: '/shopping_list_items/' + item.id,
 	    method: 'PATCH',
 	    data: { shopping_list_item: _extends({}, item, { done: !item.done }) },
 	    success: success,
