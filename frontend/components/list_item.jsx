@@ -4,15 +4,19 @@ class ListItem extends React.Component {
   componentWillMount() {
   }
 
-  greyOut(e) {
-    console.log('grayed out')
+  toggle(e) {
+    e.preventDefault()
+    this.props.toggleItem(this.props.item)
   }
 
   render () {
+    const item = this.props.item
     return (
-      <li key={this.props.item.id} onClick={this.greyOut}>
+      <li key={item.id}
+          onClick={this.toggle.bind(this)}
+          className={item.done ? 'greyed-out' : ''}>
       {
-        this.props.item.name
+        item.name
       }
       </li>
     )

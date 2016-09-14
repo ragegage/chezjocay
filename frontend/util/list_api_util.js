@@ -19,9 +19,9 @@ export const createShoppingList = (data, success) => {
 
 export const updateShoppingListItem = (item, success) => {
   $.ajax({
-    url: 'shopping_lists',
-    method: 'POST',
-    data: {},
+    url: `shopping_list_items/${item.id}`,
+    method: 'PATCH',
+    data: {shopping_list_item: {...item, done: !item.done}},
     success,
     error: data => console.log(data)
   })

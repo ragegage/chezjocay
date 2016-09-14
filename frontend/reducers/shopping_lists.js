@@ -3,8 +3,7 @@ const shopping_lists = function(state = {}, action){
     case 'RECEIVE_SHOPPING_LISTS':
       return action.lists;
     case 'RECEIVE_SHOPPING_LIST':
-      const newList = {[action.list.id]: action.list};
-      return {...state, ...newList}
+      return {...state, ...action.list}
     default:
       return state;
   }
