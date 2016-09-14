@@ -29616,10 +29616,59 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var item = this.props.item;
 	      return _react2.default.createElement(
 	        'li',
-	        { key: this.props.item.id, onClick: this.changePage.bind(this) },
-	        this.props.item.name
+	        { key: item.id, onClick: this.changePage.bind(this) },
+	        _react2.default.createElement(
+	          'header',
+	          null,
+	          item.name
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { href: item.url },
+	          item.url
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          item.notes
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          item.entree ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'entree'
+	          ) : '',
+	          item.soup ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'soup'
+	          ) : '',
+	          item.salad ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'salad'
+	          ) : '',
+	          item.dessert ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'dessert'
+	          ) : '',
+	          item.appetizer ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'appetizer'
+	          ) : ''
+	        ),
+	        _react2.default.createElement(
+	          'footer',
+	          null,
+	          item.tags
+	        )
 	      );
 	    }
 	  }]);
