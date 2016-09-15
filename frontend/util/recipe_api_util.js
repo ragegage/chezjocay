@@ -26,3 +26,13 @@ export const searchRecipes = (query, success) => {
     error: data => console.log(data)
   })
 }
+
+export const createIngredient = (ingredient, success) => {
+  $.ajax({
+    url: '/ingredients',
+    method: 'POST',
+    data: {ingredient},
+    success,
+    error: data => console.log(data)
+  })
+}

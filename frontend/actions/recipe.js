@@ -16,3 +16,8 @@ export const searchRecipes = (query) => ({
   type: 'SEARCH_RECIPES',
   query
 })
+
+export const createIngredient = (ingredient) => ({
+  type: 'CREATE_INGREDIENT',
+  ingredient
+})

@@ -29206,6 +29206,13 @@
 	    query: query
 	  };
 	};
+	
+	var createIngredient = exports.createIngredient = function createIngredient(ingredient) {
+	  return {
+	    type: 'CREATE_INGREDIENT',
+	    ingredient: ingredient
+	  };
+	};
 
 /***/ },
 /* 270 */
@@ -29688,11 +29695,15 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _reactRedux = __webpack_require__(173);
 	
 	var _recipe_show = __webpack_require__(277);
 	
 	var _recipe_show2 = _interopRequireDefault(_recipe_show);
+	
+	var _recipe = __webpack_require__(269);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29702,7 +29713,15 @@
 	  };
 	};
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(_recipe_show2.default);
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+	  return {
+	    createIngredient: function createIngredient(ingredient) {
+	      return dispatch((0, _recipe.createIngredient)(_extends({}, ingredient, { recipe_id: ownProps.params.recipeId })));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_recipe_show2.default);
 
 /***/ },
 /* 277 */
@@ -29723,6 +29742,10 @@
 	var _ingredient_index = __webpack_require__(278);
 	
 	var _ingredient_index2 = _interopRequireDefault(_ingredient_index);
+	
+	var _ingredient_form = __webpack_require__(290);
+	
+	var _ingredient_form2 = _interopRequireDefault(_ingredient_form);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29803,7 +29826,8 @@
 	          null,
 	          recipe.tags
 	        ),
-	        _react2.default.createElement(_ingredient_index2.default, { ingredients: ingredients })
+	        _react2.default.createElement(_ingredient_index2.default, { ingredients: ingredients }),
+	        _react2.default.createElement(_ingredient_form2.default, { createIngredient: this.props.createIngredient })
 	      );
 	    }
 	  }]);
@@ -29997,8 +30021,6 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
 	var recipes = function recipes() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	  var action = arguments[1];
@@ -30007,8 +30029,7 @@
 	    case 'RECEIVE_RECIPES':
 	      return action.recipes;
 	    case 'RECEIVE_RECIPE':
-	      var newRecipe = _defineProperty({}, action.recipe.id, action.recipe);
-	      return _extends({}, state, newRecipe);
+	      return _extends({}, state, action.recipe);
 	    default:
 	      return state;
 	  }
@@ -30135,6 +30156,9 @@
 	        case 'SEARCH_RECIPES':
 	          (0, _recipe_api_util.searchRecipes)(action.query, recipesSuccess);
 	          break;
+	        case 'CREATE_INGREDIENT':
+	          (0, _recipe_api_util.createIngredient)(action.ingredient, recipeSuccess);
+	          break;
 	        default:
 	          break;
 	      }
@@ -30180,6 +30204,18 @@
 	    url: 'search',
 	    method: 'GET',
 	    data: { q: query },
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var createIngredient = exports.createIngredient = function createIngredient(ingredient, success) {
+	  $.ajax({
+	    url: '/ingredients',
+	    method: 'POST',
+	    data: { ingredient: ingredient },
 	    success: success,
 	    error: function error(data) {
 	      return console.log(data);
@@ -30277,6 +30313,79 @@
 	    }
 	  });
 	};
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var IngredientForm = function (_React$Component) {
+	  _inherits(IngredientForm, _React$Component);
+	
+	  function IngredientForm(props) {
+	    _classCallCheck(this, IngredientForm);
+	
+	    var _this = _possibleConstructorReturn(this, (IngredientForm.__proto__ || Object.getPrototypeOf(IngredientForm)).call(this, props));
+	
+	    _this.state = { name: '' };
+	    _this.update = _this.update.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(IngredientForm, [{
+	    key: 'update',
+	    value: function update(name) {
+	      var _this2 = this;
+	
+	      return function (e) {
+	        return _this2.setState({ name: e.currentTarget.value });
+	      };
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      e.preventDefault();
+	      this.props.createIngredient(this.state);
+	      this.setState({ name: '' });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'form',
+	        null,
+	        _react2.default.createElement('input', { placeholder: 'name',
+	          value: this.state.name,
+	          onChange: this.update('name') }),
+	        _react2.default.createElement('input', { type: 'submit', onClick: this.handleSubmit })
+	      );
+	    }
+	  }]);
+	
+	  return IngredientForm;
+	}(_react2.default.Component);
+	
+	exports.default = IngredientForm;
 
 /***/ }
 /******/ ]);

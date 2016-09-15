@@ -1,5 +1,6 @@
 import React from 'react'
 import IngredientIndex from './ingredient_index'
+import IngredientForm from './ingredient_form'
 
 class RecipeShow extends React.Component {
   // componentWillMount () {
@@ -24,9 +25,8 @@ class RecipeShow extends React.Component {
           {recipe.appetizer ? <li>appetizer</li> : ''}
         </ul>
         <footer>{recipe.tags}</footer>
-      {
         <IngredientIndex ingredients={ingredients} />
-      }
+        <IngredientForm createIngredient={this.props.createIngredient}/>
       </div>
     )
   }

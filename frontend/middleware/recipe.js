@@ -1,6 +1,7 @@
 import { fetchRecipes,
          createRecipe,
-         searchRecipes
+         searchRecipes,
+         createIngredient
        } from '../util/recipe_api_util'
 import { receiveRecipe,
          receiveRecipes
@@ -20,6 +21,9 @@ export default ({getState, dispatch}) => next => action => {
       break
     case 'SEARCH_RECIPES':
       searchRecipes(action.query, recipesSuccess)
+      break
+    case 'CREATE_INGREDIENT':
+      createIngredient(action.ingredient, recipeSuccess)
       break
     default:
       break

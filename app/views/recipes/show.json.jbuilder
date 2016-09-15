@@ -1,3 +1,3 @@
 json.set! @recipe.id do
-  json.partial! 'recipe', recipe: @recipe
+  json.partial! 'recipes/recipe', recipe: @recipe
 end

@@ -3,8 +3,7 @@ const recipes = function(state = {}, action){
     case 'RECEIVE_RECIPES':
       return action.recipes;
     case 'RECEIVE_RECIPE':
-      const newRecipe = {[action.recipe.id]: action.recipe};
-      return {...state, ...newRecipe}
+      return {...state, ...action.recipe}
     default:
       return state;
   }
