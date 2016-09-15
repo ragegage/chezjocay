@@ -28805,6 +28805,11 @@
 	      return _react2.default.createElement(
 	        'ul',
 	        { className: 'shopping-list' },
+	        this.props.shopping_list ? _react2.default.createElement(
+	          'li',
+	          { className: 'list-header', onClick: this.props.deselectList },
+	          'deselect list'
+	        ) : '',
 	        list
 	      );
 	    }
@@ -28928,7 +28933,9 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'li',
-	        { key: this.props.item.id, onClick: this.props.onClick },
+	        { key: this.props.item.id,
+	          onClick: this.props.onClick,
+	          className: 'shopping-list-list' },
 	        this.props.item.name
 	      );
 	    }
@@ -30033,7 +30040,7 @@
 	  }, {
 	    key: 'handleDelete',
 	    value: function handleDelete(e) {
-	      e.preventDefault();
+	      e.stopPropagation();
 	      this.props.deleteIngredient(this.props.item);
 	    }
 	  }, {

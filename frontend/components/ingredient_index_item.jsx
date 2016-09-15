@@ -10,7 +10,7 @@ class IngredientIndexItem extends React.Component {
   }
 
   handleDelete (e) {
-    e.preventDefault()
+    e.stopPropagation()
     this.props.deleteIngredient(this.props.item)
   }
 
