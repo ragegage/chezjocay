@@ -1,3 +1,78 @@
 // Place all the styles related to the recipes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.recipe-index {
+  width: 60%;
+  padding: 0 20px;
+  .search {
+    padding: 10px;
+    font-size: 16px;
+  }
+  .search:focus {
+    outline: none;
+  }
+}
+
+.recipe-list {
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.recipe-list-item {
+  color: #ff6666;
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 10px 0;
+  header {
+    font-size: 22px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+}
+
+.recipe-show {
+  width: 60%;
+  border: 1px solid #bbb;
+  border-radius: 25px;
+  background-color: #ffe;
+  header {
+    display: flex;
+    align-items: flex-end;
+    a {
+      font-size: 22px;
+    }
+    ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+    }
+  }
+  .info {
+    display: flex;
+    .left-half {
+      width: 60%;
+    }
+    .right-half {
+      width: 40%;
+      ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        li {
+          cursor: pointer;
+        }
+      }
+      form {
+        display: flex;
+      }
+    }
+  }
+}

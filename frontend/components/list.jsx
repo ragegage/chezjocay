@@ -25,7 +25,7 @@ class List extends React.Component {
               )
 
     return (
-      <ul>
+      <ul className='shopping-list'>
       {
         list
       }

@@ -1,5 +1,5 @@
 import React from 'react'
-import IngredientIndexItem from './ingredient_index_item'
+import IngredientIndexItemContainer from './ingredient_index_item_container'
 
 class IngredientIndex extends React.Component {
   componentWillMount() {
@@ -8,10 +8,10 @@ class IngredientIndex extends React.Component {
   render () {
     const ingredients = this.props.ingredients || {}
     return (
-      <ul>
+      <ul className='ingredient-list'>
       {
         Object.keys(ingredients).map(id => {
-          return (<IngredientIndexItem key={id} item={ingredients[id]}/>)
+          return (<IngredientIndexItemContainer key={id} item={ingredients[id]}/>)
         })
       }
       </ul>

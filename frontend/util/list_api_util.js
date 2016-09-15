@@ -26,3 +26,13 @@ export const updateShoppingListItem = (item, success) => {
     error: data => console.log(data)
   })
 }
+
+export const createShoppingListItem = (item, success) => {
+  $.ajax({
+    url: `/shopping_list_items`,
+    method: 'POST',
+    data: {shopping_list_item: item},
+    success,
+    error: data => console.log(data)
+  })
+}

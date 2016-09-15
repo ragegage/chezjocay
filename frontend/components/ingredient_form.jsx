@@ -24,7 +24,7 @@ class IngredientForm extends React.Component {
         <input placeholder='name'
                value={this.state.name}
                onChange={this.update('name')} />
-        <input type='submit' onClick={this.handleSubmit} />
+             <input type='submit' onClick={this.handleSubmit} value='+'/>
       </form>
     )
   }

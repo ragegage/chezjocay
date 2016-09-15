@@ -6,19 +6,16 @@ class RecipeIndexItem extends React.Component {
   }
 
   changePage(e) {
-    console.log(`going to page ${this.props.item.id}`)
     this.props.push(`/r/${this.props.item.id}`)
   }
 
   render () {
     const item = this.props.item
     return (
-      <li key={item.id} onClick={this.changePage.bind(this)}>
+      <li key={item.id} onClick={this.changePage.bind(this)} className='recipe-list-item'>
         <header>{
           item.name
         }</header>
-        <a href={item.url}>{item.url}</a>
-        <p>{item.notes}</p>
         <ul>
           {item.entree ? <li>entree</li> : ''}
           {item.soup ? <li>soup</li> : ''}
@@ -26,7 +23,6 @@ class RecipeIndexItem extends React.Component {
           {item.dessert ? <li>dessert</li> : ''}
           {item.appetizer ? <li>appetizer</li> : ''}
         </ul>
-        <footer>{item.tags}</footer>
       </li>
     )
   }

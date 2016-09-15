@@ -1,0 +1,16 @@
+import { connect } from 'react-redux'
+import IngredientIndexItem from './ingredient_index_item'
+import { createShoppingListItem } from '../actions/shopping_list'
+
+const mapStateToProps = (state) => ({
+  selectedListId: state.selections.list
+})
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  createListItem: (item) => dispatch(createShoppingListItem(item)),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(IngredientIndexItem)

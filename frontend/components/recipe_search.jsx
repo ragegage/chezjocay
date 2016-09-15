@@ -5,13 +5,14 @@ class RecipeSearch extends React.Component {
   }
 
   onChange(e) {
-    console.log(`searching with ${e.currentTarget.value}`)
     this.props.searchRecipes(e.currentTarget.value)
   }
 
   render () {
     return (
-      <input onChange={this.onChange.bind(this)} />
+      <input onChange={this.onChange.bind(this)}
+             className='search'
+             placeholder='Search...' />
     )
   }
 }

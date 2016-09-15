@@ -16,3 +16,8 @@ export const updateShoppingListItem = (item) => ({
   type: 'UPDATE_SHOPPING_LIST_ITEM',
   item
 })
+
+export const createShoppingListItem = (item) => ({
+  type: 'CREATE_SHOPPING_LIST_ITEM',
+  item
+})

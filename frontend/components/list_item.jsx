@@ -14,7 +14,7 @@ class ListItem extends React.Component {
     return (
       <li key={item.id}
           onClick={this.toggle.bind(this)}
-          className={item.done ? 'greyed-out' : ''}>
+          className={item.done ? 'shopping-list-item greyed-out' : 'shopping-list-item'}>
       {
         item.name
       }

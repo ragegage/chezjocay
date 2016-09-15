@@ -56,7 +56,7 @@
 	
 	var _root2 = _interopRequireDefault(_root);
 	
-	var _store = __webpack_require__(280);
+	var _store = __webpack_require__(281);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -28675,8 +28675,12 @@
 	        )
 	      )
 	    ),
-	    _react2.default.createElement(_list_container2.default, null),
-	    children
+	    _react2.default.createElement(
+	      'section',
+	      { className: 'page-content' },
+	      _react2.default.createElement(_list_container2.default, null),
+	      children
+	    )
 	  );
 	};
 	
@@ -28793,7 +28797,7 @@
 	
 	      return _react2.default.createElement(
 	        'ul',
-	        null,
+	        { className: 'shopping-list' },
 	        list
 	      );
 	    }
@@ -28854,7 +28858,7 @@
 	        'li',
 	        { key: item.id,
 	          onClick: this.toggle.bind(this),
-	          className: item.done ? 'greyed-out' : '' },
+	          className: item.done ? 'shopping-list-item greyed-out' : 'shopping-list-item' },
 	        item.name
 	      );
 	    }
@@ -28949,6 +28953,13 @@
 	var updateShoppingListItem = exports.updateShoppingListItem = function updateShoppingListItem(item) {
 	  return {
 	    type: 'UPDATE_SHOPPING_LIST_ITEM',
+	    item: item
+	  };
+	};
+	
+	var createShoppingListItem = exports.createShoppingListItem = function createShoppingListItem(item) {
+	  return {
+	    type: 'CREATE_SHOPPING_LIST_ITEM',
 	    item: item
 	  };
 	};
@@ -29156,13 +29167,14 @@
 	  }, {
 	    key: 'onChange',
 	    value: function onChange(e) {
-	      console.log('searching with ' + e.currentTarget.value);
 	      this.props.searchRecipes(e.currentTarget.value);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('input', { onChange: this.onChange.bind(this) });
+	      return _react2.default.createElement('input', { onChange: this.onChange.bind(this),
+	        className: 'search',
+	        placeholder: 'Search...' });
 	    }
 	  }]);
 	
@@ -29617,7 +29629,6 @@
 	  }, {
 	    key: 'changePage',
 	    value: function changePage(e) {
-	      console.log('going to page ' + this.props.item.id);
 	      this.props.push('/r/' + this.props.item.id);
 	    }
 	  }, {
@@ -29626,21 +29637,11 @@
 	      var item = this.props.item;
 	      return _react2.default.createElement(
 	        'li',
-	        { key: item.id, onClick: this.changePage.bind(this) },
+	        { key: item.id, onClick: this.changePage.bind(this), className: 'recipe-list-item' },
 	        _react2.default.createElement(
 	          'header',
 	          null,
 	          item.name
-	        ),
-	        _react2.default.createElement(
-	          'a',
-	          { href: item.url },
-	          item.url
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          item.notes
 	        ),
 	        _react2.default.createElement(
 	          'ul',
@@ -29670,11 +29671,6 @@
 	            null,
 	            'appetizer'
 	          ) : ''
-	        ),
-	        _react2.default.createElement(
-	          'footer',
-	          null,
-	          item.tags
 	        )
 	      );
 	    }
@@ -29743,7 +29739,7 @@
 	
 	var _ingredient_index2 = _interopRequireDefault(_ingredient_index);
 	
-	var _ingredient_form = __webpack_require__(290);
+	var _ingredient_form = __webpack_require__(280);
 	
 	var _ingredient_form2 = _interopRequireDefault(_ingredient_form);
 	
@@ -29780,54 +29776,70 @@
 	        _react2.default.createElement(
 	          'header',
 	          null,
-	          recipe.name
+	          _react2.default.createElement(
+	            'a',
+	            { href: recipe.url, target: '_blank' },
+	            recipe.name
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            recipe.entree ? _react2.default.createElement(
+	              'li',
+	              null,
+	              'entree'
+	            ) : '',
+	            recipe.soup ? _react2.default.createElement(
+	              'li',
+	              null,
+	              'soup'
+	            ) : '',
+	            recipe.salad ? _react2.default.createElement(
+	              'li',
+	              null,
+	              'salad'
+	            ) : '',
+	            recipe.dessert ? _react2.default.createElement(
+	              'li',
+	              null,
+	              'dessert'
+	            ) : '',
+	            recipe.appetizer ? _react2.default.createElement(
+	              'li',
+	              null,
+	              'appetizer'
+	            ) : ''
+	          )
 	        ),
 	        _react2.default.createElement(
-	          'a',
-	          { href: recipe.url },
-	          recipe.url
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          recipe.notes
-	        ),
-	        _react2.default.createElement(
-	          'ul',
-	          null,
-	          recipe.entree ? _react2.default.createElement(
-	            'li',
-	            null,
-	            'entree'
-	          ) : '',
-	          recipe.soup ? _react2.default.createElement(
-	            'li',
-	            null,
-	            'soup'
-	          ) : '',
-	          recipe.salad ? _react2.default.createElement(
-	            'li',
-	            null,
-	            'salad'
-	          ) : '',
-	          recipe.dessert ? _react2.default.createElement(
-	            'li',
-	            null,
-	            'dessert'
-	          ) : '',
-	          recipe.appetizer ? _react2.default.createElement(
-	            'li',
-	            null,
-	            'appetizer'
-	          ) : ''
-	        ),
-	        _react2.default.createElement(
-	          'footer',
-	          null,
-	          recipe.tags
-	        ),
-	        _react2.default.createElement(_ingredient_index2.default, { ingredients: ingredients }),
-	        _react2.default.createElement(_ingredient_form2.default, { createIngredient: this.props.createIngredient })
+	          'section',
+	          { className: 'info' },
+	          _react2.default.createElement(
+	            'section',
+	            { className: 'left-half' },
+	            _react2.default.createElement(
+	              'tags',
+	              null,
+	              recipe.tags
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              recipe.notes
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            { className: 'right-half' },
+	            _react2.default.createElement(
+	              'header',
+	              null,
+	              'All Ingredients'
+	            ),
+	            _react2.default.createElement(_ingredient_index2.default, { ingredients: ingredients }),
+	            _react2.default.createElement(_ingredient_form2.default, { createIngredient: this.props.createIngredient })
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -29853,9 +29865,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ingredient_index_item = __webpack_require__(279);
+	var _ingredient_index_item_container = __webpack_require__(291);
 	
-	var _ingredient_index_item2 = _interopRequireDefault(_ingredient_index_item);
+	var _ingredient_index_item_container2 = _interopRequireDefault(_ingredient_index_item_container);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29883,9 +29895,9 @@
 	      var ingredients = this.props.ingredients || {};
 	      return _react2.default.createElement(
 	        'ul',
-	        null,
+	        { className: 'ingredient-list' },
 	        Object.keys(ingredients).map(function (id) {
-	          return _react2.default.createElement(_ingredient_index_item2.default, { key: id, item: ingredients[id] });
+	          return _react2.default.createElement(_ingredient_index_item_container2.default, { key: id, item: ingredients[id] });
 	        })
 	      );
 	    }
@@ -29905,6 +29917,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -29933,11 +29947,16 @@
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {}
 	  }, {
+	    key: 'ingredientClick',
+	    value: function ingredientClick(e) {
+	      if (this.props.selectedListId) this.props.createListItem(_extends({}, this.props.item, { shopping_list_id: this.props.selectedListId }));
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'li',
-	        { key: this.props.item.id },
+	        { key: this.props.item.id, onClick: this.ingredientClick.bind(this) },
 	        this.props.item.name
 	      );
 	    }
@@ -29950,372 +29969,6 @@
 
 /***/ },
 /* 280 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _redux = __webpack_require__(180);
-	
-	var _reducers = __webpack_require__(281);
-	
-	var _reducers2 = _interopRequireDefault(_reducers);
-	
-	var _middleware = __webpack_require__(285);
-	
-	var _middleware2 = _interopRequireDefault(_middleware);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var configureStore = function configureStore() {
-	  var preloadedState = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	  return (0, _redux.createStore)(_reducers2.default, preloadedState, _middleware2.default);
-	};
-	
-	exports.default = configureStore;
-
-/***/ },
-/* 281 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _redux = __webpack_require__(180);
-	
-	var _recipes = __webpack_require__(282);
-	
-	var _recipes2 = _interopRequireDefault(_recipes);
-	
-	var _shopping_lists = __webpack_require__(283);
-	
-	var _shopping_lists2 = _interopRequireDefault(_shopping_lists);
-	
-	var _selections = __webpack_require__(284);
-	
-	var _selections2 = _interopRequireDefault(_selections);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = (0, _redux.combineReducers)({
-	  selections: _selections2.default,
-	  recipes: _recipes2.default,
-	  shopping_lists: _shopping_lists2.default
-	});
-
-/***/ },
-/* 282 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var recipes = function recipes() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	  var action = arguments[1];
-	
-	  switch (action.type) {
-	    case 'RECEIVE_RECIPES':
-	      return action.recipes;
-	    case 'RECEIVE_RECIPE':
-	      return _extends({}, state, action.recipe);
-	    default:
-	      return state;
-	  }
-	};
-	
-	exports.default = recipes;
-
-/***/ },
-/* 283 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var shopping_lists = function shopping_lists() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	  var action = arguments[1];
-	
-	  switch (action.type) {
-	    case 'RECEIVE_SHOPPING_LISTS':
-	      return action.lists;
-	    case 'RECEIVE_SHOPPING_LIST':
-	      return _extends({}, state, action.list);
-	    default:
-	      return state;
-	  }
-	};
-	
-	exports.default = shopping_lists;
-
-/***/ },
-/* 284 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var selections = function selections() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	  var action = arguments[1];
-	
-	  switch (action.type) {
-	    case 'SELECT_LIST':
-	      return _extends({}, state, { list: action.id });
-	    default:
-	      return state;
-	  }
-	};
-	
-	exports.default = selections;
-
-/***/ },
-/* 285 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _redux = __webpack_require__(180);
-	
-	var _reactRouterRedux = __webpack_require__(270);
-	
-	var _reactRouter = __webpack_require__(197);
-	
-	var _recipe = __webpack_require__(286);
-	
-	var _recipe2 = _interopRequireDefault(_recipe);
-	
-	var _shopping_list = __webpack_require__(288);
-	
-	var _shopping_list2 = _interopRequireDefault(_shopping_list);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = (0, _redux.applyMiddleware)(_recipe2.default, _shopping_list2.default, (0, _reactRouterRedux.routerMiddleware)(_reactRouter.browserHistory));
-
-/***/ },
-/* 286 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _recipe_api_util = __webpack_require__(287);
-	
-	var _recipe = __webpack_require__(269);
-	
-	exports.default = function (_ref) {
-	  var getState = _ref.getState;
-	  var dispatch = _ref.dispatch;
-	  return function (next) {
-	    return function (action) {
-	      var recipesSuccess = function recipesSuccess(data) {
-	        return dispatch((0, _recipe.receiveRecipes)(data));
-	      };
-	      var recipeSuccess = function recipeSuccess(data) {
-	        return dispatch((0, _recipe.receiveRecipe)(data));
-	      };
-	      var result = next(action);
-	
-	      switch (action.type) {
-	        case 'REQUEST_RECIPES':
-	          (0, _recipe_api_util.fetchRecipes)(recipesSuccess);
-	          break;
-	        case 'CREATE_RECIPE':
-	          (0, _recipe_api_util.createRecipe)(action.bench, recipeSuccess);
-	          break;
-	        case 'SEARCH_RECIPES':
-	          (0, _recipe_api_util.searchRecipes)(action.query, recipesSuccess);
-	          break;
-	        case 'CREATE_INGREDIENT':
-	          (0, _recipe_api_util.createIngredient)(action.ingredient, recipeSuccess);
-	          break;
-	        default:
-	          break;
-	      }
-	      return result;
-	    };
-	  };
-	};
-
-/***/ },
-/* 287 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var fetchRecipes = exports.fetchRecipes = function fetchRecipes(success) {
-	  $.ajax({
-	    url: 'recipes',
-	    method: 'GET',
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var createRecipe = exports.createRecipe = function createRecipe(data, success) {
-	  $.ajax({
-	    url: 'recipes',
-	    method: 'POST',
-	    data: data,
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var searchRecipes = exports.searchRecipes = function searchRecipes(query, success) {
-	  $.ajax({
-	    url: 'search',
-	    method: 'GET',
-	    data: { q: query },
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var createIngredient = exports.createIngredient = function createIngredient(ingredient, success) {
-	  $.ajax({
-	    url: '/ingredients',
-	    method: 'POST',
-	    data: { ingredient: ingredient },
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-
-/***/ },
-/* 288 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _list_api_util = __webpack_require__(289);
-	
-	var _shopping_list = __webpack_require__(263);
-	
-	exports.default = function (_ref) {
-	  var getState = _ref.getState;
-	  var dispatch = _ref.dispatch;
-	  return function (next) {
-	    return function (action) {
-	      var shoppingListsSuccess = function shoppingListsSuccess(data) {
-	        return dispatch((0, _shopping_list.receiveShoppingLists)(data));
-	      };
-	      var shoppingListSuccess = function shoppingListSuccess(data) {
-	        return dispatch((0, _shopping_list.receiveShoppingList)(data));
-	      };
-	      var result = next(action);
-	      switch (action.type) {
-	        case 'REQUEST_SHOPPING_LISTS':
-	          (0, _list_api_util.fetchShoppingLists)(shoppingListsSuccess);
-	          break;
-	        case 'CREATE_SHOPPING_LIST':
-	          (0, _list_api_util.createShoppingList)(action.bench, shoppingListSuccess);
-	          break;
-	        case 'UPDATE_SHOPPING_LIST_ITEM':
-	          (0, _list_api_util.updateShoppingListItem)(action.item, shoppingListSuccess);
-	          break;
-	        default:
-	          break;
-	      }
-	      return result;
-	    };
-	  };
-	};
-
-/***/ },
-/* 289 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var fetchShoppingLists = exports.fetchShoppingLists = function fetchShoppingLists(success) {
-	  $.ajax({
-	    url: '/shopping_lists',
-	    method: 'GET',
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var createShoppingList = exports.createShoppingList = function createShoppingList(data, success) {
-	  $.ajax({
-	    url: '/shopping_lists',
-	    method: 'POST',
-	    data: data,
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var updateShoppingListItem = exports.updateShoppingListItem = function updateShoppingListItem(item, success) {
-	  $.ajax({
-	    url: '/shopping_list_items/' + item.id,
-	    method: 'PATCH',
-	    data: { shopping_list_item: _extends({}, item, { done: !item.done }) },
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-
-/***/ },
-/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30377,7 +30030,7 @@
 	        _react2.default.createElement('input', { placeholder: 'name',
 	          value: this.state.name,
 	          onChange: this.update('name') }),
-	        _react2.default.createElement('input', { type: 'submit', onClick: this.handleSubmit })
+	        _react2.default.createElement('input', { type: 'submit', onClick: this.handleSubmit, value: '+' })
 	      );
 	    }
 	  }]);
@@ -30386,6 +30039,423 @@
 	}(_react2.default.Component);
 	
 	exports.default = IngredientForm;
+
+/***/ },
+/* 281 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _redux = __webpack_require__(180);
+	
+	var _reducers = __webpack_require__(282);
+	
+	var _reducers2 = _interopRequireDefault(_reducers);
+	
+	var _middleware = __webpack_require__(286);
+	
+	var _middleware2 = _interopRequireDefault(_middleware);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var configureStore = function configureStore() {
+	  var preloadedState = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  return (0, _redux.createStore)(_reducers2.default, preloadedState, _middleware2.default);
+	};
+	
+	exports.default = configureStore;
+
+/***/ },
+/* 282 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _redux = __webpack_require__(180);
+	
+	var _recipes = __webpack_require__(283);
+	
+	var _recipes2 = _interopRequireDefault(_recipes);
+	
+	var _shopping_lists = __webpack_require__(284);
+	
+	var _shopping_lists2 = _interopRequireDefault(_shopping_lists);
+	
+	var _selections = __webpack_require__(285);
+	
+	var _selections2 = _interopRequireDefault(_selections);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = (0, _redux.combineReducers)({
+	  selections: _selections2.default,
+	  recipes: _recipes2.default,
+	  shopping_lists: _shopping_lists2.default
+	});
+
+/***/ },
+/* 283 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var recipes = function recipes() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'RECEIVE_RECIPES':
+	      return action.recipes;
+	    case 'RECEIVE_RECIPE':
+	      return _extends({}, state, action.recipe);
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = recipes;
+
+/***/ },
+/* 284 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var shopping_lists = function shopping_lists() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'RECEIVE_SHOPPING_LISTS':
+	      return action.lists;
+	    case 'RECEIVE_SHOPPING_LIST':
+	      return _extends({}, state, action.list);
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = shopping_lists;
+
+/***/ },
+/* 285 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var selections = function selections() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'SELECT_LIST':
+	      return _extends({}, state, { list: action.id });
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = selections;
+
+/***/ },
+/* 286 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _redux = __webpack_require__(180);
+	
+	var _reactRouterRedux = __webpack_require__(270);
+	
+	var _reactRouter = __webpack_require__(197);
+	
+	var _recipe = __webpack_require__(287);
+	
+	var _recipe2 = _interopRequireDefault(_recipe);
+	
+	var _shopping_list = __webpack_require__(289);
+	
+	var _shopping_list2 = _interopRequireDefault(_shopping_list);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = (0, _redux.applyMiddleware)(_recipe2.default, _shopping_list2.default, (0, _reactRouterRedux.routerMiddleware)(_reactRouter.browserHistory));
+
+/***/ },
+/* 287 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _recipe_api_util = __webpack_require__(288);
+	
+	var _recipe = __webpack_require__(269);
+	
+	exports.default = function (_ref) {
+	  var getState = _ref.getState;
+	  var dispatch = _ref.dispatch;
+	  return function (next) {
+	    return function (action) {
+	      var recipesSuccess = function recipesSuccess(data) {
+	        return dispatch((0, _recipe.receiveRecipes)(data));
+	      };
+	      var recipeSuccess = function recipeSuccess(data) {
+	        return dispatch((0, _recipe.receiveRecipe)(data));
+	      };
+	      var result = next(action);
+	
+	      switch (action.type) {
+	        case 'REQUEST_RECIPES':
+	          (0, _recipe_api_util.fetchRecipes)(recipesSuccess);
+	          break;
+	        case 'CREATE_RECIPE':
+	          (0, _recipe_api_util.createRecipe)(action.bench, recipeSuccess);
+	          break;
+	        case 'SEARCH_RECIPES':
+	          (0, _recipe_api_util.searchRecipes)(action.query, recipesSuccess);
+	          break;
+	        case 'CREATE_INGREDIENT':
+	          (0, _recipe_api_util.createIngredient)(action.ingredient, recipeSuccess);
+	          break;
+	        default:
+	          break;
+	      }
+	      return result;
+	    };
+	  };
+	};
+
+/***/ },
+/* 288 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var fetchRecipes = exports.fetchRecipes = function fetchRecipes(success) {
+	  $.ajax({
+	    url: 'recipes',
+	    method: 'GET',
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var createRecipe = exports.createRecipe = function createRecipe(data, success) {
+	  $.ajax({
+	    url: 'recipes',
+	    method: 'POST',
+	    data: data,
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var searchRecipes = exports.searchRecipes = function searchRecipes(query, success) {
+	  $.ajax({
+	    url: 'search',
+	    method: 'GET',
+	    data: { q: query },
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var createIngredient = exports.createIngredient = function createIngredient(ingredient, success) {
+	  $.ajax({
+	    url: '/ingredients',
+	    method: 'POST',
+	    data: { ingredient: ingredient },
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+
+/***/ },
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _list_api_util = __webpack_require__(290);
+	
+	var _shopping_list = __webpack_require__(263);
+	
+	exports.default = function (_ref) {
+	  var getState = _ref.getState;
+	  var dispatch = _ref.dispatch;
+	  return function (next) {
+	    return function (action) {
+	      var shoppingListsSuccess = function shoppingListsSuccess(data) {
+	        return dispatch((0, _shopping_list.receiveShoppingLists)(data));
+	      };
+	      var shoppingListSuccess = function shoppingListSuccess(data) {
+	        return dispatch((0, _shopping_list.receiveShoppingList)(data));
+	      };
+	      var result = next(action);
+	      switch (action.type) {
+	        case 'REQUEST_SHOPPING_LISTS':
+	          (0, _list_api_util.fetchShoppingLists)(shoppingListsSuccess);
+	          break;
+	        case 'CREATE_SHOPPING_LIST':
+	          (0, _list_api_util.createShoppingList)(action.bench, shoppingListSuccess);
+	          break;
+	        case 'UPDATE_SHOPPING_LIST_ITEM':
+	          (0, _list_api_util.updateShoppingListItem)(action.item, shoppingListSuccess);
+	          break;
+	        case 'CREATE_SHOPPING_LIST_ITEM':
+	          (0, _list_api_util.createShoppingListItem)(action.item, shoppingListSuccess);
+	          break;
+	        default:
+	          break;
+	      }
+	      return result;
+	    };
+	  };
+	};
+
+/***/ },
+/* 290 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var fetchShoppingLists = exports.fetchShoppingLists = function fetchShoppingLists(success) {
+	  $.ajax({
+	    url: '/shopping_lists',
+	    method: 'GET',
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var createShoppingList = exports.createShoppingList = function createShoppingList(data, success) {
+	  $.ajax({
+	    url: '/shopping_lists',
+	    method: 'POST',
+	    data: data,
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var updateShoppingListItem = exports.updateShoppingListItem = function updateShoppingListItem(item, success) {
+	  $.ajax({
+	    url: '/shopping_list_items/' + item.id,
+	    method: 'PATCH',
+	    data: { shopping_list_item: _extends({}, item, { done: !item.done }) },
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var createShoppingListItem = exports.createShoppingListItem = function createShoppingListItem(item, success) {
+	  $.ajax({
+	    url: '/shopping_list_items',
+	    method: 'POST',
+	    data: { shopping_list_item: item },
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+
+/***/ },
+/* 291 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(173);
+	
+	var _ingredient_index_item = __webpack_require__(279);
+	
+	var _ingredient_index_item2 = _interopRequireDefault(_ingredient_index_item);
+	
+	var _shopping_list = __webpack_require__(263);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    selectedListId: state.selections.list
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+	  return {
+	    createListItem: function createListItem(item) {
+	      return dispatch((0, _shopping_list.createShoppingListItem)(item));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ingredient_index_item2.default);
 
 /***/ }
 /******/ ]);

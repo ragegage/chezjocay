@@ -7,8 +7,10 @@ const App = ({children}) => (
     <header>
       <Link to="/" className="header-link"><h1>Chez Jocay</h1></Link>
     </header>
-    <ListContainer />
-    {children}
+    <section className='page-content'>
+      <ListContainer />
+      {children}
+    </section>
   </div>
 )
 
