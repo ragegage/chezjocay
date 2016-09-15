@@ -56,7 +56,7 @@
 	
 	var _root2 = _interopRequireDefault(_root);
 	
-	var _store = __webpack_require__(281);
+	var _store = __webpack_require__(282);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -28725,6 +28725,12 @@
 	    },
 	    toggleItem: function toggleItem(item) {
 	      return dispatch((0, _shopping_list.updateShoppingListItem)(item));
+	    },
+	    deselectList: function deselectList() {
+	      return dispatch((0, _selections.deselectList)());
+	    },
+	    deleteItem: function deleteItem(item) {
+	      return dispatch((0, _shopping_list.deleteShoppingListItem)(item));
 	    }
 	  };
 	};
@@ -28786,7 +28792,8 @@
 	      if (this.props.shopping_list) list = Object.keys(this.props.shopping_list.shopping_list_items).map(function (id) {
 	        return _react2.default.createElement(_list_item2.default, { key: id,
 	          item: _this2.props.shopping_list.shopping_list_items[id],
-	          toggleItem: _this2.props.toggleItem
+	          toggleItem: _this2.props.toggleItem,
+	          deleteItem: _this2.props.deleteItem
 	        });
 	      });else list = Object.keys(this.props.shopping_lists).map(function (id) {
 	        return _react2.default.createElement(_list_list2.default, { key: id,
@@ -28851,6 +28858,12 @@
 	      this.props.toggleItem(this.props.item);
 	    }
 	  }, {
+	    key: 'handleDelete',
+	    value: function handleDelete(e) {
+	      e.stopPropagation();
+	      this.props.deleteItem(this.props.item);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var item = this.props.item;
@@ -28859,7 +28872,12 @@
 	        { key: item.id,
 	          onClick: this.toggle.bind(this),
 	          className: item.done ? 'shopping-list-item greyed-out' : 'shopping-list-item' },
-	        item.name
+	        item.name,
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.handleDelete.bind(this) },
+	          '-'
+	        )
 	      );
 	    }
 	  }]);
@@ -28963,6 +28981,13 @@
 	    item: item
 	  };
 	};
+	
+	var deleteShoppingListItem = exports.deleteShoppingListItem = function deleteShoppingListItem(item) {
+	  return {
+	    type: 'DELETE_SHOPPING_LIST_ITEM',
+	    item: item
+	  };
+	};
 
 /***/ },
 /* 264 */
@@ -28977,6 +29002,12 @@
 	  return {
 	    type: 'SELECT_LIST',
 	    id: id
+	  };
+	};
+	
+	var deselectList = exports.deselectList = function deselectList() {
+	  return {
+	    type: 'DESELECT_LIST'
 	  };
 	};
 
@@ -29222,6 +29253,13 @@
 	var createIngredient = exports.createIngredient = function createIngredient(ingredient) {
 	  return {
 	    type: 'CREATE_INGREDIENT',
+	    ingredient: ingredient
+	  };
+	};
+	
+	var deleteIngredient = exports.deleteIngredient = function deleteIngredient(ingredient) {
+	  return {
+	    type: 'DELETE_INGREDIENT',
 	    ingredient: ingredient
 	  };
 	};
@@ -29739,7 +29777,7 @@
 	
 	var _ingredient_index2 = _interopRequireDefault(_ingredient_index);
 	
-	var _ingredient_form = __webpack_require__(280);
+	var _ingredient_form = __webpack_require__(281);
 	
 	var _ingredient_form2 = _interopRequireDefault(_ingredient_form);
 	
@@ -29865,7 +29903,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ingredient_index_item_container = __webpack_require__(291);
+	var _ingredient_index_item_container = __webpack_require__(279);
 	
 	var _ingredient_index_item_container2 = _interopRequireDefault(_ingredient_index_item_container);
 	
@@ -29918,6 +29956,47 @@
 	  value: true
 	});
 	
+	var _reactRedux = __webpack_require__(173);
+	
+	var _ingredient_index_item = __webpack_require__(280);
+	
+	var _ingredient_index_item2 = _interopRequireDefault(_ingredient_index_item);
+	
+	var _shopping_list = __webpack_require__(263);
+	
+	var _recipe = __webpack_require__(269);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    selectedListId: state.selections.list
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+	  return {
+	    createListItem: function createListItem(item) {
+	      return dispatch((0, _shopping_list.createShoppingListItem)(item));
+	    },
+	    deleteIngredient: function deleteIngredient(item) {
+	      return dispatch((0, _recipe.deleteIngredient)(item));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ingredient_index_item2.default);
+
+/***/ },
+/* 280 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -29952,12 +30031,23 @@
 	      if (this.props.selectedListId) this.props.createListItem(_extends({}, this.props.item, { shopping_list_id: this.props.selectedListId }));
 	    }
 	  }, {
+	    key: 'handleDelete',
+	    value: function handleDelete(e) {
+	      e.preventDefault();
+	      this.props.deleteIngredient(this.props.item);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'li',
 	        { key: this.props.item.id, onClick: this.ingredientClick.bind(this) },
-	        this.props.item.name
+	        this.props.item.name,
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.handleDelete.bind(this) },
+	          '-'
+	        )
 	      );
 	    }
 	  }]);
@@ -29968,7 +30058,7 @@
 	exports.default = IngredientIndexItem;
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30041,7 +30131,7 @@
 	exports.default = IngredientForm;
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30052,11 +30142,11 @@
 	
 	var _redux = __webpack_require__(180);
 	
-	var _reducers = __webpack_require__(282);
+	var _reducers = __webpack_require__(283);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _middleware = __webpack_require__(286);
+	var _middleware = __webpack_require__(287);
 	
 	var _middleware2 = _interopRequireDefault(_middleware);
 	
@@ -30070,7 +30160,7 @@
 	exports.default = configureStore;
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30081,15 +30171,15 @@
 	
 	var _redux = __webpack_require__(180);
 	
-	var _recipes = __webpack_require__(283);
+	var _recipes = __webpack_require__(284);
 	
 	var _recipes2 = _interopRequireDefault(_recipes);
 	
-	var _shopping_lists = __webpack_require__(284);
+	var _shopping_lists = __webpack_require__(285);
 	
 	var _shopping_lists2 = _interopRequireDefault(_shopping_lists);
 	
-	var _selections = __webpack_require__(285);
+	var _selections = __webpack_require__(286);
 	
 	var _selections2 = _interopRequireDefault(_selections);
 	
@@ -30102,7 +30192,7 @@
 	});
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30130,7 +30220,7 @@
 	exports.default = recipes;
 
 /***/ },
-/* 284 */
+/* 285 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30158,7 +30248,7 @@
 	exports.default = shopping_lists;
 
 /***/ },
-/* 285 */
+/* 286 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30176,6 +30266,8 @@
 	  switch (action.type) {
 	    case 'SELECT_LIST':
 	      return _extends({}, state, { list: action.id });
+	    case 'DESELECT_LIST':
+	      return _extends({}, state, { list: undefined });
 	    default:
 	      return state;
 	  }
@@ -30184,7 +30276,7 @@
 	exports.default = selections;
 
 /***/ },
-/* 286 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30199,11 +30291,11 @@
 	
 	var _reactRouter = __webpack_require__(197);
 	
-	var _recipe = __webpack_require__(287);
+	var _recipe = __webpack_require__(288);
 	
 	var _recipe2 = _interopRequireDefault(_recipe);
 	
-	var _shopping_list = __webpack_require__(289);
+	var _shopping_list = __webpack_require__(290);
 	
 	var _shopping_list2 = _interopRequireDefault(_shopping_list);
 	
@@ -30212,7 +30304,7 @@
 	exports.default = (0, _redux.applyMiddleware)(_recipe2.default, _shopping_list2.default, (0, _reactRouterRedux.routerMiddleware)(_reactRouter.browserHistory));
 
 /***/ },
-/* 287 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30221,7 +30313,7 @@
 	  value: true
 	});
 	
-	var _recipe_api_util = __webpack_require__(288);
+	var _recipe_api_util = __webpack_require__(289);
 	
 	var _recipe = __webpack_require__(269);
 	
@@ -30251,6 +30343,9 @@
 	        case 'CREATE_INGREDIENT':
 	          (0, _recipe_api_util.createIngredient)(action.ingredient, recipeSuccess);
 	          break;
+	        case 'DELETE_INGREDIENT':
+	          (0, _recipe_api_util.deleteIngredient)(action.ingredient, recipeSuccess);
+	          break;
 	        default:
 	          break;
 	      }
@@ -30260,7 +30355,7 @@
 	};
 
 /***/ },
-/* 288 */
+/* 289 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30314,9 +30409,20 @@
 	    }
 	  });
 	};
+	
+	var deleteIngredient = exports.deleteIngredient = function deleteIngredient(ingredient, success) {
+	  $.ajax({
+	    url: '/ingredients/' + ingredient.id,
+	    method: 'DELETE',
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
 
 /***/ },
-/* 289 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30325,7 +30431,7 @@
 	  value: true
 	});
 	
-	var _list_api_util = __webpack_require__(290);
+	var _list_api_util = __webpack_require__(291);
 	
 	var _shopping_list = __webpack_require__(263);
 	
@@ -30354,6 +30460,9 @@
 	        case 'CREATE_SHOPPING_LIST_ITEM':
 	          (0, _list_api_util.createShoppingListItem)(action.item, shoppingListSuccess);
 	          break;
+	        case 'DELETE_SHOPPING_LIST_ITEM':
+	          (0, _list_api_util.deleteShoppingListItem)(action.item, shoppingListSuccess);
+	          break;
 	        default:
 	          break;
 	      }
@@ -30363,7 +30472,7 @@
 	};
 
 /***/ },
-/* 290 */
+/* 291 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30420,42 +30529,17 @@
 	    }
 	  });
 	};
-
-/***/ },
-/* 291 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _reactRedux = __webpack_require__(173);
-	
-	var _ingredient_index_item = __webpack_require__(279);
-	
-	var _ingredient_index_item2 = _interopRequireDefault(_ingredient_index_item);
-	
-	var _shopping_list = __webpack_require__(263);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    selectedListId: state.selections.list
-	  };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-	  return {
-	    createListItem: function createListItem(item) {
-	      return dispatch((0, _shopping_list.createShoppingListItem)(item));
+	var deleteShoppingListItem = exports.deleteShoppingListItem = function deleteShoppingListItem(item, success) {
+	  $.ajax({
+	    url: '/shopping_list_items/' + item.id,
+	    method: 'DELETE',
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
 	    }
-	  };
+	  });
 	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ingredient_index_item2.default);
 
 /***/ }
 /******/ ]);

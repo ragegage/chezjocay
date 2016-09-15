@@ -1,6 +1,6 @@
 export const fetchRecipes = (success) => {
   $.ajax({
-    url: 'recipes',
+    url: `recipes`,
     method: 'GET',
     success,
     error: data => console.log(data)
@@ -9,7 +9,7 @@ export const fetchRecipes = (success) => {
 
 export const createRecipe = (data, success) => {
   $.ajax({
-    url: 'recipes',
+    url: `recipes`,
     method: 'POST',
     data,
     success,
@@ -32,6 +32,15 @@ export const createIngredient = (ingredient, success) => {
     url: '/ingredients',
     method: 'POST',
     data: {ingredient},
+    success,
+    error: data => console.log(data)
+  })
+}
+
+export const deleteIngredient = (ingredient, success) => {
+  $.ajax({
+    url: `/ingredients/${ingredient.id}`,
+    method: 'DELETE',
     success,
     error: data => console.log(data)
   })

@@ -14,6 +14,7 @@ class List extends React.Component {
                <ListItem key={id}
                  item={this.props.shopping_list.shopping_list_items[id]}
                  toggleItem={this.props.toggleItem}
+                 deleteItem={this.props.deleteItem}
                  />)
              )
     else

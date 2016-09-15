@@ -23,7 +23,7 @@ class ShoppingListItemsController < ApplicationController
     @shopping_list_item = ShoppingListItem.find(params[:id])
     if @shopping_list_item.destroy
       @shopping_list = @shopping_list_item.shopping_list
-      render json: @shopping_list
+      render 'shopping_lists/show'
     else
       render json: @shopping_list_item.errors.full_messages, status: 422
     end

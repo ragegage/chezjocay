@@ -25,7 +25,8 @@ class IngredientsController < ApplicationController
     @ingredient = Ingredient.find(params[:id])
     @ingredient.destroy
 
-    render json: @ingredient
+    @recipe = @ingredient.recipe
+    render 'recipes/show'
   end
 
   private

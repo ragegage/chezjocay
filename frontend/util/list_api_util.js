@@ -36,3 +36,12 @@ export const createShoppingListItem = (item, success) => {
     error: data => console.log(data)
   })
 }
+
+export const deleteShoppingListItem = (item, success) => {
+  $.ajax({
+    url: `/shopping_list_items/${item.id}`,
+    method: 'DELETE',
+    success,
+    error: data => console.log(data)
+  })
+}

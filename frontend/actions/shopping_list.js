@@ -21,3 +21,9 @@ export const createShoppingListItem = (item) => ({
   type: 'CREATE_SHOPPING_LIST_ITEM',
   item
 })
+
+export const deleteShoppingListItem = (item) => ({
+  type: 'DELETE_SHOPPING_LIST_ITEM',
+  item
+})
+
