@@ -31,7 +31,7 @@ class RecipeShow extends React.Component {
           </section>
 
           <section className='right-half'>
-            <header>All Ingredients</header>
+            <header onClick={this.props.bulkCreateItems.bind(null, this.props.listId)}>Add All Ingredients</header>
             <IngredientIndex ingredients={ingredients} />
             <IngredientForm createIngredient={this.props.createIngredient}/>
           </section>

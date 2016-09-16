@@ -28995,6 +28995,14 @@
 	    item: item
 	  };
 	};
+	
+	var bulkCreateShoppingListItems = exports.bulkCreateShoppingListItems = function bulkCreateShoppingListItems(list_id, recipe_id) {
+	  return {
+	    type: 'BULK_CREATE_SHOPPING_LIST_ITEMS',
+	    list_id: list_id,
+	    recipe_id: recipe_id
+	  };
+	};
 
 /***/ },
 /* 264 */
@@ -29746,11 +29754,14 @@
 	
 	var _recipe = __webpack_require__(269);
 	
+	var _shopping_list = __webpack_require__(263);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 	  return {
-	    recipe: state.recipes[ownProps.params.recipeId]
+	    recipe: state.recipes[ownProps.params.recipeId],
+	    listId: state.selections.list
 	  };
 	};
 	
@@ -29758,6 +29769,9 @@
 	  return {
 	    createIngredient: function createIngredient(ingredient) {
 	      return dispatch((0, _recipe.createIngredient)(_extends({}, ingredient, { recipe_id: ownProps.params.recipeId })));
+	    },
+	    bulkCreateItems: function bulkCreateItems(list_id) {
+	      return dispatch((0, _shopping_list.bulkCreateShoppingListItems)(list_id, ownProps.params.recipeId));
 	    }
 	  };
 	};
@@ -29878,8 +29892,8 @@
 	            { className: 'right-half' },
 	            _react2.default.createElement(
 	              'header',
-	              null,
-	              'All Ingredients'
+	              { onClick: this.props.bulkCreateItems.bind(null, this.props.listId) },
+	              'Add All Ingredients'
 	            ),
 	            _react2.default.createElement(_ingredient_index2.default, { ingredients: ingredients }),
 	            _react2.default.createElement(_ingredient_form2.default, { createIngredient: this.props.createIngredient })
@@ -30470,6 +30484,9 @@
 	        case 'DELETE_SHOPPING_LIST_ITEM':
 	          (0, _list_api_util.deleteShoppingListItem)(action.item, shoppingListSuccess);
 	          break;
+	        case 'BULK_CREATE_SHOPPING_LIST_ITEMS':
+	          (0, _list_api_util.createShoppingListItems)(action.list_id, action.recipe_id, shoppingListSuccess);
+	          break;
 	        default:
 	          break;
 	      }
@@ -30541,6 +30558,18 @@
 	  $.ajax({
 	    url: '/shopping_list_items/' + item.id,
 	    method: 'DELETE',
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var createShoppingListItems = exports.createShoppingListItems = function createShoppingListItems(shopping_list_id, recipe_id, success) {
+	  $.ajax({
+	    url: '/shopping_list_items/bulk',
+	    method: 'POST',
+	    data: { shopping_list_id: shopping_list_id, recipe_id: recipe_id },
 	    success: success,
 	    error: function error(data) {
 	      return console.log(data);

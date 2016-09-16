@@ -27,3 +27,8 @@ export const deleteShoppingListItem = (item) => ({
   item
 })
 
+export const bulkCreateShoppingListItems = (list_id, recipe_id) => ({
+  type: 'BULK_CREATE_SHOPPING_LIST_ITEMS',
+  list_id,
+  recipe_id,
+})
