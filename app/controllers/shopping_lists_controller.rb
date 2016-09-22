@@ -10,7 +10,7 @@ class ShoppingListsController < ApplicationController
   end
 
   def create
-    @shopping_list = ShoppingList.new(shopping_list_params)
+    @shopping_list = ShoppingList.new(name: "new list")
     if @shopping_list.save
       # render json: @shopping_list
       render :show
@@ -36,5 +36,10 @@ class ShoppingListsController < ApplicationController
     else
       render json: @shopping_list.errors.full_messages, status: 422
     end
+  end
+
+  private
+  def shopping_list_params
+    params.require(:shopping_list).permit(:name)
   end
 end
