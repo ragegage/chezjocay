@@ -32,3 +32,7 @@ export const bulkCreateShoppingListItems = (list_id, recipe_id) => ({
   list_id,
   recipe_id,
 })
+
+export const createList = () => ({
+  type: 'CREATE_SHOPPING_LIST'
+})
