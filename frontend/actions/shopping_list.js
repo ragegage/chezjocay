@@ -7,6 +7,11 @@ export const receiveShoppingLists = (lists) => ({
   lists
 })
 
+export const removeShoppingList = (list) => ({
+  type: 'REMOVE_SHOPPING_LIST',
+  list
+})
+
 export const receiveShoppingList = (list) => ({
   type: 'RECEIVE_SHOPPING_LIST',
   list
@@ -35,4 +40,9 @@ export const bulkCreateShoppingListItems = (list_id, recipe_id) => ({
 
 export const createList = () => ({
   type: 'CREATE_SHOPPING_LIST'
+})
+
+export const deleteShoppingList = (id) => ({
+  type: 'DELETE_SHOPPING_LIST',
+  id
 })

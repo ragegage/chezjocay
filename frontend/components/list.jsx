@@ -22,6 +22,7 @@ class List extends React.Component {
                   <ListList key={id}
                     item={this.props.shopping_lists[id]}
                     onClick={this.props.selectList.bind(null, id)}
+                    deleteList={this.props.deleteList.bind(null, id)}
                     />)
               )
 

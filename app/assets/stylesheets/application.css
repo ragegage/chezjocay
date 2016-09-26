@@ -23,3 +23,12 @@ tr:nth-child(even){background-color:#e5e5e5;}
   display: flex;
   flex-direction: row-reverse;
 }
+
+@media only screen and (max-width: 650px) {
+  .page-content {
+    flex-direction: column;
+    .recipe-index, .recipe-show, .shopping-list {
+      width: 100%;
+    }
+  }
+}

@@ -4,6 +4,10 @@ const shopping_lists = function(state = {}, action){
       return action.lists;
     case 'RECEIVE_SHOPPING_LIST':
       return {...state, ...action.list}
+    case 'REMOVE_SHOPPING_LIST':
+      let newState = {...state}
+      delete newState[action.list.id]
+      return newState
     default:
       return state;
   }

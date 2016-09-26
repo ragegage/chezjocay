@@ -4,14 +4,17 @@ import { fetchShoppingLists,
          createShoppingListItem,
          deleteShoppingListItem,
          createShoppingListItems,
+         deleteShoppingList
        } from '../util/list_api_util';
 import { receiveShoppingList,
-         receiveShoppingLists
+         receiveShoppingLists,
+         removeShoppingList
        } from '../actions/shopping_list';
 
 export default ({getState, dispatch}) => next => action => {
   const shoppingListsSuccess = data => dispatch(receiveShoppingLists(data))
   const shoppingListSuccess = data => dispatch(receiveShoppingList(data))
+  const shoppingListDeletionSuccess = data => dispatch(removeShoppingList(data))
   const result = next(action)
   switch(action.type){
     case 'REQUEST_SHOPPING_LISTS':
@@ -31,6 +34,9 @@ export default ({getState, dispatch}) => next => action => {
       break
     case 'BULK_CREATE_SHOPPING_LIST_ITEMS':
       createShoppingListItems(action.list_id, action.recipe_id, shoppingListSuccess)
+      break
+    case 'DELETE_SHOPPING_LIST':
+      deleteShoppingList(action.id, shoppingListDeletionSuccess)
       break
     default:
       break
