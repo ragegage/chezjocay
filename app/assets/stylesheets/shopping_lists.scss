@@ -11,6 +11,12 @@
   padding: 0 20px;
   .list-header {
     cursor: pointer;
+    font-weight: 700;
+    border-bottom: 2px solid black;
+    padding: 10px 0;
+  }
+  .list-header:hover {
+    background-color: #ddd;
   }
 }
 
@@ -19,4 +25,8 @@
   border-bottom: 1px solid black;
   cursor: pointer;
   padding: 10px 0;
+}
+.shopping-list-list:hover {
+  background-color: #ddd;
+  color: #c00;
 }

@@ -27,6 +27,7 @@
   align-items: flex-end;
   justify-content: space-between;
   padding: 10px 0;
+  cursor: pointer;
   header {
     font-size: 22px;
   }
@@ -37,12 +38,17 @@
     display: flex;
   }
 }
+.recipe-list-item:hover {
+  background-color: #ddd;
+  color: #c00;
+}
 
 .recipe-show {
   width: 60%;
   border: 1px solid #bbb;
   border-radius: 25px;
   background-color: #ffe;
+  padding: 25px;
   header {
     display: flex;
     align-items: flex-end;
@@ -65,12 +71,20 @@
       header {
         cursor: pointer;
       }
+      header:hover {
+        background-color: #ddd;
+      }
       ul {
         padding: 0;
         margin: 0;
         list-style: none;
         li {
           cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+        }
+        li:hover {
+          background-color: #ddd;
         }
       }
       form {
