@@ -4,29 +4,24 @@
 
 .shopping-list {
   width: 40%;
-  background-color: #fdd;
   list-style: none;
   padding-left: 0;
   margin: 0;
   padding: 0 20px;
+  font-size: 22px;
   .list-header {
     cursor: pointer;
     font-weight: 700;
-    border-bottom: 2px solid black;
+    font-size: 24px;
     padding: 10px 0;
   }
   .list-header:hover {
-    background-color: #ddd;
   }
 }
 
 .shopping-list-list {
-  color: #ff6666;
-  border-bottom: 1px solid black;
   cursor: pointer;
   padding: 10px 0;
 }
 .shopping-list-list:hover {
-  background-color: #ddd;
-  color: #c00;
 }

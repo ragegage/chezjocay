@@ -13,8 +13,41 @@
  *= require_tree .
  *= require_self
  */
-html{background-color:white;font-family:'Helvetica'}
-h1,a{color:black}
+html {
+  background-color:transparent;
+  font-family:'Avenir','Helvetica';
+}
+body {
+  color: #2b2a2a;
+}
+body::after {
+  content: "";
+  background-repeat: repeat;
+  background: url('./laffairz-food.png');
+  background-size: 300px;
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+h1 {
+  font-size: 30px;
+  font-weight: 700;
+}
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+.red {
+  color: #d83a16;
+}
+.grey {
+  color: #b1b1b1;
+}
+
 table{width:100%}
 td{padding:10px 0px}
 tr:nth-child(even){background-color:#e5e5e5;}

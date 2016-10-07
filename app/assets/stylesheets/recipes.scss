@@ -21,8 +21,7 @@
 }
 
 .recipe-list-item {
-  color: #ff6666;
-  border-bottom: 1px solid black;
+  color: #2b2a2a;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -39,21 +38,19 @@
   }
 }
 .recipe-list-item:hover {
-  background-color: #ddd;
-  color: #c00;
 }
 
 .recipe-show {
   width: 60%;
-  border: 1px solid #bbb;
-  border-radius: 25px;
-  background-color: #ffe;
-  padding: 25px;
+  padding: 35px;
   header {
     display: flex;
     align-items: flex-end;
     a {
-      font-size: 22px;
+      font-size: 24px;
+      color: #2b2a2a;
+      text-decoration: none;
+      font-weight: 700;
     }
     ul {
       display: flex;

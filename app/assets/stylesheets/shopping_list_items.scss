@@ -3,7 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .shopping-list-item {
-  color: #ff6666;
   border-bottom: 1px solid black;
   cursor: pointer;
   padding: 10px 0;
@@ -11,12 +10,10 @@
   justify-content: space-between;
 }
 .shopping-list-item:hover {
-  background-color: #ddd;
-  color: #c00;
 }
 
 .greyed-out {
-  color: #aaa;
+  color: #b1b1b1;
   text-decoration: line-through;
   font-style: italic;
 }
