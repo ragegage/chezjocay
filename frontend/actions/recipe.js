@@ -26,3 +26,8 @@ export const deleteIngredient = (ingredient) => ({
   type: 'DELETE_INGREDIENT',
   ingredient
 })
+
+export const createRecipe = (recipe) => ({
+  type: 'CREATE_RECIPE',
+  recipe
+})

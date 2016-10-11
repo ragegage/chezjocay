@@ -1,5 +1,6 @@
 import React from 'react'
 import RecipeSearchContainer from './recipe_search_container'
+import RecipeFormContainer from './recipe_form_container'
 import RecipeIndexItem from './recipe_index_item'
 
 class RecipeIndex extends React.Component {
@@ -10,7 +11,10 @@ class RecipeIndex extends React.Component {
   render () {
     return (
       <div className='recipe-index'>
-        <RecipeSearchContainer />
+        <div>
+          <RecipeSearchContainer />
+          <RecipeFormContainer />
+        </div>
         <ul className='recipe-list'>
         {
           Object.keys(this.props.recipes).map(id => {

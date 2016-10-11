@@ -29129,6 +29129,10 @@
 	
 	var _recipe_search_container2 = _interopRequireDefault(_recipe_search_container);
 	
+	var _recipe_form_container = __webpack_require__(292);
+	
+	var _recipe_form_container2 = _interopRequireDefault(_recipe_form_container);
+	
 	var _recipe_index_item = __webpack_require__(275);
 	
 	var _recipe_index_item2 = _interopRequireDefault(_recipe_index_item);
@@ -29163,7 +29167,12 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'recipe-index' },
-	        _react2.default.createElement(_recipe_search_container2.default, null),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_recipe_search_container2.default, null),
+	          _react2.default.createElement(_recipe_form_container2.default, null)
+	        ),
 	        _react2.default.createElement(
 	          'ul',
 	          { className: 'recipe-list' },
@@ -29318,6 +29327,13 @@
 	  return {
 	    type: 'DELETE_INGREDIENT',
 	    ingredient: ingredient
+	  };
+	};
+	
+	var createRecipe = exports.createRecipe = function createRecipe(recipe) {
+	  return {
+	    type: 'CREATE_RECIPE',
+	    recipe: recipe
 	  };
 	};
 
@@ -30402,7 +30418,7 @@
 	          (0, _recipe_api_util.fetchRecipes)(recipesSuccess);
 	          break;
 	        case 'CREATE_RECIPE':
-	          (0, _recipe_api_util.createRecipe)(action.bench, recipeSuccess);
+	          (0, _recipe_api_util.createRecipe)(action.recipe, recipeSuccess);
 	          break;
 	        case 'SEARCH_RECIPES':
 	          (0, _recipe_api_util.searchRecipes)(action.query, recipesSuccess);
@@ -30639,6 +30655,189 @@
 	    }
 	  });
 	};
+
+/***/ },
+/* 292 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(173);
+	
+	var _recipe_form = __webpack_require__(293);
+	
+	var _recipe_form2 = _interopRequireDefault(_recipe_form);
+	
+	var _recipe = __webpack_require__(269);
+	
+	var _reactRouterRedux = __webpack_require__(270);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {};
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    createRecipe: function createRecipe(recipe) {
+	      return dispatch((0, _recipe.createRecipe)({ recipe: recipe }));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_recipe_form2.default);
+
+/***/ },
+/* 293 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RecipeSearch = function (_React$Component) {
+	  _inherits(RecipeSearch, _React$Component);
+	
+	  function RecipeSearch(props) {
+	    _classCallCheck(this, RecipeSearch);
+	
+	    var _this = _possibleConstructorReturn(this, (RecipeSearch.__proto__ || Object.getPrototypeOf(RecipeSearch)).call(this, props));
+	
+	    _this.state = {
+	      displayForm: false,
+	      name: '',
+	      url: '',
+	      entree: false,
+	      soup: false,
+	      salad: false,
+	      dessert: false,
+	      appetizer: false,
+	      tags: '',
+	      notes: ''
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(RecipeSearch, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'update',
+	    value: function update(name) {
+	      var _this2 = this;
+	
+	      return function (e) {
+	        return _this2.setState(_defineProperty({}, name, e.currentTarget.value));
+	      };
+	    }
+	  }, {
+	    key: 'onClick',
+	    value: function onClick(e) {
+	      e.preventDefault();
+	      this.setState({ displayForm: true });
+	    }
+	  }, {
+	    key: 'onSubmit',
+	    value: function onSubmit(e) {
+	      e.preventDefault();
+	      this.props.createRecipe(_extends({}, this.state));
+	      this.resetState.bind(this);
+	    }
+	  }, {
+	    key: 'resetState',
+	    value: function resetState() {
+	      this.setState({
+	        displayForm: false,
+	        name: '',
+	        url: '',
+	        entree: false,
+	        soup: false,
+	        salad: false,
+	        dessert: false,
+	        appetizer: false,
+	        tags: '',
+	        notes: ''
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this.state.displayForm) return _react2.default.createElement(
+	        'form',
+	        { onSubmit: this.onSubmit.bind(this) },
+	        _react2.default.createElement('input', { type: 'text', value: this.state.name, onChange: this.update('name').bind(this), placeholder: 'name' }),
+	        _react2.default.createElement('input', { type: 'text', value: this.state.url, onChange: this.update('url').bind(this), placeholder: 'url' }),
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Entree',
+	          _react2.default.createElement('input', { type: 'checkbox' })
+	        ),
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Soup',
+	          _react2.default.createElement('input', { type: 'checkbox' })
+	        ),
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Salad',
+	          _react2.default.createElement('input', { type: 'checkbox' })
+	        ),
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Dessert',
+	          _react2.default.createElement('input', { type: 'checkbox' })
+	        ),
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Appetizer',
+	          _react2.default.createElement('input', { type: 'checkbox' })
+	        ),
+	        _react2.default.createElement('input', { type: 'text', value: this.state.tags, onChange: this.update('tags').bind(this), placeholder: 'tags' }),
+	        _react2.default.createElement('input', { type: 'text', value: this.state.notes, onChange: this.update('notes').bind(this), placeholder: 'notes' }),
+	        _react2.default.createElement('input', { type: 'submit', value: 'Create Recipe' })
+	      );else return _react2.default.createElement(
+	        'button',
+	        { onClick: this.onClick.bind(this),
+	          className: 'create' },
+	        '+'
+	      );
+	    }
+	  }]);
+	
+	  return RecipeSearch;
+	}(_react2.default.Component);
+	
+	exports.default = RecipeSearch;
 
 /***/ }
 /******/ ]);

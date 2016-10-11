@@ -18,7 +18,7 @@ export default ({getState, dispatch}) => next => action => {
       fetchRecipes(recipesSuccess)
       break
     case 'CREATE_RECIPE':
-      createRecipe(action.bench, recipeSuccess)
+      createRecipe(action.recipe, recipeSuccess)
       break
     case 'SEARCH_RECIPES':
       searchRecipes(action.query, recipesSuccess)
