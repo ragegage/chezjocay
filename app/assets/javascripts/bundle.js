@@ -56,7 +56,7 @@
 	
 	var _root2 = _interopRequireDefault(_root);
 	
-	var _store = __webpack_require__(282);
+	var _store = __webpack_require__(284);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -21468,7 +21468,7 @@
 	
 	var _recipe_index_container2 = _interopRequireDefault(_recipe_index_container);
 	
-	var _recipe_show_container = __webpack_require__(276);
+	var _recipe_show_container = __webpack_require__(278);
 	
 	var _recipe_show_container2 = _interopRequireDefault(_recipe_show_container);
 	
@@ -28814,8 +28814,14 @@
 	        { className: 'shopping-list' },
 	        this.props.shopping_list ? _react2.default.createElement(
 	          'li',
-	          { className: 'list-header', onClick: this.props.deselectList },
-	          'deselect list'
+	          { className: 'list-header' },
+	          this.props.shopping_list.name,
+	          ' ',
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.props.deselectList },
+	            'deselect list'
+	          )
 	        ) : _react2.default.createElement(
 	          'li',
 	          { className: 'list-header', onClick: this.props.createList },
@@ -28892,7 +28898,7 @@
 	        _react2.default.createElement(
 	          'button',
 	          { onClick: this.handleDelete.bind(this) },
-	          '-'
+	          'delete'
 	        )
 	      );
 	    }
@@ -28957,7 +28963,7 @@
 	        _react2.default.createElement(
 	          'button',
 	          { onClick: this.destroyList.bind(this) },
-	          '-'
+	          'delete'
 	        )
 	      );
 	    }
@@ -29129,11 +29135,11 @@
 	
 	var _recipe_search_container2 = _interopRequireDefault(_recipe_search_container);
 	
-	var _recipe_form_container = __webpack_require__(292);
+	var _recipe_form_container = __webpack_require__(275);
 	
 	var _recipe_form_container2 = _interopRequireDefault(_recipe_form_container);
 	
-	var _recipe_index_item = __webpack_require__(275);
+	var _recipe_index_item = __webpack_require__(277);
 	
 	var _recipe_index_item2 = _interopRequireDefault(_recipe_index_item);
 	
@@ -29709,966 +29715,9 @@
 	  value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(197);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var RecipeIndexItem = function (_React$Component) {
-	  _inherits(RecipeIndexItem, _React$Component);
-	
-	  function RecipeIndexItem() {
-	    _classCallCheck(this, RecipeIndexItem);
-	
-	    return _possibleConstructorReturn(this, (RecipeIndexItem.__proto__ || Object.getPrototypeOf(RecipeIndexItem)).apply(this, arguments));
-	  }
-	
-	  _createClass(RecipeIndexItem, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {}
-	  }, {
-	    key: 'changePage',
-	    value: function changePage(e) {
-	      this.props.push('/r/' + this.props.item.id);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var item = this.props.item;
-	      return _react2.default.createElement(
-	        'li',
-	        { key: item.id, onClick: this.changePage.bind(this), className: 'recipe-list-item' },
-	        _react2.default.createElement(
-	          'header',
-	          null,
-	          item.name
-	        ),
-	        _react2.default.createElement(
-	          'ul',
-	          null,
-	          item.entree ? _react2.default.createElement(
-	            'li',
-	            null,
-	            'entree'
-	          ) : '',
-	          item.soup ? _react2.default.createElement(
-	            'li',
-	            null,
-	            'soup'
-	          ) : '',
-	          item.salad ? _react2.default.createElement(
-	            'li',
-	            null,
-	            'salad'
-	          ) : '',
-	          item.dessert ? _react2.default.createElement(
-	            'li',
-	            null,
-	            'dessert'
-	          ) : '',
-	          item.appetizer ? _react2.default.createElement(
-	            'li',
-	            null,
-	            'appetizer'
-	          ) : ''
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return RecipeIndexItem;
-	}(_react2.default.Component);
-	
-	exports.default = RecipeIndexItem;
-
-/***/ },
-/* 276 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	var _reactRedux = __webpack_require__(173);
 	
-	var _recipe_show = __webpack_require__(277);
-	
-	var _recipe_show2 = _interopRequireDefault(_recipe_show);
-	
-	var _recipe = __webpack_require__(269);
-	
-	var _shopping_list = __webpack_require__(263);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStateToProps = function mapStateToProps(state, ownProps) {
-	  return {
-	    recipe: state.recipes[ownProps.params.recipeId],
-	    listId: state.selections.list
-	  };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-	  return {
-	    createIngredient: function createIngredient(ingredient) {
-	      return dispatch((0, _recipe.createIngredient)(_extends({}, ingredient, { recipe_id: ownProps.params.recipeId })));
-	    },
-	    bulkCreateItems: function bulkCreateItems(list_id) {
-	      return dispatch((0, _shopping_list.bulkCreateShoppingListItems)(list_id, ownProps.params.recipeId));
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_recipe_show2.default);
-
-/***/ },
-/* 277 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _ingredient_index = __webpack_require__(278);
-	
-	var _ingredient_index2 = _interopRequireDefault(_ingredient_index);
-	
-	var _ingredient_form = __webpack_require__(281);
-	
-	var _ingredient_form2 = _interopRequireDefault(_ingredient_form);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var RecipeShow = function (_React$Component) {
-	  _inherits(RecipeShow, _React$Component);
-	
-	  function RecipeShow() {
-	    _classCallCheck(this, RecipeShow);
-	
-	    return _possibleConstructorReturn(this, (RecipeShow.__proto__ || Object.getPrototypeOf(RecipeShow)).apply(this, arguments));
-	  }
-	
-	  _createClass(RecipeShow, [{
-	    key: 'render',
-	
-	    // componentWillMount () {
-	    //   this.props.requestRecipes()
-	    // }
-	
-	    value: function render() {
-	      var ingredients = this.props.recipe.ingredients;
-	      var recipe = this.props.recipe;
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'recipe-show' },
-	        _react2.default.createElement(
-	          'header',
-	          null,
-	          _react2.default.createElement(
-	            'a',
-	            { href: recipe.url, target: '_blank' },
-	            recipe.name
-	          ),
-	          _react2.default.createElement(
-	            'ul',
-	            null,
-	            recipe.entree ? _react2.default.createElement(
-	              'li',
-	              null,
-	              'entree'
-	            ) : '',
-	            recipe.soup ? _react2.default.createElement(
-	              'li',
-	              null,
-	              'soup'
-	            ) : '',
-	            recipe.salad ? _react2.default.createElement(
-	              'li',
-	              null,
-	              'salad'
-	            ) : '',
-	            recipe.dessert ? _react2.default.createElement(
-	              'li',
-	              null,
-	              'dessert'
-	            ) : '',
-	            recipe.appetizer ? _react2.default.createElement(
-	              'li',
-	              null,
-	              'appetizer'
-	            ) : ''
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'section',
-	          { className: 'info' },
-	          _react2.default.createElement(
-	            'section',
-	            { className: 'left-half' },
-	            _react2.default.createElement(
-	              'tags',
-	              null,
-	              recipe.tags
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              recipe.notes
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'section',
-	            { className: 'right-half' },
-	            _react2.default.createElement(
-	              'header',
-	              { onClick: this.props.bulkCreateItems.bind(null, this.props.listId) },
-	              'Add All Ingredients'
-	            ),
-	            _react2.default.createElement(_ingredient_index2.default, { ingredients: ingredients }),
-	            _react2.default.createElement(_ingredient_form2.default, { createIngredient: this.props.createIngredient })
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return RecipeShow;
-	}(_react2.default.Component);
-	
-	exports.default = RecipeShow;
-
-/***/ },
-/* 278 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _ingredient_index_item_container = __webpack_require__(279);
-	
-	var _ingredient_index_item_container2 = _interopRequireDefault(_ingredient_index_item_container);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var IngredientIndex = function (_React$Component) {
-	  _inherits(IngredientIndex, _React$Component);
-	
-	  function IngredientIndex() {
-	    _classCallCheck(this, IngredientIndex);
-	
-	    return _possibleConstructorReturn(this, (IngredientIndex.__proto__ || Object.getPrototypeOf(IngredientIndex)).apply(this, arguments));
-	  }
-	
-	  _createClass(IngredientIndex, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {}
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var ingredients = this.props.ingredients || {};
-	      return _react2.default.createElement(
-	        'ul',
-	        { className: 'ingredient-list' },
-	        Object.keys(ingredients).map(function (id) {
-	          return _react2.default.createElement(_ingredient_index_item_container2.default, { key: id, item: ingredients[id] });
-	        })
-	      );
-	    }
-	  }]);
-	
-	  return IngredientIndex;
-	}(_react2.default.Component);
-	
-	exports.default = IngredientIndex;
-
-/***/ },
-/* 279 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _reactRedux = __webpack_require__(173);
-	
-	var _ingredient_index_item = __webpack_require__(280);
-	
-	var _ingredient_index_item2 = _interopRequireDefault(_ingredient_index_item);
-	
-	var _shopping_list = __webpack_require__(263);
-	
-	var _recipe = __webpack_require__(269);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    selectedListId: state.selections.list
-	  };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-	  return {
-	    createListItem: function createListItem(item) {
-	      return dispatch((0, _shopping_list.createShoppingListItem)(item));
-	    },
-	    deleteIngredient: function deleteIngredient(item) {
-	      return dispatch((0, _recipe.deleteIngredient)(item));
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ingredient_index_item2.default);
-
-/***/ },
-/* 280 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var IngredientIndexItem = function (_React$Component) {
-	  _inherits(IngredientIndexItem, _React$Component);
-	
-	  function IngredientIndexItem() {
-	    _classCallCheck(this, IngredientIndexItem);
-	
-	    return _possibleConstructorReturn(this, (IngredientIndexItem.__proto__ || Object.getPrototypeOf(IngredientIndexItem)).apply(this, arguments));
-	  }
-	
-	  _createClass(IngredientIndexItem, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {}
-	  }, {
-	    key: 'ingredientClick',
-	    value: function ingredientClick(e) {
-	      if (this.props.selectedListId) this.props.createListItem(_extends({}, this.props.item, { shopping_list_id: this.props.selectedListId }));
-	    }
-	  }, {
-	    key: 'handleDelete',
-	    value: function handleDelete(e) {
-	      e.stopPropagation();
-	      this.props.deleteIngredient(this.props.item);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'li',
-	        { key: this.props.item.id, onClick: this.ingredientClick.bind(this) },
-	        this.props.item.name,
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.handleDelete.bind(this) },
-	          '-'
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return IngredientIndexItem;
-	}(_react2.default.Component);
-	
-	exports.default = IngredientIndexItem;
-
-/***/ },
-/* 281 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var IngredientForm = function (_React$Component) {
-	  _inherits(IngredientForm, _React$Component);
-	
-	  function IngredientForm(props) {
-	    _classCallCheck(this, IngredientForm);
-	
-	    var _this = _possibleConstructorReturn(this, (IngredientForm.__proto__ || Object.getPrototypeOf(IngredientForm)).call(this, props));
-	
-	    _this.state = { name: '' };
-	    _this.update = _this.update.bind(_this);
-	    _this.handleSubmit = _this.handleSubmit.bind(_this);
-	    return _this;
-	  }
-	
-	  _createClass(IngredientForm, [{
-	    key: 'update',
-	    value: function update(name) {
-	      var _this2 = this;
-	
-	      return function (e) {
-	        return _this2.setState({ name: e.currentTarget.value });
-	      };
-	    }
-	  }, {
-	    key: 'handleSubmit',
-	    value: function handleSubmit(e) {
-	      e.preventDefault();
-	      this.props.createIngredient(this.state);
-	      this.setState({ name: '' });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'form',
-	        null,
-	        _react2.default.createElement('input', { placeholder: 'name',
-	          value: this.state.name,
-	          onChange: this.update('name') }),
-	        _react2.default.createElement('input', { type: 'submit', onClick: this.handleSubmit, value: '+' })
-	      );
-	    }
-	  }]);
-	
-	  return IngredientForm;
-	}(_react2.default.Component);
-	
-	exports.default = IngredientForm;
-
-/***/ },
-/* 282 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _redux = __webpack_require__(180);
-	
-	var _reducers = __webpack_require__(283);
-	
-	var _reducers2 = _interopRequireDefault(_reducers);
-	
-	var _middleware = __webpack_require__(287);
-	
-	var _middleware2 = _interopRequireDefault(_middleware);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var configureStore = function configureStore() {
-	  var preloadedState = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	  return (0, _redux.createStore)(_reducers2.default, preloadedState, _middleware2.default);
-	};
-	
-	exports.default = configureStore;
-
-/***/ },
-/* 283 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _redux = __webpack_require__(180);
-	
-	var _recipes = __webpack_require__(284);
-	
-	var _recipes2 = _interopRequireDefault(_recipes);
-	
-	var _shopping_lists = __webpack_require__(285);
-	
-	var _shopping_lists2 = _interopRequireDefault(_shopping_lists);
-	
-	var _selections = __webpack_require__(286);
-	
-	var _selections2 = _interopRequireDefault(_selections);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = (0, _redux.combineReducers)({
-	  selections: _selections2.default,
-	  recipes: _recipes2.default,
-	  shopping_lists: _shopping_lists2.default
-	});
-
-/***/ },
-/* 284 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var recipes = function recipes() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	  var action = arguments[1];
-	
-	  switch (action.type) {
-	    case 'RECEIVE_RECIPES':
-	      return action.recipes;
-	    case 'RECEIVE_RECIPE':
-	      return _extends({}, state, action.recipe);
-	    default:
-	      return state;
-	  }
-	};
-	
-	exports.default = recipes;
-
-/***/ },
-/* 285 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var shopping_lists = function shopping_lists() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	  var action = arguments[1];
-	
-	  switch (action.type) {
-	    case 'RECEIVE_SHOPPING_LISTS':
-	      return action.lists;
-	    case 'RECEIVE_SHOPPING_LIST':
-	      return _extends({}, state, action.list);
-	    case 'REMOVE_SHOPPING_LIST':
-	      var newState = _extends({}, state);
-	      delete newState[action.list.id];
-	      return newState;
-	    default:
-	      return state;
-	  }
-	};
-	
-	exports.default = shopping_lists;
-
-/***/ },
-/* 286 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var selections = function selections() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	  var action = arguments[1];
-	
-	  switch (action.type) {
-	    case 'SELECT_LIST':
-	      return _extends({}, state, { list: action.id });
-	    case 'DESELECT_LIST':
-	      return _extends({}, state, { list: undefined });
-	    default:
-	      return state;
-	  }
-	};
-	
-	exports.default = selections;
-
-/***/ },
-/* 287 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _redux = __webpack_require__(180);
-	
-	var _reactRouterRedux = __webpack_require__(270);
-	
-	var _reactRouter = __webpack_require__(197);
-	
-	var _recipe = __webpack_require__(288);
-	
-	var _recipe2 = _interopRequireDefault(_recipe);
-	
-	var _shopping_list = __webpack_require__(290);
-	
-	var _shopping_list2 = _interopRequireDefault(_shopping_list);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = (0, _redux.applyMiddleware)(_recipe2.default, _shopping_list2.default, (0, _reactRouterRedux.routerMiddleware)(_reactRouter.browserHistory));
-
-/***/ },
-/* 288 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _recipe_api_util = __webpack_require__(289);
-	
-	var _recipe = __webpack_require__(269);
-	
-	exports.default = function (_ref) {
-	  var getState = _ref.getState;
-	  var dispatch = _ref.dispatch;
-	  return function (next) {
-	    return function (action) {
-	      var recipesSuccess = function recipesSuccess(data) {
-	        return dispatch((0, _recipe.receiveRecipes)(data));
-	      };
-	      var recipeSuccess = function recipeSuccess(data) {
-	        return dispatch((0, _recipe.receiveRecipe)(data));
-	      };
-	      var result = next(action);
-	
-	      switch (action.type) {
-	        case 'REQUEST_RECIPES':
-	          (0, _recipe_api_util.fetchRecipes)(recipesSuccess);
-	          break;
-	        case 'CREATE_RECIPE':
-	          (0, _recipe_api_util.createRecipe)(action.recipe, recipeSuccess);
-	          break;
-	        case 'SEARCH_RECIPES':
-	          (0, _recipe_api_util.searchRecipes)(action.query, recipesSuccess);
-	          break;
-	        case 'CREATE_INGREDIENT':
-	          (0, _recipe_api_util.createIngredient)(action.ingredient, recipeSuccess);
-	          break;
-	        case 'DELETE_INGREDIENT':
-	          (0, _recipe_api_util.deleteIngredient)(action.ingredient, recipeSuccess);
-	          break;
-	        default:
-	          break;
-	      }
-	      return result;
-	    };
-	  };
-	};
-
-/***/ },
-/* 289 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var fetchRecipes = exports.fetchRecipes = function fetchRecipes(success) {
-	  $.ajax({
-	    url: 'recipes',
-	    method: 'GET',
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var createRecipe = exports.createRecipe = function createRecipe(data, success) {
-	  $.ajax({
-	    url: 'recipes',
-	    method: 'POST',
-	    data: data,
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var searchRecipes = exports.searchRecipes = function searchRecipes(query, success) {
-	  $.ajax({
-	    url: 'search',
-	    method: 'GET',
-	    data: { q: query },
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var createIngredient = exports.createIngredient = function createIngredient(ingredient, success) {
-	  $.ajax({
-	    url: '/ingredients',
-	    method: 'POST',
-	    data: { ingredient: ingredient },
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var deleteIngredient = exports.deleteIngredient = function deleteIngredient(ingredient, success) {
-	  $.ajax({
-	    url: '/ingredients/' + ingredient.id,
-	    method: 'DELETE',
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-
-/***/ },
-/* 290 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _list_api_util = __webpack_require__(291);
-	
-	var _shopping_list = __webpack_require__(263);
-	
-	exports.default = function (_ref) {
-	  var getState = _ref.getState;
-	  var dispatch = _ref.dispatch;
-	  return function (next) {
-	    return function (action) {
-	      var shoppingListsSuccess = function shoppingListsSuccess(data) {
-	        return dispatch((0, _shopping_list.receiveShoppingLists)(data));
-	      };
-	      var shoppingListSuccess = function shoppingListSuccess(data) {
-	        return dispatch((0, _shopping_list.receiveShoppingList)(data));
-	      };
-	      var shoppingListDeletionSuccess = function shoppingListDeletionSuccess(data) {
-	        return dispatch((0, _shopping_list.removeShoppingList)(data));
-	      };
-	      var result = next(action);
-	      switch (action.type) {
-	        case 'REQUEST_SHOPPING_LISTS':
-	          (0, _list_api_util.fetchShoppingLists)(shoppingListsSuccess);
-	          break;
-	        case 'CREATE_SHOPPING_LIST':
-	          (0, _list_api_util.createShoppingList)(action.bench, shoppingListSuccess);
-	          break;
-	        case 'UPDATE_SHOPPING_LIST_ITEM':
-	          (0, _list_api_util.updateShoppingListItem)(action.item, shoppingListSuccess);
-	          break;
-	        case 'CREATE_SHOPPING_LIST_ITEM':
-	          (0, _list_api_util.createShoppingListItem)(action.item, shoppingListSuccess);
-	          break;
-	        case 'DELETE_SHOPPING_LIST_ITEM':
-	          (0, _list_api_util.deleteShoppingListItem)(action.item, shoppingListSuccess);
-	          break;
-	        case 'BULK_CREATE_SHOPPING_LIST_ITEMS':
-	          (0, _list_api_util.createShoppingListItems)(action.list_id, action.recipe_id, shoppingListSuccess);
-	          break;
-	        case 'DELETE_SHOPPING_LIST':
-	          (0, _list_api_util.deleteShoppingList)(action.id, shoppingListDeletionSuccess);
-	          break;
-	        default:
-	          break;
-	      }
-	      return result;
-	    };
-	  };
-	};
-
-/***/ },
-/* 291 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var fetchShoppingLists = exports.fetchShoppingLists = function fetchShoppingLists(success) {
-	  $.ajax({
-	    url: '/shopping_lists',
-	    method: 'GET',
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var createShoppingList = exports.createShoppingList = function createShoppingList(data, success) {
-	  $.ajax({
-	    url: '/shopping_lists',
-	    method: 'POST',
-	    data: data,
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var updateShoppingListItem = exports.updateShoppingListItem = function updateShoppingListItem(item, success) {
-	  $.ajax({
-	    url: '/shopping_list_items/' + item.id,
-	    method: 'PATCH',
-	    data: { shopping_list_item: _extends({}, item, { done: !item.done }) },
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var createShoppingListItem = exports.createShoppingListItem = function createShoppingListItem(item, success) {
-	  $.ajax({
-	    url: '/shopping_list_items',
-	    method: 'POST',
-	    data: { shopping_list_item: item },
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var deleteShoppingListItem = exports.deleteShoppingListItem = function deleteShoppingListItem(item, success) {
-	  $.ajax({
-	    url: '/shopping_list_items/' + item.id,
-	    method: 'DELETE',
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var createShoppingListItems = exports.createShoppingListItems = function createShoppingListItems(shopping_list_id, recipe_id, success) {
-	  $.ajax({
-	    url: '/shopping_list_items/bulk',
-	    method: 'POST',
-	    data: { shopping_list_id: shopping_list_id, recipe_id: recipe_id },
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-	
-	var deleteShoppingList = exports.deleteShoppingList = function deleteShoppingList(id, success) {
-	  $.ajax({
-	    url: '/shopping_lists/' + id,
-	    method: 'DELETE',
-	    success: success,
-	    error: function error(data) {
-	      return console.log(data);
-	    }
-	  });
-	};
-
-/***/ },
-/* 292 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _reactRedux = __webpack_require__(173);
-	
-	var _recipe_form = __webpack_require__(293);
+	var _recipe_form = __webpack_require__(276);
 	
 	var _recipe_form2 = _interopRequireDefault(_recipe_form);
 	
@@ -30693,7 +29742,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_recipe_form2.default);
 
 /***/ },
-/* 293 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30838,6 +29887,963 @@
 	}(_react2.default.Component);
 	
 	exports.default = RecipeSearch;
+
+/***/ },
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(197);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RecipeIndexItem = function (_React$Component) {
+	  _inherits(RecipeIndexItem, _React$Component);
+	
+	  function RecipeIndexItem() {
+	    _classCallCheck(this, RecipeIndexItem);
+	
+	    return _possibleConstructorReturn(this, (RecipeIndexItem.__proto__ || Object.getPrototypeOf(RecipeIndexItem)).apply(this, arguments));
+	  }
+	
+	  _createClass(RecipeIndexItem, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'changePage',
+	    value: function changePage(e) {
+	      this.props.push('/r/' + this.props.item.id);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var item = this.props.item;
+	      return _react2.default.createElement(
+	        'li',
+	        { key: item.id, onClick: this.changePage.bind(this), className: 'recipe-list-item' },
+	        _react2.default.createElement(
+	          'header',
+	          null,
+	          item.name
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          item.entree ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'entree'
+	          ) : '',
+	          item.soup ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'soup'
+	          ) : '',
+	          item.salad ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'salad'
+	          ) : '',
+	          item.dessert ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'dessert'
+	          ) : '',
+	          item.appetizer ? _react2.default.createElement(
+	            'li',
+	            null,
+	            'appetizer'
+	          ) : ''
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return RecipeIndexItem;
+	}(_react2.default.Component);
+	
+	exports.default = RecipeIndexItem;
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _reactRedux = __webpack_require__(173);
+	
+	var _recipe_show = __webpack_require__(279);
+	
+	var _recipe_show2 = _interopRequireDefault(_recipe_show);
+	
+	var _recipe = __webpack_require__(269);
+	
+	var _shopping_list = __webpack_require__(263);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
+	  return {
+	    recipe: state.recipes[ownProps.params.recipeId],
+	    listId: state.selections.list
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+	  return {
+	    createIngredient: function createIngredient(ingredient) {
+	      return dispatch((0, _recipe.createIngredient)(_extends({}, ingredient, { recipe_id: ownProps.params.recipeId })));
+	    },
+	    bulkCreateItems: function bulkCreateItems(list_id) {
+	      return dispatch((0, _shopping_list.bulkCreateShoppingListItems)(list_id, ownProps.params.recipeId));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_recipe_show2.default);
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _ingredient_index = __webpack_require__(280);
+	
+	var _ingredient_index2 = _interopRequireDefault(_ingredient_index);
+	
+	var _ingredient_form = __webpack_require__(283);
+	
+	var _ingredient_form2 = _interopRequireDefault(_ingredient_form);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RecipeShow = function (_React$Component) {
+	  _inherits(RecipeShow, _React$Component);
+	
+	  function RecipeShow() {
+	    _classCallCheck(this, RecipeShow);
+	
+	    return _possibleConstructorReturn(this, (RecipeShow.__proto__ || Object.getPrototypeOf(RecipeShow)).apply(this, arguments));
+	  }
+	
+	  _createClass(RecipeShow, [{
+	    key: 'render',
+	
+	    // componentWillMount () {
+	    //   this.props.requestRecipes()
+	    // }
+	
+	    value: function render() {
+	      var ingredients = this.props.recipe.ingredients;
+	      var recipe = this.props.recipe;
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'recipe-show' },
+	        _react2.default.createElement(
+	          'header',
+	          null,
+	          _react2.default.createElement(
+	            'a',
+	            { href: recipe.url, target: '_blank' },
+	            recipe.name
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            recipe.entree ? _react2.default.createElement(
+	              'li',
+	              null,
+	              'entree'
+	            ) : '',
+	            recipe.soup ? _react2.default.createElement(
+	              'li',
+	              null,
+	              'soup'
+	            ) : '',
+	            recipe.salad ? _react2.default.createElement(
+	              'li',
+	              null,
+	              'salad'
+	            ) : '',
+	            recipe.dessert ? _react2.default.createElement(
+	              'li',
+	              null,
+	              'dessert'
+	            ) : '',
+	            recipe.appetizer ? _react2.default.createElement(
+	              'li',
+	              null,
+	              'appetizer'
+	            ) : ''
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'section',
+	          { className: 'info' },
+	          _react2.default.createElement(
+	            'section',
+	            { className: 'left-half' },
+	            _react2.default.createElement(
+	              'tags',
+	              null,
+	              recipe.tags
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              recipe.notes
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            { className: 'right-half' },
+	            _react2.default.createElement(
+	              'header',
+	              { onClick: this.props.bulkCreateItems.bind(null, this.props.listId) },
+	              'Add All Ingredients'
+	            ),
+	            _react2.default.createElement(_ingredient_index2.default, { ingredients: ingredients }),
+	            _react2.default.createElement(_ingredient_form2.default, { createIngredient: this.props.createIngredient })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return RecipeShow;
+	}(_react2.default.Component);
+	
+	exports.default = RecipeShow;
+
+/***/ },
+/* 280 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _ingredient_index_item_container = __webpack_require__(281);
+	
+	var _ingredient_index_item_container2 = _interopRequireDefault(_ingredient_index_item_container);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var IngredientIndex = function (_React$Component) {
+	  _inherits(IngredientIndex, _React$Component);
+	
+	  function IngredientIndex() {
+	    _classCallCheck(this, IngredientIndex);
+	
+	    return _possibleConstructorReturn(this, (IngredientIndex.__proto__ || Object.getPrototypeOf(IngredientIndex)).apply(this, arguments));
+	  }
+	
+	  _createClass(IngredientIndex, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var ingredients = this.props.ingredients || {};
+	      return _react2.default.createElement(
+	        'ul',
+	        { className: 'ingredient-list' },
+	        Object.keys(ingredients).map(function (id) {
+	          return _react2.default.createElement(_ingredient_index_item_container2.default, { key: id, item: ingredients[id] });
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return IngredientIndex;
+	}(_react2.default.Component);
+	
+	exports.default = IngredientIndex;
+
+/***/ },
+/* 281 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(173);
+	
+	var _ingredient_index_item = __webpack_require__(282);
+	
+	var _ingredient_index_item2 = _interopRequireDefault(_ingredient_index_item);
+	
+	var _shopping_list = __webpack_require__(263);
+	
+	var _recipe = __webpack_require__(269);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    selectedListId: state.selections.list
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+	  return {
+	    createListItem: function createListItem(item) {
+	      return dispatch((0, _shopping_list.createShoppingListItem)(item));
+	    },
+	    deleteIngredient: function deleteIngredient(item) {
+	      return dispatch((0, _recipe.deleteIngredient)(item));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ingredient_index_item2.default);
+
+/***/ },
+/* 282 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var IngredientIndexItem = function (_React$Component) {
+	  _inherits(IngredientIndexItem, _React$Component);
+	
+	  function IngredientIndexItem() {
+	    _classCallCheck(this, IngredientIndexItem);
+	
+	    return _possibleConstructorReturn(this, (IngredientIndexItem.__proto__ || Object.getPrototypeOf(IngredientIndexItem)).apply(this, arguments));
+	  }
+	
+	  _createClass(IngredientIndexItem, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'ingredientClick',
+	    value: function ingredientClick(e) {
+	      if (this.props.selectedListId) this.props.createListItem(_extends({}, this.props.item, { shopping_list_id: this.props.selectedListId }));
+	    }
+	  }, {
+	    key: 'handleDelete',
+	    value: function handleDelete(e) {
+	      e.stopPropagation();
+	      this.props.deleteIngredient(this.props.item);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'li',
+	        { key: this.props.item.id, onClick: this.ingredientClick.bind(this) },
+	        this.props.item.name,
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.handleDelete.bind(this) },
+	          '-'
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return IngredientIndexItem;
+	}(_react2.default.Component);
+	
+	exports.default = IngredientIndexItem;
+
+/***/ },
+/* 283 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var IngredientForm = function (_React$Component) {
+	  _inherits(IngredientForm, _React$Component);
+	
+	  function IngredientForm(props) {
+	    _classCallCheck(this, IngredientForm);
+	
+	    var _this = _possibleConstructorReturn(this, (IngredientForm.__proto__ || Object.getPrototypeOf(IngredientForm)).call(this, props));
+	
+	    _this.state = { name: '' };
+	    _this.update = _this.update.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(IngredientForm, [{
+	    key: 'update',
+	    value: function update(name) {
+	      var _this2 = this;
+	
+	      return function (e) {
+	        return _this2.setState({ name: e.currentTarget.value });
+	      };
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      e.preventDefault();
+	      this.props.createIngredient(this.state);
+	      this.setState({ name: '' });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'form',
+	        null,
+	        _react2.default.createElement('input', { placeholder: 'name',
+	          value: this.state.name,
+	          onChange: this.update('name') }),
+	        _react2.default.createElement('input', { type: 'submit', onClick: this.handleSubmit, value: '+' })
+	      );
+	    }
+	  }]);
+	
+	  return IngredientForm;
+	}(_react2.default.Component);
+	
+	exports.default = IngredientForm;
+
+/***/ },
+/* 284 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _redux = __webpack_require__(180);
+	
+	var _reducers = __webpack_require__(285);
+	
+	var _reducers2 = _interopRequireDefault(_reducers);
+	
+	var _middleware = __webpack_require__(289);
+	
+	var _middleware2 = _interopRequireDefault(_middleware);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var configureStore = function configureStore() {
+	  var preloadedState = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  return (0, _redux.createStore)(_reducers2.default, preloadedState, _middleware2.default);
+	};
+	
+	exports.default = configureStore;
+
+/***/ },
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _redux = __webpack_require__(180);
+	
+	var _recipes = __webpack_require__(286);
+	
+	var _recipes2 = _interopRequireDefault(_recipes);
+	
+	var _shopping_lists = __webpack_require__(287);
+	
+	var _shopping_lists2 = _interopRequireDefault(_shopping_lists);
+	
+	var _selections = __webpack_require__(288);
+	
+	var _selections2 = _interopRequireDefault(_selections);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = (0, _redux.combineReducers)({
+	  selections: _selections2.default,
+	  recipes: _recipes2.default,
+	  shopping_lists: _shopping_lists2.default
+	});
+
+/***/ },
+/* 286 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var recipes = function recipes() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'RECEIVE_RECIPES':
+	      return action.recipes;
+	    case 'RECEIVE_RECIPE':
+	      return _extends({}, state, action.recipe);
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = recipes;
+
+/***/ },
+/* 287 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var shopping_lists = function shopping_lists() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'RECEIVE_SHOPPING_LISTS':
+	      return action.lists;
+	    case 'RECEIVE_SHOPPING_LIST':
+	      return _extends({}, state, action.list);
+	    case 'REMOVE_SHOPPING_LIST':
+	      var newState = _extends({}, state);
+	      delete newState[action.list.id];
+	      return newState;
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = shopping_lists;
+
+/***/ },
+/* 288 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var selections = function selections() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'SELECT_LIST':
+	      return _extends({}, state, { list: action.id });
+	    case 'DESELECT_LIST':
+	      return _extends({}, state, { list: undefined });
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = selections;
+
+/***/ },
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _redux = __webpack_require__(180);
+	
+	var _reactRouterRedux = __webpack_require__(270);
+	
+	var _reactRouter = __webpack_require__(197);
+	
+	var _recipe = __webpack_require__(290);
+	
+	var _recipe2 = _interopRequireDefault(_recipe);
+	
+	var _shopping_list = __webpack_require__(292);
+	
+	var _shopping_list2 = _interopRequireDefault(_shopping_list);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = (0, _redux.applyMiddleware)(_recipe2.default, _shopping_list2.default, (0, _reactRouterRedux.routerMiddleware)(_reactRouter.browserHistory));
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _recipe_api_util = __webpack_require__(291);
+	
+	var _recipe = __webpack_require__(269);
+	
+	exports.default = function (_ref) {
+	  var getState = _ref.getState;
+	  var dispatch = _ref.dispatch;
+	  return function (next) {
+	    return function (action) {
+	      var recipesSuccess = function recipesSuccess(data) {
+	        return dispatch((0, _recipe.receiveRecipes)(data));
+	      };
+	      var recipeSuccess = function recipeSuccess(data) {
+	        return dispatch((0, _recipe.receiveRecipe)(data));
+	      };
+	      var result = next(action);
+	
+	      switch (action.type) {
+	        case 'REQUEST_RECIPES':
+	          (0, _recipe_api_util.fetchRecipes)(recipesSuccess);
+	          break;
+	        case 'CREATE_RECIPE':
+	          (0, _recipe_api_util.createRecipe)(action.recipe, recipeSuccess);
+	          break;
+	        case 'SEARCH_RECIPES':
+	          (0, _recipe_api_util.searchRecipes)(action.query, recipesSuccess);
+	          break;
+	        case 'CREATE_INGREDIENT':
+	          (0, _recipe_api_util.createIngredient)(action.ingredient, recipeSuccess);
+	          break;
+	        case 'DELETE_INGREDIENT':
+	          (0, _recipe_api_util.deleteIngredient)(action.ingredient, recipeSuccess);
+	          break;
+	        default:
+	          break;
+	      }
+	      return result;
+	    };
+	  };
+	};
+
+/***/ },
+/* 291 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var fetchRecipes = exports.fetchRecipes = function fetchRecipes(success) {
+	  $.ajax({
+	    url: 'recipes',
+	    method: 'GET',
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var createRecipe = exports.createRecipe = function createRecipe(data, success) {
+	  $.ajax({
+	    url: 'recipes',
+	    method: 'POST',
+	    data: data,
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var searchRecipes = exports.searchRecipes = function searchRecipes(query, success) {
+	  $.ajax({
+	    url: 'search',
+	    method: 'GET',
+	    data: { q: query },
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var createIngredient = exports.createIngredient = function createIngredient(ingredient, success) {
+	  $.ajax({
+	    url: '/ingredients',
+	    method: 'POST',
+	    data: { ingredient: ingredient },
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var deleteIngredient = exports.deleteIngredient = function deleteIngredient(ingredient, success) {
+	  $.ajax({
+	    url: '/ingredients/' + ingredient.id,
+	    method: 'DELETE',
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+
+/***/ },
+/* 292 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _list_api_util = __webpack_require__(293);
+	
+	var _shopping_list = __webpack_require__(263);
+	
+	exports.default = function (_ref) {
+	  var getState = _ref.getState;
+	  var dispatch = _ref.dispatch;
+	  return function (next) {
+	    return function (action) {
+	      var shoppingListsSuccess = function shoppingListsSuccess(data) {
+	        return dispatch((0, _shopping_list.receiveShoppingLists)(data));
+	      };
+	      var shoppingListSuccess = function shoppingListSuccess(data) {
+	        return dispatch((0, _shopping_list.receiveShoppingList)(data));
+	      };
+	      var shoppingListDeletionSuccess = function shoppingListDeletionSuccess(data) {
+	        return dispatch((0, _shopping_list.removeShoppingList)(data));
+	      };
+	      var result = next(action);
+	      switch (action.type) {
+	        case 'REQUEST_SHOPPING_LISTS':
+	          (0, _list_api_util.fetchShoppingLists)(shoppingListsSuccess);
+	          break;
+	        case 'CREATE_SHOPPING_LIST':
+	          (0, _list_api_util.createShoppingList)(action.bench, shoppingListSuccess);
+	          break;
+	        case 'UPDATE_SHOPPING_LIST_ITEM':
+	          (0, _list_api_util.updateShoppingListItem)(action.item, shoppingListSuccess);
+	          break;
+	        case 'CREATE_SHOPPING_LIST_ITEM':
+	          (0, _list_api_util.createShoppingListItem)(action.item, shoppingListSuccess);
+	          break;
+	        case 'DELETE_SHOPPING_LIST_ITEM':
+	          (0, _list_api_util.deleteShoppingListItem)(action.item, shoppingListSuccess);
+	          break;
+	        case 'BULK_CREATE_SHOPPING_LIST_ITEMS':
+	          (0, _list_api_util.createShoppingListItems)(action.list_id, action.recipe_id, shoppingListSuccess);
+	          break;
+	        case 'DELETE_SHOPPING_LIST':
+	          (0, _list_api_util.deleteShoppingList)(action.id, shoppingListDeletionSuccess);
+	          break;
+	        default:
+	          break;
+	      }
+	      return result;
+	    };
+	  };
+	};
+
+/***/ },
+/* 293 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var fetchShoppingLists = exports.fetchShoppingLists = function fetchShoppingLists(success) {
+	  $.ajax({
+	    url: '/shopping_lists',
+	    method: 'GET',
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var createShoppingList = exports.createShoppingList = function createShoppingList(data, success) {
+	  $.ajax({
+	    url: '/shopping_lists',
+	    method: 'POST',
+	    data: data,
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var updateShoppingListItem = exports.updateShoppingListItem = function updateShoppingListItem(item, success) {
+	  $.ajax({
+	    url: '/shopping_list_items/' + item.id,
+	    method: 'PATCH',
+	    data: { shopping_list_item: _extends({}, item, { done: !item.done }) },
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var createShoppingListItem = exports.createShoppingListItem = function createShoppingListItem(item, success) {
+	  $.ajax({
+	    url: '/shopping_list_items',
+	    method: 'POST',
+	    data: { shopping_list_item: item },
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var deleteShoppingListItem = exports.deleteShoppingListItem = function deleteShoppingListItem(item, success) {
+	  $.ajax({
+	    url: '/shopping_list_items/' + item.id,
+	    method: 'DELETE',
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var createShoppingListItems = exports.createShoppingListItems = function createShoppingListItems(shopping_list_id, recipe_id, success) {
+	  $.ajax({
+	    url: '/shopping_list_items/bulk',
+	    method: 'POST',
+	    data: { shopping_list_id: shopping_list_id, recipe_id: recipe_id },
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var deleteShoppingList = exports.deleteShoppingList = function deleteShoppingList(id, success) {
+	  $.ajax({
+	    url: '/shopping_lists/' + id,
+	    method: 'DELETE',
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
 
 /***/ }
 /******/ ]);

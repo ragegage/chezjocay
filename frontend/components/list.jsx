@@ -28,7 +28,9 @@ class List extends React.Component {
 
     return (
       <ul className='shopping-list'>
-        {this.props.shopping_list ? <li className='list-header' onClick={this.props.deselectList}>deselect list</li> : <li className='list-header' onClick={this.props.createList}>create list</li>}
+        {(this.props.shopping_list ? 
+          <li className='list-header'>{this.props.shopping_list.name} <button onClick={this.props.deselectList}>deselect list</button></li> : 
+          <li className='list-header' onClick={this.props.createList}>create list</li>)}
       {
         list
       }

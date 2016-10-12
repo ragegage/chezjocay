@@ -17,7 +17,7 @@ class ListList extends React.Component {
         {
           this.props.item.name
         }
-        <button onClick={this.destroyList.bind(this)}>-</button>
+        <button onClick={this.destroyList.bind(this)}>delete</button>
       </li>
     )
   }

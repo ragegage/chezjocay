@@ -23,7 +23,7 @@ class ListItem extends React.Component {
         {
           item.name
         }
-        <button onClick={this.handleDelete.bind(this)}>-</button>
+        <button onClick={this.handleDelete.bind(this)}>delete</button>
       </li>
     )
   }
