@@ -46,3 +46,8 @@ export const deleteShoppingList = (id) => ({
   type: 'DELETE_SHOPPING_LIST',
   id
 })
+
+export const updateShoppingList = (list) => ({
+  type: 'UPDATE_SHOPPING_LIST',
+  list
+})

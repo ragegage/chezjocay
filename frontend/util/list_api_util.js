@@ -64,3 +64,13 @@ export const deleteShoppingList = (id, success) => {
     error: data => console.log(data)
   })
 }
+
+export const updateShoppingList = (list, success) => {
+  $.ajax({
+    url: `/shopping_lists/${list.id}`,
+    method: 'PATCH',
+    data: { shopping_list: list },
+    success,
+    error: data => console.log(data)
+  })
+}

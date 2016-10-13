@@ -4,7 +4,8 @@ import { fetchShoppingLists,
          createShoppingListItem,
          deleteShoppingListItem,
          createShoppingListItems,
-         deleteShoppingList
+         deleteShoppingList,
+         updateShoppingList
        } from '../util/list_api_util';
 import { receiveShoppingList,
          receiveShoppingLists,
@@ -37,6 +38,9 @@ export default ({getState, dispatch}) => next => action => {
       break
     case 'DELETE_SHOPPING_LIST':
       deleteShoppingList(action.id, shoppingListDeletionSuccess)
+      break
+    case 'UPDATE_SHOPPING_LIST':
+      updateShoppingList(action.list, shoppingListSuccess)
       break
     default:
       break

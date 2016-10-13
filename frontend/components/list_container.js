@@ -1,6 +1,11 @@
 import { connect } from 'react-redux'
 import List from './list'
-import { requestShoppingLists, updateShoppingListItem, deleteShoppingListItem, createList, deleteShoppingList } from '../actions/shopping_list'
+import { requestShoppingLists,
+  updateShoppingListItem,
+  deleteShoppingListItem,
+  createList,
+  deleteShoppingList,
+  updateShoppingList } from '../actions/shopping_list'
 import { selectList, deselectList } from '../actions/selections'
 
 const mapStateToProps = state => ({
@@ -15,7 +20,8 @@ const mapDispatchToProps = dispatch => ({
   deselectList: () => dispatch(deselectList()),
   deleteItem: (item) => dispatch(deleteShoppingListItem(item)),
   createList: () => dispatch(createList()),
-  deleteList: (id) => dispatch(deleteShoppingList(id))
+  deleteList: (id) => dispatch(deleteShoppingList(id)),
+  updateList: (list) => dispatch(updateShoppingList(list)),
 })
 
 export default connect(

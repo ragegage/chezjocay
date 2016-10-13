@@ -1,6 +1,7 @@
 import React from 'react'
 import ListItem from './list_item'
 import ListList from './list_list'
+import ListHeader from './list_header'
 
 class List extends React.Component {
   componentWillMount() {
@@ -28,8 +29,10 @@ class List extends React.Component {
 
     return (
       <ul className='shopping-list'>
-        {(this.props.shopping_list ? 
-          <li className='list-header'>{this.props.shopping_list.name} <button onClick={this.props.deselectList}>deselect list</button></li> : 
+        {(this.props.shopping_list ?
+          <ListHeader list={this.props.shopping_list}
+                      updateList={this.props.updateList}
+                      deselectList={this.props.deselectList} /> :
           <li className='list-header' onClick={this.props.createList}>create list</li>)}
       {
         list
