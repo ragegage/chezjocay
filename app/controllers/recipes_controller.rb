@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
 
   def index
-      @recipes = Recipe.all.includes(:ingredients)
+      @recipes = Recipe.all.includes(:ingredients).order(:name)
       # render json: @recipes
   end
 
