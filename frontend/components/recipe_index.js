@@ -17,7 +17,7 @@ class RecipeIndex extends React.Component {
         </div>
         <ul className='recipe-list'>
         {
-          Object.keys(this.props.recipes).sort(a, b => {
+          Object.keys(this.props.recipes).sort((a, b) => {
             var nameA = this.props.recipes[a].name.toUpperCase();
             var nameB = this.props.recipes[b].name.toUpperCase();
             if (nameA < nameB) {
