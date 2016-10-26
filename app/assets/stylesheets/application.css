@@ -82,4 +82,25 @@ button:hover {
   .shopping-list {
     margin-bottom: 20px;
   }
+
+  /* increase sizes of everything to make it more zoomed-in */
+  html {
+    font-size: 40px;
+  }
+  h1 {
+    font-size: 80px;
+  }
+  .shopping-list, .shopping-list .list-header, .recipe-list-item header, .recipe-show header a {
+    font-size: 72px;
+  }
+  .right-half {
+    font-size: 60px;
+  }
+  button {
+    font-size: 40px;
+  }
+  .recipe-index .search, .shopping-list input, .recipe-show input {
+    font-size: 48px;
+  }
+
 }
