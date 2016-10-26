@@ -28732,6 +28732,9 @@
 	    deleteItem: function deleteItem(item) {
 	      return dispatch((0, _shopping_list.deleteShoppingListItem)(item));
 	    },
+	    createListItem: function createListItem(item) {
+	      return dispatch((0, _shopping_list.createShoppingListItem)(item));
+	    },
 	    createList: function createList() {
 	      return dispatch((0, _shopping_list.createList)());
 	    },
@@ -28773,6 +28776,10 @@
 	var _list_header = __webpack_require__(263);
 	
 	var _list_header2 = _interopRequireDefault(_list_header);
+	
+	var _list_item_form = __webpack_require__(295);
+	
+	var _list_item_form2 = _interopRequireDefault(_list_item_form);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28826,7 +28833,9 @@
 	          { className: 'list-header', onClick: this.props.createList },
 	          'create list'
 	        ),
-	        list
+	        list,
+	        this.props.shopping_list ? _react2.default.createElement(_list_item_form2.default, { selectedListId: this.props.shopping_list.id,
+	          createListItem: this.props.createListItem }) : ''
 	      );
 	    }
 	  }]);
@@ -30976,6 +30985,74 @@
 	    }
 	  });
 	};
+
+/***/ },
+/* 295 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ListItemForm = function (_React$Component) {
+	  _inherits(ListItemForm, _React$Component);
+	
+	  function ListItemForm(props) {
+	    _classCallCheck(this, ListItemForm);
+	
+	    var _this = _possibleConstructorReturn(this, (ListItemForm.__proto__ || Object.getPrototypeOf(ListItemForm)).call(this, props));
+	
+	    _this.state = { name: '' };
+	
+	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.submit = _this.submit.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(ListItemForm, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'form',
+	        { onSubmit: this.submit },
+	        _react2.default.createElement('input', { type: 'text', value: this.state.name,
+	          onChange: this.handleChange })
+	      );
+	    }
+	  }, {
+	    key: 'handleChange',
+	    value: function handleChange(e) {
+	      this.setState({ name: e.target.value });
+	    }
+	  }, {
+	    key: 'submit',
+	    value: function submit(e) {
+	      e.preventDefault();
+	      this.props.createListItem({ name: this.state.name, shopping_list_id: this.props.selectedListId, recipe_id: 0 });
+	      this.setState({ name: '' });
+	    }
+	  }]);
+	
+	  return ListItemForm;
+	}(_react2.default.Component);
+	
+	exports.default = ListItemForm;
 
 /***/ }
 /******/ ]);

@@ -2,6 +2,7 @@ import React from 'react'
 import ListItem from './list_item'
 import ListList from './list_list'
 import ListHeader from './list_header'
+import ListItemForm from './list_item_form'
 
 class List extends React.Component {
   componentWillMount() {
@@ -37,6 +38,12 @@ class List extends React.Component {
       {
         list
       }
+        {
+          (this.props.shopping_list ?
+          <ListItemForm selectedListId={this.props.shopping_list.id}
+                        createListItem={this.props.createListItem} /> :
+          '')
+        }
       </ul>
     )
   }

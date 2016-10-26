@@ -3,6 +3,7 @@ import List from './list'
 import { requestShoppingLists,
   updateShoppingListItem,
   deleteShoppingListItem,
+  createShoppingListItem,
   createList,
   deleteShoppingList,
   updateShoppingList } from '../actions/shopping_list'
@@ -19,6 +20,7 @@ const mapDispatchToProps = dispatch => ({
   toggleItem: (item) => dispatch(updateShoppingListItem(item)),
   deselectList: () => dispatch(deselectList()),
   deleteItem: (item) => dispatch(deleteShoppingListItem(item)),
+  createListItem: (item) => dispatch(createShoppingListItem(item)),
   createList: () => dispatch(createList()),
   deleteList: (id) => dispatch(deleteShoppingList(id)),
   updateList: (list) => dispatch(updateShoppingList(list)),
