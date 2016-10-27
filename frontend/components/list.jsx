@@ -12,12 +12,14 @@ class List extends React.Component {
   render () {
     let list
     if (this.props.shopping_list)
-      list = Object.keys(this.props.shopping_list.shopping_list_items).map(id => (
-               <ListItem key={id}
-                 item={this.props.shopping_list.shopping_list_items[id]}
-                 toggleItem={this.props.toggleItem}
-                 deleteItem={this.props.deleteItem}
-                 />)
+      list = Object.keys(this.props.shopping_list.shopping_list_items)
+                   .sort((id1, id2) => this.props.shopping_list.shopping_list_items[id1].recipe_id - this.props.shopping_list.shopping_list_items[id2].recipe_id)
+                   .map(id => (
+                     <ListItem key={id}
+                       item={this.props.shopping_list.shopping_list_items[id]}
+                       toggleItem={this.props.toggleItem}
+                       deleteItem={this.props.deleteItem}
+                     />)
              )
     else
       list = Object.keys(this.props.shopping_lists).map(id => (

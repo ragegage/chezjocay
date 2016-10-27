@@ -28809,7 +28809,9 @@
 	      var _this2 = this;
 	
 	      var list = void 0;
-	      if (this.props.shopping_list) list = Object.keys(this.props.shopping_list.shopping_list_items).map(function (id) {
+	      if (this.props.shopping_list) list = Object.keys(this.props.shopping_list.shopping_list_items).sort(function (id1, id2) {
+	        return _this2.props.shopping_list.shopping_list_items[id1].recipe_id - _this2.props.shopping_list.shopping_list_items[id2].recipe_id;
+	      }).map(function (id) {
 	        return _react2.default.createElement(_list_item2.default, { key: id,
 	          item: _this2.props.shopping_list.shopping_list_items[id],
 	          toggleItem: _this2.props.toggleItem,

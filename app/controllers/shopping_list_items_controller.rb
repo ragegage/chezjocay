@@ -1,5 +1,6 @@
 class ShoppingListItemsController < ApplicationController
   def create
+    debugger
     @shopping_list_item = ShoppingListItem.new(shopping_list_item_params)
     if @shopping_list_item.save
       @shopping_list = @shopping_list_item.shopping_list
@@ -32,7 +33,7 @@ class ShoppingListItemsController < ApplicationController
   def create_from_recipe
     @recipe = Recipe.find(params[:recipe_id])
     bulk_shopping_list_item_params = @recipe.ingredients.map do |ingredient|
-      {name: ingredient.name, shopping_list_id: params[:shopping_list_id]}
+      {name: ingredient.name, shopping_list_id: params[:shopping_list_id], recipe_id: params[:recipe_id]}
     end
     if ShoppingListItem.create(bulk_shopping_list_item_params)
       @shopping_list = ShoppingList.find(params[:shopping_list_id])
@@ -43,6 +44,6 @@ class ShoppingListItemsController < ApplicationController
   end
 
   def shopping_list_item_params
-    params.require(:shopping_list_item).permit(:name, :shopping_list_id, :done)
+    params.require(:shopping_list_item).permit(:name, :shopping_list_id, :recipe_id, :done)
   end
 end
