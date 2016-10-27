@@ -1,6 +1,5 @@
 class ShoppingListItemsController < ApplicationController
   def create
-    debugger
     @shopping_list_item = ShoppingListItem.new(shopping_list_item_params)
     if @shopping_list_item.save
       @shopping_list = @shopping_list_item.shopping_list
