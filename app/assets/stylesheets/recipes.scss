@@ -20,6 +20,19 @@
   list-style: none;
 }
 
+.recipe-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  input, label {
+    padding: 5px 0;
+  }
+  input {
+    margin: 5px 0;
+    max-width: 250px;
+  }
+}
+
 .recipe-list-item {
   color: #2b2a2a;
   display: flex;

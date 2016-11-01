@@ -53,7 +53,7 @@ class RecipeSearch extends React.Component {
   render () {
     if(this.state.displayForm)
       return (
-        <form onSubmit={this.onSubmit.bind(this)}>
+        <form className='recipe-form' onSubmit={this.onSubmit.bind(this)}>
           <input type='text' value={this.state.name} onChange={this.update('name').bind(this)} placeholder='name' />
           <input type='text' value={this.state.url} onChange={this.update('url').bind(this)} placeholder='url' />
           <label>Entree<input type='checkbox' /></label>
