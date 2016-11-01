@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :ingredients, only: [:create, :update, :destroy], defaults: {format: :json}
 
   root 'welcome#index'
+  get '*path', to: 'welcome#index'
 end

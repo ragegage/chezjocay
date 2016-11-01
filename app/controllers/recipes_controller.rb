@@ -6,7 +6,7 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.find(params[:id]).includes(:ingredients)
+    @recipe = Recipe.find(params[:id])
     # render json: @recipe
   end
 

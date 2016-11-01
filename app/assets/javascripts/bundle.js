@@ -29538,6 +29538,13 @@
 	    recipe: recipe
 	  };
 	};
+	
+	var requestRecipe = exports.requestRecipe = function requestRecipe(id) {
+	  return {
+	    type: 'REQUEST_RECIPE',
+	    id: id
+	  };
+	};
 
 /***/ },
 /* 272 */
@@ -30215,6 +30222,9 @@
 	    },
 	    bulkCreateItems: function bulkCreateItems(list_id) {
 	      return dispatch((0, _shopping_list.bulkCreateShoppingListItems)(list_id, ownProps.params.recipeId));
+	    },
+	    requestRecipe: function requestRecipe() {
+	      return dispatch((0, _recipe.requestRecipe)(ownProps.params.recipeId));
 	    }
 	  };
 	};
@@ -30263,15 +30273,15 @@
 	  }
 	
 	  _createClass(RecipeShow, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      if (!this.props.recipe) this.props.requestRecipe();
+	    }
+	  }, {
 	    key: 'render',
-	
-	    // componentWillMount () {
-	    //   this.props.requestRecipes()
-	    // }
-	
 	    value: function render() {
-	      var ingredients = this.props.recipe.ingredients;
-	      var recipe = this.props.recipe;
+	      var recipe = this.props.recipe || {};
+	      var ingredients = recipe.ingredients;
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'recipe-show' },
@@ -30802,6 +30812,9 @@
 	        case 'REQUEST_RECIPES':
 	          (0, _recipe_api_util.fetchRecipes)(recipesSuccess);
 	          break;
+	        case 'REQUEST_RECIPE':
+	          (0, _recipe_api_util.fetchRecipe)(action.id, recipeSuccess);
+	          break;
 	        case 'CREATE_RECIPE':
 	          (0, _recipe_api_util.createRecipe)(action.recipe, recipeSuccess);
 	          break;
@@ -30833,7 +30846,7 @@
 	});
 	var fetchRecipes = exports.fetchRecipes = function fetchRecipes(success) {
 	  $.ajax({
-	    url: 'recipes',
+	    url: '/recipes',
 	    method: 'GET',
 	    success: success,
 	    error: function error(data) {
@@ -30844,7 +30857,7 @@
 	
 	var createRecipe = exports.createRecipe = function createRecipe(data, success) {
 	  $.ajax({
-	    url: 'recipes',
+	    url: '/recipes',
 	    method: 'POST',
 	    data: data,
 	    success: success,
@@ -30856,7 +30869,7 @@
 	
 	var searchRecipes = exports.searchRecipes = function searchRecipes(query, success) {
 	  $.ajax({
-	    url: 'search',
+	    url: '/search',
 	    method: 'GET',
 	    data: { q: query },
 	    success: success,
@@ -30882,6 +30895,17 @@
 	  $.ajax({
 	    url: '/ingredients/' + ingredient.id,
 	    method: 'DELETE',
+	    success: success,
+	    error: function error(data) {
+	      return console.log(data);
+	    }
+	  });
+	};
+	
+	var fetchRecipe = exports.fetchRecipe = function fetchRecipe(id, success) {
+	  $.ajax({
+	    url: '/recipes/' + id,
+	    method: 'GET',
 	    success: success,
 	    error: function error(data) {
 	      return console.log(data);

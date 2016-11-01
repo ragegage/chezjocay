@@ -1,6 +1,6 @@
 export const fetchRecipes = (success) => {
   $.ajax({
-    url: `recipes`,
+    url: `/recipes`,
     method: 'GET',
     success,
     error: data => console.log(data)
@@ -9,7 +9,7 @@ export const fetchRecipes = (success) => {
 
 export const createRecipe = (data, success) => {
   $.ajax({
-    url: `recipes`,
+    url: `/recipes`,
     method: 'POST',
     data,
     success,
@@ -19,7 +19,7 @@ export const createRecipe = (data, success) => {
 
 export const searchRecipes = (query, success) => {
   $.ajax({
-    url: 'search',
+    url: '/search',
     method: 'GET',
     data: {q: query},
     success,
@@ -41,6 +41,15 @@ export const deleteIngredient = (ingredient, success) => {
   $.ajax({
     url: `/ingredients/${ingredient.id}`,
     method: 'DELETE',
+    success,
+    error: data => console.log(data)
+  })
+}
+
+export const fetchRecipe = (id, success) => {
+  $.ajax({
+    url: `/recipes/${id}`,
+    method: 'GET',
     success,
     error: data => console.log(data)
   })

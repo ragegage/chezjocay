@@ -31,3 +31,8 @@ export const createRecipe = (recipe) => ({
   type: 'CREATE_RECIPE',
   recipe
 })
+
+export const requestRecipe = (id) => ({
+  type: 'REQUEST_RECIPE',
+  id
+})

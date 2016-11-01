@@ -3,13 +3,14 @@ import IngredientIndex from './ingredient_index'
 import IngredientForm from './ingredient_form'
 
 class RecipeShow extends React.Component {
-  // componentWillMount () {
-  //   this.props.requestRecipes()
-  // }
+  componentWillMount () {
+    if (!this.props.recipe) 
+      this.props.requestRecipe()
+  }
 
   render () {
-    const ingredients = this.props.recipe.ingredients
-    const recipe = this.props.recipe
+    const recipe = this.props.recipe || {}
+    const ingredients = recipe.ingredients
     return (
       <div className='recipe-show'>
         <header>

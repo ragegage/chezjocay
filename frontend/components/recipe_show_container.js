@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import RecipeShow from './recipe_show'
-import { createIngredient } from '../actions/recipe'
+import { createIngredient, requestRecipe } from '../actions/recipe'
 import { bulkCreateShoppingListItems } from '../actions/shopping_list'
 
 const mapStateToProps = (state, ownProps) => ({
@@ -11,6 +11,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   createIngredient: ingredient => dispatch(createIngredient({...ingredient, recipe_id: ownProps.params.recipeId})),
   bulkCreateItems: (list_id) => dispatch(bulkCreateShoppingListItems(list_id, ownProps.params.recipeId)),
+  requestRecipe: () => dispatch(requestRecipe(ownProps.params.recipeId)),
 })
 
 export default connect(

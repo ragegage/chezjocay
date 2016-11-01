@@ -1,4 +1,5 @@
 import { fetchRecipes,
+         fetchRecipe,
          createRecipe,
          searchRecipes,
          createIngredient,
@@ -16,6 +17,9 @@ export default ({getState, dispatch}) => next => action => {
   switch(action.type){
     case 'REQUEST_RECIPES':
       fetchRecipes(recipesSuccess)
+      break
+    case 'REQUEST_RECIPE':
+      fetchRecipe(action.id, recipeSuccess)
       break
     case 'CREATE_RECIPE':
       createRecipe(action.recipe, recipeSuccess)
