@@ -65,8 +65,6 @@
 	document.addEventListener('DOMContentLoaded', function () {
 	  var store = (0, _store2.default)();
 	
-	  window.store = store;
-	
 	  var root = document.getElementById('luv-you-joc');
 	  (0, _reactDom.render)(_react2.default.createElement(_root2.default, { store: store }), root);
 	});
