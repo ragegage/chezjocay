@@ -75,6 +75,10 @@
     display: flex;
     .left-half {
       width: 60%;
+      p {
+        padding-right: 15px;
+        text-align: justify;
+      }
     }
     .right-half {
       width: 40%;
