@@ -29,6 +29,11 @@ class RecipeSearch extends React.Component {
     this.setState({displayForm: true})
   }
 
+  onClose(e) {
+    e.preventDefault()
+    this.setState({displayForm: false})
+  }
+
   onSubmit(e) {
     e.preventDefault()
     this.props.createRecipe({...this.state})
@@ -64,6 +69,8 @@ class RecipeSearch extends React.Component {
           <input type='text' value={this.state.tags} onChange={this.update('tags').bind(this)} placeholder='tags' />
           <input type='text' value={this.state.notes} onChange={this.update('notes').bind(this)} placeholder='notes' />
           <input type='submit' value='Create Recipe' />
+          <button onClick={this.onClose.bind(this)}
+                className='create'>Close</button>
         </form>
       )
     else
