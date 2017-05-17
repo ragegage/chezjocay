@@ -9,10 +9,15 @@
   justify-content: space-between;
 }
 .shopping-list-item:hover {
+  text-decoration: underline;
 }
 
 .greyed-out {
   color: #b1b1b1;
   text-decoration: line-through;
   font-style: italic;
+}
+.greyed-out:hover {
+  color: #2a2a2a;
+  text-decoration: none;
 }
