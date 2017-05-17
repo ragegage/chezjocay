@@ -17,6 +17,7 @@ class RecipeShow extends React.Component {
           <a href={recipe.url} target='_blank'>{
             recipe.name
           }</a>
+          <button>Edit</button>
           <ul>
             {recipe.entree ? <li>entree</li> : ''}
             {recipe.soup ? <li>soup</li> : ''}
